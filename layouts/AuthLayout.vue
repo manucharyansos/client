@@ -1,10 +1,10 @@
 <template>
-$END$
+  <Nuxt/>
 </template>
 
 <script>
 export default {
-name: "Index-Header"
+  name: "AuthLayout"
 }
 </script>
 
