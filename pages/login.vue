@@ -35,14 +35,17 @@
           <p class="text-red-500 text-xs italic">{{getErrorMessage}}</p>
         </template>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col items-center justify-between" >
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           @click="login"
         >
           Sign In
         </button>
-
+        <div class="flex flex-row">
+          <p class="font-roboto text-base m-2">Do you have not account?</p>
+          <nuxt-link to="/register" class="sign_in_here m-2"> Register </nuxt-link>
+        </div>
       </div>
     </div>
   </div>

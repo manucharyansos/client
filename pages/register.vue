@@ -75,7 +75,7 @@
         </button>
         <div class="flex flex-row">
           <p class="font-roboto text-base">Already have an account?</p>
-          <nuxt-link to="/auth/login" class="sign_in_here"> Sign in here </nuxt-link>
+          <nuxt-link to="/login" class="sign_in_here"> Sign in here </nuxt-link>
         </div>
       </div>
     </div>
