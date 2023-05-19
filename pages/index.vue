@@ -7,13 +7,9 @@
 export default {
   name: 'IndexPage',
   layout: 'MainLayout',
+  auth: 'guest'
 }
 </script>
 <style scoped>
-a.nuxt-link-active {
-  color: #718096;
-}
-a.nuxt-link-exact-active {
-  color: #1a202c;
-}
+
 </style>

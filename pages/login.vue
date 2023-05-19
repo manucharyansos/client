@@ -32,7 +32,7 @@
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </template>
         <template v-if="getErrorMessage">
-          <p class="text-red-500 text-xs italic">{{getErrorMessage.error}}</p>
+          <p class="text-red-500 text-xs italic">{{getErrorMessage}}</p>
         </template>
       </div>
       <div class="flex items-center justify-between">

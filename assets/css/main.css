@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+a.nuxt-link-active {
+  color: #040303;
+}
+a.nuxt-link-exact-active {
+  color: #44444f;
+}

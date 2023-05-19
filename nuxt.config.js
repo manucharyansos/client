@@ -1,5 +1,7 @@
 export default {
-  router: ['auth'],
+  router: {
+    middleware: ['auth']
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'client',
@@ -39,9 +41,12 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxt/image',
   ],
-
+  image: {
+    // domains: ['http://localhost:8000'],
+  },
   auth: {
     strategies: {
       'laravelSanctum': {
@@ -55,11 +60,11 @@ export default {
           getProducts: { url: '/api/products', method: 'get'}
         },
         redirect: {
-          login: '/auth/login',
+          login: '/login',
           register: '/register',
           logout: '/',
           callback: '/login',
-          home: '/'
+          // home: '/'
         },
         cookie: {
           name: 'XSRF-TOKEN'
