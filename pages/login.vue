@@ -58,8 +58,8 @@ export default {
   layout: 'AuthLayout',
   data(){
     return {
-      email: '',
-      password: '',
+      email: 'admin@gmail.com',
+      password: '123456',
       fieldEmail: false,
       fieldPassword: false
     }
