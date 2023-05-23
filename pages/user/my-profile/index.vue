@@ -103,7 +103,7 @@
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Last Name</div>
-                    <div class="px-4 py-2">Doe</div>
+                    <div class="px-4 py-2">{{ $auth.user.last_name}}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Gender</div>
@@ -111,11 +111,11 @@
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Contact No.</div>
-                    <div class="px-4 py-2">+11 998001001</div>
+                    <div class="px-4 py-2">{{ $auth.user.contact }}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Current Address</div>
-                    <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                    <div class="px-4 py-2">{{ $auth.user.address }}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Permanant Address</div>

@@ -15,12 +15,12 @@
 // }
 
 export const actions = {
-  async testUrl({commit}, userData){
+  async updateUser({ commit }, { id, userData }) {
     try {
-      await this.$axios.get('/api/users/info', userData)
-    }
-    catch (err){
+      await this.$axios.post(`/api/users/update/info/${id}`, userData);
+    } catch (err) {
+      console.log(err);
       // commit('setErrorMessage', err.response.data.message)
     }
   },
-}
+};
