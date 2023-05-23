@@ -17,7 +17,9 @@
 export const actions = {
   async updateUser({ commit }, { id, userData }) {
     try {
-      await this.$axios.post(`/api/users/update/info/${id}`, userData);
+      await this.$axios.post(`/api/users/update/info/${id}`, userData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
     } catch (err) {
       console.log(err);
       // commit('setErrorMessage', err.response.data.message)

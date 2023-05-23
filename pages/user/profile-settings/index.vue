@@ -7,13 +7,20 @@
           <div class="mt-6 border-t border-gray-400 pt-4">
             <div class='flex flex-wrap -mx-3 mb-6'>
               <div class="personal w-full border-t border-gray-400 pt-4">
-                <h2 class="text-2xl text-gray-900">Personal info:</h2>
+                <div class="w-full flex flex-col md:flex-row justify-between">
+                  <h2 class="text-2xl text-gray-900">Personal info:</h2>
 
-                <div class="flex items-center justify-center w-1/2">
-                  <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <input id="dropzone-file" type="file" class="hidden"  @change="handleFileUpload"/>
-                    <img v-if="user.image" :src="user.image" alt="Uploaded Image">
-                  </label>
+                  <div class="flex items-center justify-center md:w-1/2 w-full">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        class="hidden"
+                        @change="handleFileUpload"
+                      />
+                      <img :src="user.imageUrl" alt="Selected Image" v-if="user.imageUrl">
+                    </label>
+                  </div>
                 </div>
 
                 <div class="flex items-center justify-between mt-4">
@@ -55,13 +62,23 @@
                       id="phone"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="123-45-678"
-                      pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                      pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
                       v-model="user.contact"
                       required
                     >
                   </div>
                 </div>
                 <div class="flex items-center justify-between mt-4">
+
+                  <div class="flex items-center mb-4">
+                    <input id="man" type="radio" value="Man" v-model="user.gender" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="man" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 mx-4">Man</label>
+
+                    <input checked id="woman" type="radio" value="Woman" v-model="user.gender" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="woman" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 mx-4">Woman</label>
+                  </div>
+
+
                   <div class='w-full md:w-1/2 px-3 mb-6'>
                     <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>age</label>
                     <input
@@ -72,7 +89,7 @@
                     >
                   </div>
                 </div>
-
+                <datepicker v-model="selectedDate"></datepicker>
                 <div class='w-full md:w-full px-3 mb-6'>
                   <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' >Bio</label>
                   <textarea
@@ -117,9 +134,12 @@ export default {
         address: '',
         contact: '',
         bio: '',
-        image: ''
+        gender: '',
+        birthday: '',
+        imageUrl: '',
+        imageFile: [],
       },
-      imageUrl: ''
+      selectedDate: null,
     }
   },
   mounted() {
@@ -128,14 +148,15 @@ export default {
   methods: {
     ...mapActions('userSettings', ['updateUser']),
     handleFileUpload(event) {
-      const file = event.target.files[0];
+      this.user.imageFile = event.target.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        this.user.image = reader.result;
+        this.user.imageUrl = reader.result;
+        console.log(this.user.imageUrl)
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.user.imageFile);
     },
-    updateUserInfo() {
+    async updateUserInfo() {
       const formData = new FormData();
       formData.append('name', this.user.name);
       formData.append('last_name', this.user.last_name);
@@ -143,9 +164,12 @@ export default {
       formData.append('address', this.user.address);
       formData.append('contact', this.user.contact);
       formData.append('bio', this.user.bio);
-      formData.append('image', this.user.image);
-      const id = this.id
-      this.updateUser({ id, userData: formData });
+      formData.append('gender', this.user.gender);
+      formData.append('image', this.user.imageFile);
+
+      const id = this.id;
+      await this.updateUser({ id, userData: formData });
+      this.$router.push('/user/my-profile');
     },
     populateUserData() {
       if (this.$auth.user) {

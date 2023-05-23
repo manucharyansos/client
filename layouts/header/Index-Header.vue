@@ -11,7 +11,7 @@
           <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <span class="sr-only">Open user menu</span>
 <!--            <img class="w-8 h-8 rounded-full" src="" alt="user photo">-->
-            <nuxt-img src="/images.png" class="w-8 h-8 rounded-full"/>
+            <nuxt-img :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`" alt="/images.png" class="w-8 h-8 rounded-full"/>
           </button>
           <!-- Dropdown menu -->
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
