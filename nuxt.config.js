@@ -15,7 +15,12 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { href: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.js"}
+    ],
+    script: [
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.js" },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js" }
     ]
   },
 
@@ -26,6 +31,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/vue-datepicker', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,6 +49,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxt/image',
+    '@nuxtjs/pwa',
   ],
   image: {
     // domains: ['http://localhost:8000'],

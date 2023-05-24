@@ -8,8 +8,27 @@
             <div class='flex flex-wrap -mx-3 mb-6'>
               <div class="personal w-full border-t border-gray-400 pt-4">
                 <div class="w-full flex flex-col md:flex-row justify-between">
-                  <h2 class="text-2xl text-gray-900">Personal info:</h2>
 
+                  <div class="flex flex-col">
+                    <h2 class="text-2xl text-gray-900">Personal info:</h2>
+                    <div class="relative max-w-sm">
+                      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                      </div>
+                      <input datepicker
+                             type="text"
+                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                             placeholder="Select date"
+                             v-model="user.selectedBirthdayDate"
+
+                      >
+                    </div>
+<!--                    <date-picker-->
+<!--                      v-model="user.selectedBirthdayDate"-->
+<!--                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"-->
+<!--                    />-->
+
+                  </div>
                   <div class="flex items-center justify-center md:w-1/2 w-full">
                     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                       <input
@@ -89,7 +108,7 @@
                     >
                   </div>
                 </div>
-                <datepicker v-model="selectedDate"></datepicker>
+
                 <div class='w-full md:w-full px-3 mb-6'>
                   <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' >Bio</label>
                   <textarea
@@ -135,11 +154,10 @@ export default {
         contact: '',
         bio: '',
         gender: '',
-        birthday: '',
+        selectedBirthdayDate: '',
         imageUrl: '',
         imageFile: [],
       },
-      selectedDate: null,
     }
   },
   mounted() {
@@ -166,10 +184,11 @@ export default {
       formData.append('bio', this.user.bio);
       formData.append('gender', this.user.gender);
       formData.append('image', this.user.imageFile);
+      formData.append('birthday', this.user.selectedBirthdayDate);
 
       const id = this.id;
       await this.updateUser({ id, userData: formData });
-      this.$router.push('/user/my-profile');
+      await this.$router.push('/user/my-profile');
     },
     populateUserData() {
       if (this.$auth.user) {
@@ -181,7 +200,9 @@ export default {
           address: this.$auth.user.address || '',
           contact: this.$auth.user.contact || '',
           bio: this.$auth.user.bio || '',
-          image: this.$auth.user.image || '',
+          imageUrl: this.$auth.user.image || '',
+          gender: this.$auth.user.gender || '',
+          selectedBirthdayDate: this.$auth.user.birthday || '',
         };
       }
     },
@@ -190,5 +211,8 @@ export default {
 </script>
 
 <style scoped>
-
+date-picker div {
+  border: 2px solid #1a202c;
+  border-radius: 5px;
+}
 </style>
