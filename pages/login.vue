@@ -1,33 +1,44 @@
 <template>
-  <div class="w-full max-w-xs mx-auto">
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mt-12 mb-4">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-          Email
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          :class="{ active: fieldEmail }"
-          id="email"
-          type="email"
-          placeholder="Email"
-          v-model="email"
-        >
-      </div>
-      <template v-if="fieldEmail">
-        <p class="text-red-500 text-xs italic">Please choose a email address.</p>
-      </template>
+  <div class="w-full mx-auto font-roboto bg-white md:mt-0 sm:max-w-md xl:p-0">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg shadow dark:border px-8 pt-6 pb-8 mt-32">
       <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-          Password
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-               :class="{ active: fieldPassword }"
-               id="password"
-               type="password"
-               placeholder="***********"
-               v-model="password"
-        >
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-800 peer"
+            placeholder=" "
+            :class="{ active: fieldEmail }"
+            v-model="email"
+          />
+          <label
+            for="email"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Email address
+          </label>
+        </div>
+        <template v-if="fieldEmail">
+          <p class="text-red-500 text-xs italic">Please choose a email address.</p>
+        </template>
+      </div>
+      <div class="mb-6">
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-800 peer"
+            :class="{ active: fieldPassword }"
+            placeholder=" "
+            v-model="password"
+          />
+          <label
+            for="password"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Password
+          </label>
+        </div>
         <template v-if="fieldPassword">
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </template>
@@ -37,14 +48,14 @@
       </div>
       <div class="flex flex-col items-center justify-between" >
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="block w-full bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           @click="login"
         >
           Sign In
         </button>
-        <div class="flex flex-row">
-          <p class="font-roboto text-base m-2">Do you have not account?</p>
-          <nuxt-link to="/register" class="sign_in_here m-2"> Register </nuxt-link>
+        <div class="flex flex-row items-center mt-4">
+          <span class="font-roboto text-sm m-2 text-gray-800 dark:text-indigo-50">Don’t have an account yet?</span>
+          <nuxt-link to="/register" class="sign_in_here m-2 text-indigo-800  dark:text-indigo-300"> Sign up </nuxt-link>
         </div>
       </div>
     </div>

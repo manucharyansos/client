@@ -50,7 +50,13 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxt/image',
     '@nuxtjs/pwa',
+    '@nuxtjs/universal-storage',
   ],
+
+  storage: {
+    localStorage: true,
+    sessionStorage: false,
+  },
   image: {
     // domains: ['http://localhost:8000'],
   },
