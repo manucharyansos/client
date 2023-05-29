@@ -221,12 +221,17 @@
 
 <script>
 // import { mapGetters } from "vuex";
+import {mapActions} from "vuex";
+
 export default {
   name: "index",
   layout: 'MainLayout',
-  // mounted() {
-  //     this.$auth.user
-  // }
+  mounted() {
+      this.fetchUser()
+  },
+  methods: {
+    ...mapActions('userSettings', ['fetchUser'])
+  }
 }
 </script>
 

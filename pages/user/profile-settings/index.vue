@@ -201,8 +201,10 @@ export default {
       formData.append('birthday', this.user.selectedBirthdayDate);
 
       const id = this.id;
-      await this.updateUser({ id, userData: formData });
-      // await this.$router.push('/user/my-profile');
+      const response = await this.updateUser({ id, userData: formData });
+      if (response){
+        await this.$router.push('/user/my-profile');
+      }
     },
     populateUserData() {
       if (this.$auth.user) {
