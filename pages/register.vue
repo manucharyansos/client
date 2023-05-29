@@ -71,7 +71,7 @@
           :class="{ active: fieldConfirmPassword }"
           placeholder=" "
           required
-          v-model="confirmPassword"
+          v-model="password_confirmation"
         />
         <label
           for="confirmPassword"
@@ -109,7 +109,7 @@ export default {
       name: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      password_confirmation: '',
       fieldName: false,
       fieldEmail: false,
       fieldPassword: false,
@@ -176,10 +176,12 @@ export default {
           name: this.name,
           email: this.email,
           password: this.password,
-          confirm_password: this.confirmPassword
+          password_confirmation: this.password_confirmation
         })
+        this.name = ''
         this.email = ''
         this.password = ''
+        this.password_confirmation = ''
       }
     }
   }

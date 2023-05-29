@@ -16,7 +16,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { href: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.js"}
+      { href: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.js"},
+      { href: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css", rel:"stylesheet" }
     ],
     script: [
       { src: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.js" },

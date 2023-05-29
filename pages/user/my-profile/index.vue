@@ -1,15 +1,15 @@
 <template>
   <div>
 
-    <div class="bg-gray-100">
+    <div class="bg-gray-100 dark:bg-gray-700">
       <!-- End of Navbar -->
 
-      <div class="container mx-auto my-5 p-5">
+      <div class="container mx-auto p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
           <!-- Left Side -->
           <div class="w-full md:w-3/12 md:mx-2">
             <!-- Profile Card -->
-            <div class="bg-white p-3 border-t-4 border-green-400">
+            <div class="bg-white dark:bg-gray-700 p-3 border-t-4 border-green-400">
               <div class="image overflow-hidden">
                 <img class="h-auto w-full mx-auto"
                      :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
@@ -21,15 +21,15 @@
                 >
 
               </div>
-              <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">
+              <h1 class="text-gray-900 dark:text-indigo-50 font-bold text-xl leading-8 my-1">
                 {{ $auth.user.name}}
               </h1>
-              <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-              <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">
+              <h3 class="text-gray-600 bg-amber-50 dark:bg-gray-700 dark:text-indigo-50 bg-amber-50 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
+              <p class="text-sm text-gray-500 dark:text-indigo-50 hover:text-gray-600 leading-6">
                 {{ $auth.user.bio || 'Your description'}}
               </p>
               <ul
-                class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-indigo-50 hover:text-gray-700 dark:text-indigo-200 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li class="flex items-center py-3">
                   <span>Status</span>
                   <span class="ml-auto"><span
@@ -88,8 +88,8 @@
           <div class="w-full md:w-9/12 h-64">
             <!-- Profile tab -->
             <!-- About Section -->
-            <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+            <div class="bg-white dark:bg-gray-700 p-3 shadow-sm rounded-sm">
+              <div class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-indigo-50 leading-8">
                         <span clas="text-green-500">
                             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor">
@@ -99,7 +99,7 @@
                         </span>
                 <span class="tracking-wide">About</span>
               </div>
-              <div class="text-gray-700">
+              <div class="text-gray-700 dark:text-indigo-50">
                 <div class="grid md:grid-cols-2 text-sm">
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">First Name</div>
@@ -130,7 +130,7 @@
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Email.</div>
                     <div class="px-4 py-2">
-                      <a class="text-blue-800" :href="$auth.user.email">
+                      <a class="text-blue-800 dark:text-blue-300" :href="$auth.user.email">
                         {{ $auth.user.email }}
                       </a>
                     </div>
@@ -142,7 +142,7 @@
                 </div>
               </div>
               <button
-                class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
+                class="block w-full text-blue-800 dark:text-indigo-50 text-sm font-semibold rounded-lg hover:bg-gray-100 dark:bg-gray-800 focus:outline-none focus:shadow-outline focus:bg-gray-100 dark:bg-gray-800 hover:shadow-xs p-3 my-4">Show
                 Full Information</button>
             </div>
             <!-- End of about section -->

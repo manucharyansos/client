@@ -14,8 +14,7 @@ export const actions = {
   async fetchProducts({commit}){
     try {
       const { data }  = await this.$axios.get('/api/products')
-      commit('setProducts', data.result)
-      console.log(data.result)
+      commit('setProducts', data)
     }catch (err){
       console.log(err)
     }
