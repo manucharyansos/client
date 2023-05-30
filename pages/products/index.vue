@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container mx-auto">
 
     <div
-      class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      class="mx-auto w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       v-for="(product, index) of getProducts"
       :key="index"
     >
@@ -47,7 +47,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "index",
-  layout: 'MainLayout',
+  layout: 'UserLayout',
   methods: {
     ...mapActions('products', ['fetchProducts']),
     addToCart(index){

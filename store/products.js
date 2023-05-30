@@ -1,4 +1,3 @@
-import products from "@/pages/products";
 
 export const state = () => ({
   products: []
@@ -15,6 +14,15 @@ export const actions = {
     try {
       const { data }  = await this.$axios.get('/api/products')
       commit('setProducts', data)
+    }catch (err){
+      console.log(err)
+    }
+  },
+  async createProduct({commit}, products){
+    try {
+      const res = await this.$axios.post('/api/products', products, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
     }catch (err){
       console.log(err)
     }

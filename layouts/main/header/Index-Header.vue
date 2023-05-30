@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <header class="sticky top-0">
+    <nav class=" bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <nuxt-link to="/" class="flex items-center">
 <!--          <img src="/images.png" class="h-8 mr-3" />-->
@@ -88,6 +88,12 @@
                 {{ pages.name }}
               </nuxt-link>
             </li>
+            <template v-if="$auth.user.role === 1">
+              <li>
+                <nuxt-link to="/admin" class="block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0 dark:text-white">Admin</nuxt-link>
+              </li>
+
+            </template>
           </ul>
         </div>
       </div>

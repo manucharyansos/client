@@ -12,8 +12,8 @@
             <div class="bg-white dark:bg-gray-700 p-3 border-t-4 border-green-400">
               <div class="image overflow-hidden">
                 <img class="h-auto w-full mx-auto"
-                     :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
-                     v-if="$auth.user.image"
+                     :src="`http://127.0.0.1:8000/user-images/${ getUser.image }`"
+                     v-if="getUser.image"
                 >
                 <img class="h-auto w-full mx-auto"
                      src="/images.png"
@@ -22,11 +22,11 @@
 
               </div>
               <h1 class="text-gray-900 dark:text-indigo-50 font-bold text-xl leading-8 my-1">
-                {{ $auth.user.name}}
+                {{ getUser.name}}
               </h1>
               <h3 class="text-gray-600 bg-amber-50 dark:bg-gray-700 dark:text-indigo-50 bg-amber-50 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-              <p class="text-sm text-gray-500 dark:text-indigo-50 hover:text-gray-600 leading-6">
-                {{ $auth.user.bio || 'Your description'}}
+              <p class="flex flex-wrap justify-items-start text-sm text-gray-500 dark:text-indigo-50 hover:text-gray-600 leading-6">
+                {{ getUser.bio || 'Your description'}}
               </p>
               <ul
                 class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-indigo-50 hover:text-gray-700 dark:text-indigo-200 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -37,7 +37,7 @@
                 </li>
                 <li class="flex items-center py-3">
                   <span>Member since</span>
-                  <span class="ml-auto">{{ $auth.user.created_at }}</span>
+                  <span class="ml-auto">{{ getUser.created_at }}</span>
                 </li>
               </ul>
             </div>
@@ -104,24 +104,24 @@
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">First Name</div>
                     <div class="px-4 py-2">
-                      {{ $auth.user.name }}
+                      {{ getUser.name }}
                     </div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Last Name</div>
-                    <div class="px-4 py-2">{{ $auth.user.last_name || 'Last Name'}}</div>
+                    <div class="px-4 py-2">{{ getUser.last_name || 'Last Name'}}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Gender</div>
-                    <div class="px-4 py-2">{{ $auth.user.gender }}</div>
+                    <div class="px-4 py-2">{{ getUser.gender }}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Contact No.</div>
-                    <div class="px-4 py-2">{{ $auth.user.contact }}</div>
+                    <div class="px-4 py-2">{{ getUser.contact }}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Current Address</div>
-                    <div class="px-4 py-2">{{ $auth.user.address }}</div>
+                    <div class="px-4 py-2">{{ getUser.address }}</div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Permanant Address</div>
@@ -130,14 +130,14 @@
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Email.</div>
                     <div class="px-4 py-2">
-                      <a class="text-blue-800 dark:text-blue-300" :href="$auth.user.email">
-                        {{ $auth.user.email }}
+                      <a class="text-blue-800 dark:text-blue-300" :href="getUser.email">
+                        {{ getUser.email }}
                       </a>
                     </div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Birthday</div>
-                    <div class="px-4 py-2">{{ $auth.user.birthday }}</div>
+                    <div class="px-4 py-2">{{ getUser.birthday }}</div>
                   </div>
                 </div>
               </div>
@@ -221,13 +221,16 @@
 
 <script>
 // import { mapGetters } from "vuex";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "index",
-  layout: 'MainLayout',
+  layout: 'UserLayout',
   mounted() {
       this.fetchUser()
+  },
+  computed: {
+    ...mapGetters('userSettings', ['getUser'])
   },
   methods: {
     ...mapActions('userSettings', ['fetchUser'])

@@ -150,7 +150,7 @@ import {mapActions} from "vuex";
 import { initFlowbite } from 'flowbite'
 export default {
   name: "index",
-  layout: 'MainLayout',
+  layout: 'default',
   data(){
     return{
       email: 'www@email.com',
@@ -188,7 +188,6 @@ export default {
       reader.readAsDataURL(this.user.imageFile);
     },
     async updateUserInfo() {
-      console.log( this.user.selectedBirthdayDate)
       const formData = new FormData();
       formData.append('name', this.user.name);
       formData.append('last_name', this.user.last_name);

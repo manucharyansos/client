@@ -1,23 +1,30 @@
 export const state = () => ({
-  errorMessage: false
+  errorMessage: false,
+  user: []
 })
 
 export const getters = {
   getErrorMessage(state){
     return state.errorMessage
+  },
+  getUser(state){
+    return state.user
   }
 }
 
 export const mutations = {
   setErrorMessage(state, err){
     state.errorMessage = err
+  },
+  setUser(state, user){
+    state.user = user
   }
 }
 
 export const actions = {
   async fetchUser({commit}){
-    const user = await this.$axios.get('/api/user',)
-    console.log(user)
+    const { data } = await this.$axios.get('/api/user',)
+    commit('setUser', data)
   },
 
   async updateUser({ commit }, { id, userData }) {

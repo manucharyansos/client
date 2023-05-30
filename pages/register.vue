@@ -102,7 +102,6 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "register",
-  layout: 'AuthLayout',
   auth: 'guest',
   data(){
     return {

@@ -66,7 +66,6 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "login",
-  layout: 'AuthLayout',
   data(){
     return {
       email: 'admin@gmail.com',
