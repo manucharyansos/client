@@ -182,7 +182,6 @@ export default {
       const reader = new FileReader();
       reader.onload = () => {
         this.user.imageUrl = reader.result;
-        console.log(this.user.imageUrl)
       };
       this.isImage = true
       reader.readAsDataURL(this.user.imageFile);

@@ -119,16 +119,19 @@ export default {
       }
     },
     async create() {
-      console.log(this.product.imageFiles)
       const formData = new FormData();
       formData.append('title', this.product.title);
       formData.append('description', this.product.description);
-      formData.append('images', this.product.imageFiles);
       formData.append('price', this.product.price);
       formData.append('category_id', this.product.category_id);
 
-      const response = await this.createProduct(formData)
-      if (response){
+      // Append each image file individually
+      this.product.imageFiles.forEach((file) => {
+        formData.append('images[]', file);
+      });
+
+      const response = await this.createProduct(formData);
+      if (response) {
         await this.$router.push('/admin');
       }
     },

@@ -1,16 +1,26 @@
 <template>
-  <div class="container mx-auto">
-
+  <div class="container mx-auto flex flex-wrap mb-4">
     <div
-      class="mx-auto w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      class="mx-auto my-6 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       v-for="(product, index) of getProducts"
       :key="index"
     >
-      <a href="#">
-<!--        <img v-if="product.image" class="p-8 rounded-t-lg" :src="`http://127.0.0.1:8000/images/${product.image}`" alt="product image" />-->
-<!--        <img v-else class="p-8 rounded-t-lg" src="/download.jpeg" alt="product image" />-->
+      <template v-if="product.images" >
+        <div class="flex items-center justify-center">
+          <nuxt-img class="h-auto max-w-full rounded-lg p-8 rounded-t-lg" :src="getFirstImage(product)" alt="product image" />
+<!--          <div v-for="(image, index) of product.images" :key="index">-->
+<!--&lt;!&ndash;            <img class="h-auto max-w-full rounded-lg" :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="">&ndash;&gt;-->
+<!--            <nuxt-img class="h-auto max-w-full rounded-lg p-8 rounded-t-lg" :src="getImageUrl(image.image_path)" alt="product image" />-->
+<!--          </div>-->
+        </div>
+      </template>
+      <template v-else >
         <img class="p-8 rounded-t-lg" src="/download.jpeg" alt="product image" />
-      </a>
+      </template>
+      <template>
+
+
+      </template>
       <div class="px-5 pb-5">
         <a href="#">
           <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -50,6 +60,16 @@ export default {
   layout: 'UserLayout',
   methods: {
     ...mapActions('products', ['fetchProducts']),
+    // getImageUrl(image) {
+    //   return `http://127.0.0.1:8000/products-images/${image}`;
+    // },
+    getFirstImage(product) {
+      if (product.images.length > 0) {
+        return `http://127.0.0.1:8000/products-images/${product.images[0].image_path}`;
+      } else {
+        return '/download.png';
+      }
+    },
     addToCart(index){
       alert(index)
     }

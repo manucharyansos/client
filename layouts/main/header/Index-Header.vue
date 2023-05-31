@@ -22,12 +22,21 @@
               data-dropdown-placement="bottom"
             >
               <span class="sr-only">Open user menu</span>
-              <nuxt-img
-                :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
-                alt="/images.png"
-                class="w-8 h-8 rounded-full"
-                v-if="$auth.user.image"
-              />
+              <template v-if="$auth.user.image">
+                <nuxt-img
+                  :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
+                  alt="/images.png"
+                  class="w-8 h-8 rounded-full"
+                  v-if="$auth.user.image"
+                />
+              </template>
+              <template v-else>
+                <nuxt-img
+                  src="/images.pmg"
+                  alt="/images.png"
+                  class="w-8 h-8 rounded-full"
+                />
+              </template>
               <img
                 v-else
                 class="w-8 h-8 rounded-full"
