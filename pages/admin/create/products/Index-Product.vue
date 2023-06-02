@@ -86,7 +86,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "Index-Product",
-  middleware: ['admin', 'auth'],
+  middleware: 'admin',
   layout: 'AdminLayout',
   data(){
     return {

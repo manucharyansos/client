@@ -15,12 +15,10 @@
     "@nuxtjs/universal-storage": "^0.5.9",
     "core-js": "^3.25.3",
     "flowbite": "^1.6.5",
-    "flowbite-datepicker": "^1.2.2",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10",
-    "vuejs-datepicker": "^1.6.2"
+    "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
     "@nuxt/image": "^0.7.1",

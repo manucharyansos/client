@@ -23,7 +23,7 @@
             >
               <span class="sr-only">Open user menu</span>
               <template v-if="$auth.user.image">
-                <nuxt-img
+                <img
                   :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
                   alt="/images.png"
                   class="w-8 h-8 rounded-full"
@@ -31,17 +31,12 @@
                 />
               </template>
               <template v-else>
-                <nuxt-img
+                <img
                   src="/images.pmg"
                   alt="/images.png"
                   class="w-8 h-8 rounded-full"
                 />
               </template>
-              <img
-                v-else
-                class="w-8 h-8 rounded-full"
-                src="/images.png"
-                alt="user photo">
             </button>
             <!-- Dropdown menu -->
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -132,7 +127,7 @@ export default {
     initFlowbite();
   },
   created() {
-    this.$storage.setUniversal('color-theme', 'light');
+    this.$auth.$storage.setUniversal('color-theme', 'light');
   },
   methods: {
     async userLogout(){
@@ -140,16 +135,16 @@ export default {
       await this.$router.push('/')
     },
     toggle() {
-      const value = this.$storage.getUniversal('color-theme');
+      const value = this.$auth.$storage.getUniversal('color-theme');
       if (value) {
         if (value === 'light') {
           document.documentElement.classList.add('dark');
-          this.$storage.setUniversal('color-theme', 'dark');
+          this.$auth.$storage.setUniversal('color-theme', 'dark');
           this.isLight = false
           this.isDark = true
         } else {
           document.documentElement.classList.remove('dark');
-          this.$storage.setUniversal('color-theme', 'light');
+          this.$auth.$storage.setUniversal('color-theme', 'light');
           this.isLight = true
           this.isDark = false
         }

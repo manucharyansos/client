@@ -8,3 +8,4 @@ export default function ({ app, redirect, next }) {
   }
   return next
 }
+

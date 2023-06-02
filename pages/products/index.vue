@@ -7,7 +7,7 @@
     >
       <template v-if="product.images" >
         <div class="flex items-center justify-center">
-          <nuxt-img class="h-auto max-w-full rounded-lg p-8 rounded-t-lg" :src="getFirstImage(product)" alt="product image" />
+          <img class="h-auto max-w-full rounded-lg p-8 rounded-t-lg" :src="getFirstImage(product)" alt="product image" />
 <!--          <div v-for="(image, index) of product.images" :key="index">-->
 <!--&lt;!&ndash;            <img class="h-auto max-w-full rounded-lg" :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="">&ndash;&gt;-->
 <!--            <nuxt-img class="h-auto max-w-full rounded-lg p-8 rounded-t-lg" :src="getImageUrl(image.image_path)" alt="product image" />-->
