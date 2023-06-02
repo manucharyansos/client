@@ -12,8 +12,22 @@ export const getters = {
 
 export const actions = {
   async fetchCategory({commit}){
-    const response = await this.$axios.get('/api/categories')
-    commit('setCategory', response.data)
+    try {
+      const response = await this.$axios.get('/api/categories')
+      commit('setCategory', response.data)
+    }catch (err){
+      console.log(err)
+    }
+  },
+  async createCategory({commit}, categoryData){
+    try {
+      await this.$axios.post('/api/categories', categoryData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+      return true
+    }catch (err){
+      console.log(err)
+    }
   }
 }
 

@@ -4,7 +4,7 @@ export default function ({ app, redirect, next }) {
   }
   const userRole = app.$auth.user.role
   if (userRole !== 1) {
-    return redirect('/')
+    return redirect('/not-found')
   }
   return next
 }

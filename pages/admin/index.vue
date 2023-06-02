@@ -8,7 +8,7 @@
 export default {
   name: "index",
   layout: 'AdminLayout',
-  middleware: 'auth'
+  middleware: 'admin'
 }
 </script>
 

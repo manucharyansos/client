@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="dark:bg-gray-700">
     <header>
       <IndexHeader/>
     </header>
     <main>
       <Nuxt/>
     </main>
+    <footer>
+
+    </footer>
   </div>
 </template>
 

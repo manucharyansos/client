@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-2 mx-auto">
+  <div class="container mx-auto dark:bg-gray-700">
     <div class="flex row w-full">
       <div class="w-1/2">
         <div class="relative my-12 mx-10 shadow-xl">
@@ -8,13 +8,18 @@
             v-model="product.category_id"
             id="category"
             class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-            v-for="category of getCategory"
-            :key="category.id"
           >
             <option selected>Choose a country</option>
-            <option :value="category.id">{{category.name}}</option>
+            <option
+              v-for="category of getCategory"
+              :key="category.id"
+              :value="category.id">
+              {{category.name}}
+            </option>
           </select>
         </div>
+
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500"> {{ errors.category_id}}</p>
 
         <div class="relative mx-10 my-12 border-gray-600 shadow-xl">
           <input
@@ -97,11 +102,20 @@ export default {
         imageUrl: '',
         imageFiles: [],
         category_id: ''
+      },
+      errors: {
+        title: [],
+        description: [],
+        price: [],
+        imageUrl: [],
+        imageFiles: [],
+        category_id: []
       }
     }
   },
   computed: {
-    ...mapGetters('category', ['getCategory'])
+    ...mapGetters('category', ['getCategory']),
+    ...mapGetters('products', ['getErrorMessages'])
   },
   methods: {
     ...mapActions('products', ['createProduct']),
@@ -125,14 +139,29 @@ export default {
       formData.append('price', this.product.price);
       formData.append('category_id', this.product.category_id);
 
-      // Append each image file individually
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
       });
 
       const response = await this.createProduct(formData);
       if (response) {
-        await this.$router.push('/admin');
+        await this.$router.push('/products');
+      }else{
+        if (this.getErrorMessages.title){
+          this.errors.title = this.getErrorMessages.title
+        }
+        if (this.getErrorMessages.description){
+          this.errors.description = this.getErrorMessages.description
+        }
+        if (this.getErrorMessages.price){
+          this.errors.price = this.getErrorMessages.price
+        }
+        if (this.getErrorMessages.category_id){
+          this.errors.category_id = this.getErrorMessages.category_id
+        }
+        if (this.getErrorMessages.images){
+          this.errors.images = this.getErrorMessages.images
+        }
       }
     },
   },

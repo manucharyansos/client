@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0">
+  <header class="sticky top-0 z-20">
     <nav class=" bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <nuxt-link to="/" class="flex items-center">
@@ -96,7 +96,14 @@
               <li>
                 <nuxt-link to="/admin" class="block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0 dark:text-white">Admin</nuxt-link>
               </li>
-
+            </template>
+            <template v-if="!$auth.loggedIn">
+              <li>
+                <nuxt-link to="/login">Login</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/register">Register</nuxt-link>
+              </li>
             </template>
           </ul>
         </div>
@@ -115,9 +122,8 @@ export default {
     return {
       allPages: [
         { id: 1, name: 'Home', linkTo: '/'},
-        { id: 2, name: 'Login', linkTo: '/login'},
-        { id: 3, name: 'Register', linkTo: '/register'},
         { id: 4, name: 'Products', linkTo: '/products'},
+        { id: 4, name: 'Category', linkTo: '/products/category'},
       ],
       isDark: false,
       isLight: true

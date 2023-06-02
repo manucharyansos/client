@@ -1,11 +1,15 @@
 
 export const state = () => ({
-  products: []
+  products: [],
+  errorMessages: []
 })
 
 export const getters = {
   getProducts(state){
     return state.products
+  },
+  getErrorMessages(state){
+    return state.errorMessages
   }
 }
 
@@ -21,11 +25,13 @@ export const actions = {
   },
   async createProduct({commit}, products){
     try {
-      const res = await this.$axios.post('/api/products', products, {
+      await this.$axios.post('/api/products', products, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data.errors)
+      return false
     }
   }
 }
@@ -34,5 +40,8 @@ export const actions = {
 export const mutations = {
   setProducts(state, products){
     state.products = products
+  },
+  setErrorMessages(state, errors){
+    state.errorMessages = errors
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-white dark:bg-gray-700 dark:text-indigo-50">
+  <div class=" bg-white dark:bg-gray-700 dark:text-indigo-50 ">
     <header class="sticky top-0 mb-4">
       <IndexHeader/>
     </header>
