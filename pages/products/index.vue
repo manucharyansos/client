@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto flex flex-wrap mb-4">
     <div
-      class="mx-auto my-6 w-full max-w-sm bg-white "
+      class="mx-auto my-6 w-full max-w-sm bg-white dark:bg-gray-700"
       v-for="(product, index) of getProducts"
       :key="index"
     >

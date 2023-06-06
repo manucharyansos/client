@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full mx-auto font-roboto bg-white md:mt-0 sm:max-w-md xl:p-0">
-    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg shadow dark:border px-8 pt-6 pb-8 mt-32">
+  <div class="w-full mx-auto font-roboto bg-white dark:bg-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg shadow p-14">
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="text"
@@ -103,6 +103,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "register",
   auth: 'guest',
+  layout: 'default',
   data(){
     return {
       name: '',

@@ -92,7 +92,7 @@
                 {{ pages.name }}
               </nuxt-link>
             </li>
-            <template v-if="$auth.user.role === 1">
+            <template v-if="$auth.loggedIn && $auth.user.role === 1">
               <li>
                 <nuxt-link to="/admin" class="block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0 dark:text-white">Admin</nuxt-link>
               </li>

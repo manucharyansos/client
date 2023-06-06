@@ -1,7 +1,8 @@
 
 export const state = () => ({
   products: [],
-  errorMessages: []
+  errorMessages: [],
+  message: ''
 })
 
 export const getters = {
@@ -10,6 +11,9 @@ export const getters = {
   },
   getErrorMessages(state){
     return state.errorMessages
+  },
+  getMessage(state) {
+    return state.message
   }
 }
 
@@ -17,7 +21,6 @@ export const actions = {
   async fetchProducts({commit}){
     try {
       const { data }  = await this.$axios.get('/api/products')
-      console.log(data[1].images);
       commit('setProducts', data)
     }catch (err){
       console.log(err)
@@ -33,6 +36,16 @@ export const actions = {
       commit('setErrorMessages', err.response.data.errors)
       return false
     }
+  },
+  async deleteSelectedProduct({ commit }, id) {
+    try {
+      const res = await this.$axios.delete(`/api/products/${id}`)
+      console.log(res)
+      commit('DELETE_PRODUCT_SUCCESS', id)
+    } catch (error) {
+      console.error(error)
+      // Handle error case here if needed
+    }
   }
 }
 
@@ -43,5 +56,8 @@ export const mutations = {
   },
   setErrorMessages(state, errors){
     state.errorMessages = errors
+  },
+  DELETE_PRODUCT_SUCCESS(state, message){
+    state.message = message
   }
 }

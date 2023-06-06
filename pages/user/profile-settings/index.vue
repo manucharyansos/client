@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-700">
+  <div class="bg-white dark:bg-gray-700 w-full">
     <div class="bg-white dark:bg-gray-700 min-h-screen pt-2 font-mono">
       <div class="container mx-auto">
         <div class="inputs bg-gray-100 dark:bg-gray-900 w-full max-w-4xl p-6 mx-auto">
