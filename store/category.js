@@ -1,12 +1,16 @@
 
 
 export const state = () => ({
-  category: []
+  category: [],
+  message: ''
 })
 
 export const getters = {
   getCategory(state) {
     return state.category
+  },
+  getMessage(state){
+    return state.message
   }
 }
 
@@ -28,11 +32,23 @@ export const actions = {
     }catch (err){
       console.log(err)
     }
+  },
+  async deleteSelectedCategory({commit}, id) {
+    try {
+      const res = await this.$axios.delete(`/api/categories/${id}`)
+      console.log(res)
+      commit('DELETE_CATEGORY_SUCCESS', id)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
 export const mutations = {
   setCategory(state, category){
     state.category = category
+  },
+  DELETE_CATEGORY_SUCCESS(state, message){
+    state.message = message
   }
 }

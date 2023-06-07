@@ -17,7 +17,7 @@ export const mutations = {
 export const actions = {
   async loginUser({commit}, userData){
     try {
-      const x =await this.$auth.loginWith('laravelSanctum', userData)
+      const x = await this.$auth.loginWith('laravelSanctum', userData)
       console.log(x)
     }
     catch (err){

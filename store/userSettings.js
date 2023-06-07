@@ -1,6 +1,7 @@
 export const state = () => ({
   errorMessage: false,
-  user: []
+  user: [],
+  users: []
 })
 
 export const getters = {
@@ -9,6 +10,9 @@ export const getters = {
   },
   getUser(state){
     return state.user
+  },
+  getUsers(state){
+    return state.users
   }
 }
 
@@ -18,6 +22,9 @@ export const mutations = {
   },
   setUser(state, user){
     state.user = user
+  },
+  setUsers(state, users){
+    state.users = users
   }
 }
 
@@ -36,8 +43,15 @@ export const actions = {
         return true
       }
     } catch (err) {
-      console.log(err.response);
       commit('setErrorMessage', err.response)
     }
   },
+  async users({commit}){
+    try {
+      const response = await this.$axios.get('api/users')
+      commit('setUsers', response.data)
+    }catch (err){
+      console.log(err)
+    }
+  }
 };

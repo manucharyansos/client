@@ -70,12 +70,6 @@
                 </button>
                 <div class="p-6 text-center">
                   <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-<!--                  <div class="flex items-center justify-center">-->
-<!--                    <div class="px-6 py-4 w-32 font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
-<!--                      <img class="w-full h-full" :src="getFirstImage(product)" alt="">-->
-<!--                    </div>-->
-<!--                    {{ product.title }}-->
-<!--                  </div>-->
                   <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
                   <button
                     data-modal-hide="popup-modal"
@@ -146,6 +140,8 @@ import { initFlowbite } from 'flowbite'
 
 export default {
   name: "index",
+  layout: 'AdminLayout',
+  middleware: 'admin',
   data(){
     return {
       id: ''
@@ -175,7 +171,7 @@ export default {
     },
     async deleteProduct(){
       await this.deleteSelectedProduct(this.id)
-      await this.$router.push('/admin/products')
+      await this.$router.push('/admin')
     },
     removeProduct(id){
       this.id = id
