@@ -1,7 +1,4 @@
 <template>
-
-
-
   <div class="container mx-auto dark:bg-gray-700">
     <div class="flex row w-full">
       <div class="w-1/2">
@@ -77,10 +74,8 @@
           Create New Product
       </span>
     </button>
-
   </div>
 </template>
-
 <script>
 import {mapActions, mapGetters} from "vuex";
 
@@ -100,15 +95,14 @@ export default {
       }
     }
   },
+  async fetch() {
+    await this.fetchCategory()
+  },
   computed: {
     ...mapGetters('category', ['getCategory'])
   },
-  mounted() {
-    this.fetchCategory()
-    this.fetchSubCategory(1)
-  },
   methods :{
-    ...mapActions('category', ['createSubcategory', 'fetchCategory', 'fetchSubCategory']),
+    ...mapActions('category', ['createSubcategory', 'fetchCategory']),
     handleFileUpload(event) {
       this.category.imageFile = event.target.files[0];
       const reader = new FileReader();
@@ -126,7 +120,7 @@ export default {
       formData.append('image', this.category.imageFile);
       const response = await this.createSubcategory(formData)
       if (response) {
-        await this.$router.push('/admin/categories');
+        await this.$router.push('/admin/subcategory');
       }
     }
 

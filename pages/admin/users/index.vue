@@ -31,7 +31,7 @@
           v-for="user of getUsers"
         >
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <img class=" w-22 h-16" :src="`http://127.0.0.1:8000/user-images/${ user.image }`" alt="">
+            <img class="w-16 h-16 object-cover object-center" :src="`http://127.0.0.1:8000/user-images/${ user.image }`" alt="">
           </th>
           <td class="px-6 py-4">
             {{ user.name }}

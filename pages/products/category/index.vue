@@ -4,11 +4,6 @@
       <h1 class="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800 dark:text-white">Shop By Category</h1>
     </div>
     <template v-if="getCategory">
-<!--      <category-content -->
-<!--        v-for="category of getCategory"-->
-<!--        :category_images="getImageUrl(category.image)"-->
-<!--        :names="category.name"-->
-<!--      />-->
       <category-content
         :data="getCategory"
       />

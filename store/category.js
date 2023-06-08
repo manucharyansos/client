@@ -19,6 +19,7 @@ export const actions = {
     try {
       const response = await this.$axios.get('/api/categories')
       commit('setCategory', response.data)
+      console.log(response.data)
     }catch (err){
       console.log(err)
     }
@@ -41,6 +42,20 @@ export const actions = {
     } catch (error) {
       console.error(error)
     }
+  },
+  async createSubcategory({commit}, data){
+    try {
+      const x = await this.$axios.post('/api/subcategories', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+      console.log(x)
+    }catch (err){
+      console.log(err.response)
+    }
+  },
+  async fetchSubCategory({commit}){
+    const y = await this.$axios.get(`/api/subcategories`)
+    console.log(y)
   }
 }
 

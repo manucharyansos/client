@@ -1,12 +1,12 @@
 <template>
   <div class=" bg-white dark:bg-gray-700 dark:text-indigo-50 ">
-    <header class="sticky top-0 mb-4">
+    <header class="">
       <IndexHeader/>
     </header>
     <main>
       <Nuxt/>
     </main>
-    <footer>
+    <footer class="bg-white dark:bg-gray-900">
       <IndexFooter/>
     </footer>
   </div>

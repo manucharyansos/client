@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto z-10 mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+  <div class="mx-auto z-10 mt-20 w-full transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
     <img
-      class="h-48 w-full object-cover object-center"
+      class="md:h-64 sm:h-80 md:w-64 sm:w-80 object-cover object-center"
       :src="image_url"
       alt="Product Image"
     />
