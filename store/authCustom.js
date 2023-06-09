@@ -17,11 +17,12 @@ export const mutations = {
 export const actions = {
   async loginUser({commit}, userData){
     try {
-      const x = await this.$auth.loginWith('laravelSanctum', userData)
-      console.log(x)
+      await this.$auth.loginWith('laravelSanctum', userData)
+      return true
     }
     catch (err){
-      commit('setErrorMessage', err)
+      commit('setErrorMessage', err.response.data)
+      return false
     }
   },
   async registerUser({commit}, userData){
@@ -29,7 +30,7 @@ export const actions = {
       await this.$axios.post('/api/register', userData)
     }
     catch (err){
-      commit('setErrorMessage', err)
+      commit('setErrorMessage', err.response.data.errors)
     }
   }
 }

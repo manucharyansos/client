@@ -15,12 +15,22 @@
         <label
           for="name"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >Email address
+        >Name
         </label>
+        <template v-if="fieldName">
+          <p class="text-red-500 text-xs italic font-cormorant">Please choose a Name.</p>
+        </template>
+        <template v-if="errorMessages.name">
+          <p
+            class="text-red-500 text-xs italic font-cormorant"
+            v-if="errorMessages.name"
+            v-for="err of errorMessages.name"
+          >
+            {{ err }}
+          </p>
+        </template>
       </div>
-      <template v-if="fieldName">
-        <p class="text-red-500 text-xs italic font-cormorant">Please choose a Name.</p>
-      </template>
+
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="email"
@@ -37,10 +47,19 @@
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >Email address
         </label>
+        <template v-if="fieldEmail">
+          <p class="text-red-500 text-xs italic font-cormorant">Please choose a email address.</p>
+        </template>
+        <template v-if="errorMessages.email">
+          <p
+            class="text-red-500 text-xs italic font-cormorant"
+            v-if="errorMessages.email"
+            v-for="err of errorMessages.email"
+          >
+            {{ err }}
+          </p>
+        </template>
       </div>
-      <template v-if="fieldEmail">
-        <p class="text-red-500 text-xs italic font-cormorant">Please choose a email address.</p>
-      </template>
 
       <div class="relative z-0 w-full mb-6 group">
         <input
@@ -60,6 +79,15 @@
         </label>
         <template v-if="fieldPassword">
           <p class="text-red-500 text-xs italic font-cormorant">Please choose a password.</p>
+        </template>
+        <template v-if="errorMessages.password">
+          <p
+            class="text-red-500 text-xs italic font-cormorant"
+            v-if="errorMessages.password"
+            v-for="err of errorMessages.password"
+          >
+            {{ err }}
+          </p>
         </template>
       </div>
       <div class="relative z-0 w-full mb-6 group">
@@ -113,12 +141,18 @@ export default {
       fieldName: false,
       fieldEmail: false,
       fieldPassword: false,
-      fieldConfirmPassword: false
+      fieldConfirmPassword: false,
+      errorMessages: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      }
     }
   },
   watch: {
     name(val){
-      if (val){
+      if (`${val.length}` >= 3){
         this.fieldName = false
       }
     },
@@ -132,7 +166,7 @@ export default {
         this.fieldPassword = false
       }
     },
-    confirmPassword(val){
+    password_confirmation(val){
       if (`${val.length}` >= 6){
         this.fieldConfirmPassword = false
       }
@@ -144,45 +178,52 @@ export default {
   methods: {
     ...mapActions('authCustom', ['registerUser']),
     async sendRegister({commit}, userData){
-      if (this.name === ''){
-        this.fieldName = true
-        if (!this.email){
-          this.fieldEmail = true
-        }
-        if (!this.password){
-          this.fieldPassword = true
-        }
-        if (!this.confirmPassword){
-          this.fieldConfirmPassword = true
-        }
-      }
-      if (this.email === ''){
-        this.fieldEmail = true
-        if (!this.password){
-          this.fieldPassword = true
-        }
-        if (!this.confirmPassword){
-          this.fieldConfirmPassword = true
-        }
-      }
-      if (this.password === ''){
-        this.fieldPassword = true
-        if (!this.email){
-          this.fieldEmail = true
-        }
-      }
-      else{
-        await this.registerUser({
+      if (this.name && this.email && this.password && this.password === this.password_confirmation){
+        const response = await this.registerUser({
           name: this.name,
           email: this.email,
           password: this.password,
           password_confirmation: this.password_confirmation
         })
-        this.name = ''
-        this.email = ''
-        this.password = ''
-        this.password_confirmation = ''
+        if (response){
+          this.name = ''
+          this.email = ''
+          this.password = ''
+          this.password_confirmation = ''
+        }
+        else{
+          this.errorMessages = this.getErrorMessage
+        }
+      }else{
+        if (this.name === ''){
+          this.fieldName = true
+          if (!this.email){
+            this.fieldEmail = true
+          }
+          if (!this.password){
+            this.fieldPassword = true
+          }
+          if (!this.confirmPassword){
+            this.fieldConfirmPassword = true
+          }
+        }
+        if (this.email === ''){
+          this.fieldEmail = true
+          if (!this.password){
+            this.fieldPassword = true
+          }
+          if (!this.password_confirmation){
+            this.fieldConfirmPassword = true
+          }
+        }
+        if (this.password === ''){
+          this.fieldPassword = true
+          if (!this.email){
+            this.fieldEmail = true
+          }
+        }
       }
+
     }
   }
 }

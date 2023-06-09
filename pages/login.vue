@@ -42,8 +42,8 @@
         <template v-if="fieldPassword">
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </template>
-        <template v-if="getErrorMessage">
-          <p class="text-red-500 text-xs italic">{{getErrorMessage}}</p>
+        <template v-if="getErrorMessage" v-for="error of errorMessage">
+          <p class="text-red-500 text-xs italic">{{error}}</p>
         </template>
       </div>
       <div class="flex flex-col items-center justify-between" >
@@ -72,7 +72,11 @@ export default {
       email: 'admin@gmail.com',
       password: '123456',
       fieldEmail: false,
-      fieldPassword: false
+      fieldPassword: false,
+      errorMessage: {
+        email: '',
+        password: '',
+      }
     }
   },
   watch: {
@@ -93,28 +97,36 @@ export default {
   methods: {
     ...mapActions('authCustom', ['loginUser']),
     async login({commit}, userData){
-      if (this.email === ''){
-        this.fieldEmail = true
-        if (!this.password){
-          this.fieldPassword = true
-        }
-      }
-      if (this.password === ''){
-        this.fieldPassword = true
-        if (!this.email){
-          this.fieldEmail = true
-        }
-      }
-      else{
-        await this.loginUser({
+      if (this.email && this.password){
+        const response = await this.loginUser({
           data: {
             email: this.email,
             password: this.password
           }
         }, userData)
-        this.email = ''
-        this.password = ''
+        if (response){
+          this.email = ''
+          this.password = ''
+        }else{
+          this.errorMessage = this.getErrorMessage
+        }
+      }else{
+        if (this.email === ''){
+            this.fieldEmail = true
+            if (this.password === ''){
+              this.fieldPassword = true
+            }
+          }
+          if (this.password === ''){
+            this.fieldPassword = true
+            if (this.email === ''){
+              this.fieldEmail = true
+            }
+          }
       }
+
+
+      // }
     }
   }
 }
@@ -122,6 +134,6 @@ export default {
 
 <style scoped>
   .active{
-    border: 1px solid red;
+    border-bottom: 1px solid red;
   }
 </style>
