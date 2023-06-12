@@ -53,5 +53,25 @@ export const actions = {
     }catch (err){
       console.log(err)
     }
+  },
+  async createUser({commit}, user){
+    try {
+      const res = await this.$axios.post('/api/users/store', user)
+      return true
+    }catch (err){
+      commit('setErrorMessage', err.response.data.errors)
+      console.log(err)
+      return false
+    }
+  },
+  async deleteUser({commit}, id){
+    try {
+      const res = await this.$axios.delete(`/api/users/userDelete/${id}`)
+      if(res.status === 200){
+        return true
+      }
+    }catch (err){
+      commit('setErrorMessage', err.response)
+    }
   }
 };

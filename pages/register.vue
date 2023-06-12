@@ -15,6 +15,7 @@
         <label
           for="name"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          :class="{ label: fieldName }"
         >Name
         </label>
         <template v-if="fieldName">
@@ -45,6 +46,7 @@
         <label
           for="email"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          :class="{ label: fieldEmail }"
         >Email address
         </label>
         <template v-if="fieldEmail">
@@ -74,6 +76,7 @@
         />
         <label
           for="password"
+          :class="{ label: fieldPassword }"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
           Password
         </label>
@@ -103,6 +106,7 @@
         />
         <label
           for="confirmPassword"
+          :class="{ label: fieldConfirmPassword }"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-800 peer-focus:dark:text-indigo-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
           Confirm password
         </label>
@@ -232,6 +236,9 @@ export default {
 <style scoped>
 .active{
   border-bottom: 1px solid red;
+}
+.label{
+  color: red;
 }
 a.sign_in_here {
   /*color: #1a202c !important;*/

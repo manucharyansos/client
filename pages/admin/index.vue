@@ -40,7 +40,7 @@
          {{ countCategory }}
        </h5>
        <h5 class="mb-2 text-base font-semibold tracking-tight text-white dark:text-white" v-for="updated of updatedCategory">
-         {{ updated.updated_at }}
+<!--         {{ updated.updated_at }}-->
        </h5>
      </div>
 
@@ -81,6 +81,9 @@ export default {
     ...mapActions('userSettings', ['users'])
   },
   mounted() {
+    // this.fetchProducts()
+    // this.users()
+    // this.fetchCategory()
     this.countProduct = this.getProducts.length
     this.updatedProduct = this.getProducts.length
     this.countUsers = this.getUsers.length
