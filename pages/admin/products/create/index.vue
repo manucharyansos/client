@@ -27,9 +27,6 @@
             {{ err }}
           </p>
         </div>
-
-
-<!--        <p class="mt-2 text-sm text-red-600 dark:text-red-500"> {{ errors.title}}</p>-->
         <div class="relative mx-10 my-12">
           <div class=" border-gray-600 shadow-xl">
             <input
@@ -150,14 +147,7 @@ export default {
         category_id: '',
         selectedImage: ''
       },
-      errors: {
-        title: '',
-        description: '',
-        price: '',
-        imageUrl: '',
-        imageFiles: '',
-        category_id: ''
-      }
+      errors: {}
     }
   },
   computed: {

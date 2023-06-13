@@ -23,17 +23,17 @@
             <div>
               <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
-                <img v-if="!$auth.loggedIn" class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                <img v-else class="w-8 h-8 rounded-full" v-if="$auth.user.image" :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`" alt="">
+                <img v-if="!getUser.image" class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                <img v-else class="w-8 h-8 rounded-full" :src="`http://127.0.0.1:8000/user-images/${getUser.image}`" alt="">
               </button>
             </div>
             <div class="z-50 hidden my-4 mx-12 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
               <div class="px-4 py-3" role="none" v-if="$auth.loggedIn">
                 <p class="text-sm text-gray-900 dark:text-white" role="none">
-                  {{ $auth.user.name }}
+                  {{ getUser.name }}
                 </p>
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                  {{ $auth.user.email }}
+                  {{ getUser.email }}
                 </p>
               </div>
               <ul class="py-1" role="none">
@@ -81,8 +81,12 @@
 
 <script>
 import { initFlowbite } from 'flowbite'
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "Index",
+  async fetch(){
+    await this.fetchUser()
+  },
   data(){
     return {
       isDark: false,
@@ -95,7 +99,11 @@ export default {
   mounted() {
     initFlowbite();
   },
+  computed: {
+    ...mapGetters('authCustom', ['getUser'])
+  },
   methods: {
+    ...mapActions('authCustom', ['fetchUser']),
     toggle() {
       const value = this.$auth.$storage.getUniversal('color-theme');
       if (value) {

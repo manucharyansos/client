@@ -2,6 +2,32 @@
   <div class="container mx-auto dark:bg-gray-700">
     <div class="flex row w-full">
       <div class="w-1/2">
+<!--        <div class="relative my-12 mx-10 ">-->
+<!--          <div class="shadow-xl">-->
+<!--            <label for="category" class="sr-only">Underline select</label>-->
+<!--            <select-->
+<!--              v-model="category.category_id"-->
+<!--              id="category"-->
+<!--              class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"-->
+<!--            >-->
+<!--              <option selected>Choose a country</option>-->
+<!--              <option-->
+<!--                v-for="category of getCategory"-->
+<!--                :key="category.id"-->
+<!--                :value="category.id">-->
+<!--                {{category.name}}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <p-->
+<!--            class="mt-2 text-sm text-red-600 dark:text-red-500"-->
+<!--            v-for="err of errors"-->
+<!--            v-if="err.category_id"-->
+<!--          >-->
+<!--            {{ err.category_id }}-->
+<!--          </p>-->
+<!--        </div>-->
+
         <div class="relative my-12 mx-10 ">
           <div class="shadow-xl">
             <label for="category" class="sr-only">Underline select</label>
@@ -19,39 +45,79 @@
               </option>
             </select>
           </div>
+          <p
+            class="mt-2 text-sm text-red-600 dark:text-red-500"
+            v-if="errors.category_id"
+            v-for="err of errors.category_id"
+          >
+            {{ err }}
+          </p>
+        </div>
+
+<!--        <div class="relative mx-10 my-12 border-gray-600 shadow-xl">-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            id="title"-->
+<!--            class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"-->
+<!--            placeholder=" "-->
+<!--            v-model="category.name"-->
+<!--          />-->
+<!--          <label-->
+<!--            for="title"-->
+<!--            class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">Title</label>-->
 <!--          <p-->
 <!--            class="mt-2 text-sm text-red-600 dark:text-red-500"-->
-<!--            v-if="errors.category_id"-->
-<!--            v-for="err of errors.category_id"-->
+<!--            v-for="err of errors"-->
+<!--            v-if="err.name"-->
 <!--          >-->
-<!--            {{ err }}-->
+<!--            {{ err.name }}-->
 <!--          </p>-->
+<!--        </div>-->
+
+        <div class="relative mx-10 my-12">
+          <div class=" border-gray-600 shadow-xl">
+            <input
+              type="text"
+              id="nmae"
+              class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              v-model="category.name"
+            />
+            <label
+              for="name"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              Name
+            </label>
+          </div>
+          <p
+            class="mt-2 text-sm text-red-600 dark:text-red-500"
+            v-for="err of errors"
+            v-if="err.name"
+          >
+            {{ err.name[0] }}
+          </p>
         </div>
 
-        <div class="relative mx-10 my-12 border-gray-600 shadow-xl">
-          <input
-            type="text"
-            id="title"
-            class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            v-model="category.name"
-          />
-          <label
-            for="title"
-            class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">Title</label>
-        </div>
-
-        <div class="relative mx-10 my-12 border-gray-600 rounded-2xl shadow-2xl">
-          <input
-            type="text"
-            id="description"
-            class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            v-model="category.description"
-          />
-          <label
-            for="description"
-            class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">Description</label>
+        <div class="relative mx-10 my-12">
+          <div class=" border-gray-600 shadow-xl">
+            <input
+              type="text"
+              id="description"
+              class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              v-model="category.description"
+            />
+            <label
+              for="description"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+              Description
+            </label>
+          </div>
+          <p
+            class="mt-2 text-sm text-red-600 dark:text-red-500"
+            v-for="err of errors"
+            v-if="err.description"
+          >
+            {{ err.description[0] }}
+          </p>
         </div>
       </div>
       <div class="w-1/2">
@@ -65,6 +131,13 @@
             />
             <img class="w-full h-64 rounded-xl" :src="category.imageUrl" alt="Selected Image">
           </label>
+          <p
+            class="mt-2 text-sm text-red-600 dark:text-red-500"
+            v-for="err of errors"
+            v-if="err.image"
+          >
+            {{ err.image }}
+          </p>
         </div>
       </div>
     </div>
@@ -92,14 +165,15 @@ export default {
         imageUrl: '',
         imageFile: [],
         category_id: ''
-      }
+      },
+      errors: {},
     }
   },
   async fetch() {
     await this.fetchCategory()
   },
   computed: {
-    ...mapGetters('category', ['getCategory'])
+    ...mapGetters('category', ['getCategory', 'getErrorMessage'])
   },
   methods :{
     ...mapActions('category', ['createSubcategory', 'fetchCategory']),
@@ -120,7 +194,9 @@ export default {
       formData.append('image', this.category.imageFile);
       const response = await this.createSubcategory(formData)
       if (response) {
-        await this.$router.push('/admin/subcategory');
+        await this.$router.push('/admin');
+      }else {
+        this.errors = this.getErrorMessage
       }
     }
 

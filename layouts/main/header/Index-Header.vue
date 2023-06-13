@@ -1,6 +1,6 @@
 <template>
   <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div class="max-w-screen-full flex flex-wrap items-center justify-between mx-auto p-4">
         <nuxt-link to="/" class="flex items-center">
 <!--          <img src="/images.png" class="h-8 mr-3" />-->
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Example</span>
@@ -21,17 +21,16 @@
               data-dropdown-placement="bottom"
             >
               <span class="sr-only">Open user menu</span>
-              <template v-if="$auth.user.image">
+              <template v-if="getUser.image">
                 <img
-                  :src="`http://127.0.0.1:8000/user-images/${$auth.user.image}`"
+                  :src="`http://127.0.0.1:8000/user-images/${getUser.image}`"
                   alt="/images.png"
                   class="w-8 h-8 rounded-full"
-                  v-if="$auth.user.image"
                 />
               </template>
               <template v-else>
                 <img
-                  src="/images.pmg"
+                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                   alt="/images.png"
                   class="w-8 h-8 rounded-full"
                 />
@@ -41,10 +40,10 @@
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
               <div class="px-4 py-3">
               <span class="block text-sm text-gray-900 dark:text-white">
-                {{ $auth.user.name }}
+                {{ getUser.name }}
               </span>
                 <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                {{ $auth.user.email }}
+                {{ getUser.email }}
               </span>
               </div>
               <ul class="py-2" aria-labelledby="user-menu-button">
@@ -209,8 +208,12 @@
 
 <script>
 import { initFlowbite } from 'flowbite'
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "Index-Header",
+  async fetch(){
+    await this.fetchUser()
+  },
   data(){
     return {
       allPages: [
@@ -222,6 +225,9 @@ export default {
       isLight: true
     }
   },
+  computed: {
+    ...mapGetters('authCustom', ['getUser'])
+  },
   mounted() {
     initFlowbite();
   },
@@ -229,6 +235,7 @@ export default {
     this.$auth.$storage.setUniversal('color-theme', 'light');
   },
   methods: {
+    ...mapActions('authCustom', ['fetchUser']),
     async userLogout(){
       await this.$auth.logout()
       await this.$router.push('/')

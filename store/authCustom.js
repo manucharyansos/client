@@ -1,20 +1,31 @@
 export const state = () => ({
-  resMessage: false
+  resMessage: false,
+  user: []
 })
 
 export const getters = {
   getErrorMessage(state){
     return state.resMessage
+  },
+  getUser(state){
+    return state.user
   }
 }
 
 export const mutations = {
   setErrorMessage(state, err){
     state.resMessage = err
+  },
+  setUser(state, user){
+    state.user = user
   }
 }
 
 export const actions = {
+  async fetchUser({commit}){
+    const res = await this.$axios.get('/api/user')
+    commit('setUser', res.data)
+  },
   async loginUser({commit}, userData){
     try {
       await this.$auth.loginWith('laravelSanctum', userData)

@@ -2,7 +2,8 @@
 
 export const state = () => ({
   category: [],
-  message: ''
+  message: '',
+  error: []
 })
 
 export const getters = {
@@ -11,6 +12,9 @@ export const getters = {
   },
   getMessage(state){
     return state.message
+  },
+  getErrorMessage(state) {
+    return state.error
   }
 }
 
@@ -45,12 +49,13 @@ export const actions = {
   },
   async createSubcategory({commit}, data){
     try {
-      const x = await this.$axios.post('/api/subcategories', data, {
+      await this.$axios.post('/api/subcategories', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
-      console.log(x)
+      return true
     }catch (err){
-      console.log(err.response)
+      commit('setErrorMessage', err.response.data)
+      return false
     }
   },
   async fetchSubCategory({commit}){
@@ -65,5 +70,8 @@ export const mutations = {
   },
   DELETE_CATEGORY_SUCCESS(state, message){
     state.message = message
+  },
+  setErrorMessage(state, err){
+    state.error = err
   }
 }
