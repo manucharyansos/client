@@ -25,6 +25,9 @@ export default {
   name: "index",
   components: {ProductContent},
   layout: 'UserLayout',
+  async fetch() {
+    await this.fetchProducts()
+  },
   methods: {
     ...mapActions('products', ['fetchProducts']),
     // getImageUrl(image) {
@@ -43,9 +46,6 @@ export default {
   },
   computed: {
     ...mapGetters('products', ['getProducts'])
-  },
-  mounted() {
-    this.fetchProducts()
   },
 }
 </script>
