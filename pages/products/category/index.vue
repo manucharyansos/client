@@ -6,6 +6,7 @@
     <template v-if="getCategory">
       <category-content
         :data="getCategory"
+        @categoryButton="findProductsBuId"
       />
     </template>
   </div>
@@ -29,6 +30,9 @@ export default {
     getImageUrl(image) {
       return `http://127.0.0.1:8000/category-images/${image}`;
     },
+    findProductsBuId(id){
+      alert(id)
+    }
   }
 }
 </script>
