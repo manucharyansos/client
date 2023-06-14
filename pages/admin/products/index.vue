@@ -444,7 +444,14 @@
                     </button>
 
 
-                    <button type="button" data-drawer-target="drawer-read-product-advanced" data-drawer-show="drawer-read-product-advanced" aria-controls="drawer-read-product-advanced" class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    <button
+                      type="button"
+                      data-drawer-target="drawer-read-product-advanced"
+                      data-drawer-show="drawer-read-product-advanced"
+                      aria-controls="drawer-read-product-advanced"
+                      class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                      @click="previewSelectedProduct(product)"
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2 -ml-0.5">
                         <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
@@ -888,10 +895,20 @@
       </div>
     </div>
     <!-- Preview Drawer -->
-    <div id="drawer-read-product-advanced" class="overflow-y-auto fixed top-0 left-0 z-50 p-4 w-full max-w-lg h-screen bg-white transition-transform -translate-x-full dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+    <div
+      id="drawer-read-product-advanced"
+      class="overflow-y-auto fixed top-0 left-0 z-50 p-4 w-full max-w-lg h-screen bg-white transition-transform -translate-x-full dark:bg-gray-800"
+      tabindex="-1"
+      aria-labelledby="drawer-label"
+      aria-hidden="true"
+    >
       <div>
-        <h4 id="read-drawer-label" class="mb-1.5 leading-none text-xl font-semibold text-gray-900 dark:text-white">Apple iMac 25"</h4>
-        <h5 class="mb-5 text-xl font-bold text-gray-900 dark:text-white">$2999</h5>
+        <h4 id="read-drawer-label" class="mb-1.5 leading-none text-xl font-semibold text-gray-900 dark:text-white">
+          {{previewProduct.title}}
+        </h4>
+        <h5 class="mb-5 text-xl font-bold text-gray-900 dark:text-white">
+          {{ previewProduct.price }}
+        </h5>
       </div>
       <button type="button" data-drawer-dismiss="drawer-read-product-advanced" aria-controls="drawer-read-product-advanced" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -900,26 +917,15 @@
         <span class="sr-only">Close menu</span>
       </button>
       <div class="grid grid-cols-3 gap-4 mb-4 sm:mb-5">
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png" alt="iMac Side Image">
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png" alt="iMac Front Image">
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png" alt="iMac Back Image">
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png" alt="iMac Back Image">
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png" alt="iMac Front Image">
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png" alt="iMac Side Image">
+        <div
+          class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700"
+          v-for="image of previewProduct.images">
+          <img :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="Image">
         </div>
       </div>
-      <dl class="sm:mb-5"><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory, Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage, Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.</dd></dl>
+      <dl class="sm:mb-5"><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+        {{ previewProduct.description }}
+      </dd></dl>
       <dl class="grid grid-cols-2 gap-4 mb-4">
         <div class="col-span-2 p-3 bg-gray-100 rounded-lg border border-gray-200 dark:bg-gray-700 sm:col-span-1 dark:border-gray-600">
           <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Shipping</dt>
@@ -1028,6 +1034,7 @@ export default {
       //   category_id: ''
       // },
       selectedProduct: [],
+      previewProduct: [],
       id: '',
       product: {
         title: '',
@@ -1057,6 +1064,9 @@ export default {
     },
     editProduct(product){
       this.selectedProduct = product
+    },
+    previewSelectedProduct(product){
+      this.previewProduct = product
     },
     removeSelectedProduct(){
       this.selectedProduct = []
