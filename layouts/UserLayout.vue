@@ -3,7 +3,7 @@
     <header class="">
       <IndexHeader/>
     </header>
-    <main>
+    <main class="mt-14">
       <Nuxt/>
     </main>
     <footer class="bg-white dark:bg-gray-900">
