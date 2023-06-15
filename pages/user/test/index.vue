@@ -919,7 +919,6 @@ export default {
   middleware: 'admin',
   async fetch(){
     await this.fetchProducts()
-    await initFlowbite()
   },
   data (){
     return {
@@ -934,6 +933,9 @@ export default {
       selectedProduct: [],
       id: ''
     }
+  },
+  mounted() {
+    initFlowbite()
   },
   computed: {
     ...mapGetters('products', ['getProducts'])

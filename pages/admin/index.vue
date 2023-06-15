@@ -81,9 +81,6 @@ export default {
     ...mapActions('userSettings', ['users'])
   },
   mounted() {
-    // this.fetchProducts()
-    // this.users()
-    // this.fetchCategory()
     this.countProduct = this.getProducts.length
     this.updatedProduct = this.getProducts.length
     this.countUsers = this.getUsers.length
