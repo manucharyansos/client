@@ -1,7 +1,5 @@
 <template>
   <div>
-<!--    <Carousel/>-->
-
     <section class="bg-white dark:bg-gray-900">
       <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
@@ -20,28 +18,43 @@
         </div>
       </div>
     </section>
+
+    <carousel class="w-full">
+      <div v-for="category of getCategory" class="w-64 h-48">
+        <img :src="`http://127.0.0.1:8000/category-images/${category.image}`">
+      </div>
+    </carousel>
   </div>
 </template>
 
 <script>
-// import { initFlowbite } from 'flowbite'
-import Carousel from "@/components/carousel";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  components: {
-    Carousel
-  },
   serverPrefetch() {
     this.fetchProducts()
   },
+  data(){
+    return {
+      categories: []
+    }
+  },
+  mounted() {
+    this.fetchCategory()
+  },
+  computed: {
+    ...mapGetters('category', ['getCategory'])
+  },
   methods: {
-    ...mapActions('products', ['fetchProducts'])
+    ...mapActions('products', ['fetchProducts']),
+    ...mapActions('category', ['fetchCategory'])
   }
 }
 </script>
 <style scoped>
-
+.owl-item{
+  width: auto;
+}
 </style>

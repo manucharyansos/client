@@ -56,7 +56,7 @@ export default {
       type: String
     },
     price: {
-      type: Number
+      type: String
     },
     sale: {
       type: String
