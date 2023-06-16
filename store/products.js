@@ -46,6 +46,19 @@ export const actions = {
       console.error(error)
       // Handle error case here if needed
     }
+  },
+  async reviewProduct({ commit }, {id, data}) {
+    console.log(data)
+    try {
+      // const requestData = {
+      //   rating: data.rating,
+      //   comment: data.comment,
+      // };
+
+      await this.$axios.post(`/api/products/reviews/${id}`, data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 

@@ -447,6 +447,25 @@
                   {{ err }}
                 </p>
               </div>
+              <div>
+                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
+                <input
+                  type="number"
+                  name="stock"
+                  id="stock"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Stock"
+                  required=""
+                  v-model="product.stock"
+                >
+                <p
+                  class="mt-2 text-sm text-red-600 dark:text-red-500"
+                  v-if="errors.stock"
+                  v-for="err of errors.stock"
+                >
+                  {{ err }}
+                </p>
+              </div>
 <!--              <div class="grid gap-4 sm:col-span-2 md:gap-6 sm:grid-cols-4">-->
 <!--                <div>-->
 <!--                  <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item weight (kg)</label>-->
@@ -607,6 +626,7 @@ export default {
         title: '',
         description: '',
         price: '',
+        stock: '',
         imageUrl: '',
         imageFiles: [],
         category_id: '',
@@ -659,6 +679,7 @@ export default {
       formData.append('title', this.product.title);
       formData.append('description', this.product.description);
       formData.append('price', this.product.price);
+      formData.append('stock', this.product.stock);
       formData.append('category_id', this.product.category_id);
 
       this.product.imageFiles.forEach((file) => {

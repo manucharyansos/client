@@ -25,6 +25,7 @@ export default {
   name: "index",
   components: {ProductContent},
   layout: 'UserLayout',
+  // auth: 'guest',
   async fetch() {
     await this.fetchProducts()
   },

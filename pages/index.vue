@@ -26,6 +26,7 @@
 <script>
 // import { initFlowbite } from 'flowbite'
 import Carousel from "@/components/carousel";
+import {mapActions} from "vuex";
 export default {
   name: 'IndexPage',
   layout: 'UserLayout',
@@ -33,11 +34,11 @@ export default {
   components: {
     Carousel
   },
-  mounted() {
-    // initFlowbite();
+  serverPrefetch() {
+    this.fetchProducts()
   },
   methods: {
-
+    ...mapActions('products', ['fetchProducts'])
   }
 }
 </script>

@@ -1,32 +1,32 @@
 <template>
   <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-    <!--              <tr>-->
-    <!--                <th scope="col" class="p-4">-->
-    <!--                  <div class="flex items-center">-->
-    <!--                    <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
-    <!--                    <label for="checkbox-all" class="sr-only">checkbox</label>-->
-    <!--                  </div>-->
-    <!--                </th>-->
-    <!--                <th scope="col" class="p-4">Product</th>-->
-    <!--                <th scope="col" class="p-4">Category</th>-->
-    <!--                <th scope="col" class="p-4">Stock</th>-->
+                  <tr>
+<!--                    <th scope="col" class="p-4">-->
+<!--                      <div class="flex items-center">-->
+<!--                        <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+<!--                        <label for="checkbox-all" class="sr-only">checkbox</label>-->
+<!--                      </div>-->
+<!--                    </th>-->
+                    <th scope="col" class="p-4">Product</th>
+                    <th scope="col" class="p-4">Category</th>
+                    <th scope="col" class="p-4">Stock</th>
     <!--                <th scope="col" class="p-4">Sales/Day</th>-->
     <!--                <th scope="col" class="p-4">Sales/Month</th>-->
-    <!--                <th scope="col" class="p-4">Rating</th>-->
-    <!--                <th scope="col" class="p-4">Sales</th>-->
-    <!--                <th scope="col" class="p-4">Revenue</th>-->
-    <!--                <th scope="col" class="p-4">Last Update</th>-->
-    <!--              </tr>-->
+                    <th scope="col" class="p-4">Rating</th>
+                    <th scope="col" class="p-4">Sales</th>
+                    <th scope="col" class="p-4">Revenue</th>
+                    <th scope="col" class="p-4">Last Update</th>
+                  </tr>
     </thead>
     <tbody>
     <tr v-for="(product, index) of data" :key="index" class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-      <td class="p-4 w-4">
-        <div class="flex items-center">
-          <input id="checkbox-table-search-1" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-          <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-        </div>
-      </td>
+<!--      <td class="p-4 w-4">-->
+<!--        <div class="flex items-center">-->
+<!--          <input id="checkbox-table-search-1" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+<!--          <label for="checkbox-table-search-1" class="sr-only">checkbox</label>-->
+<!--        </div>-->
+<!--      </td>-->
       <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <div class="flex items-center mr-3">
           <img :src="getFirstImage(product)" alt="iMac Front Image" class="h-8 w-8 mr-3 object-cover object-center">
@@ -38,12 +38,16 @@
       </td>
       <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <div class="flex items-center">
-          <div class="h-4 w-4 rounded-full inline-block mr-2 bg-red-700"></div>
-          95
+          <template v-if="product.stock> 0">
+            <div class="h-4 w-4 rounded-full inline-block mr-2 bg-green-700"></div>
+            {{ product.stock }}
+          </template>
+          <div v-else class="h-4 w-4 rounded-full inline-block mr-2 bg-red-700"></div>
+
         </div>
       </td>
-      <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">1.47</td>
-      <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">0.47</td>
+<!--      <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">1.47</td>-->
+<!--      <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">0.47</td>-->
       <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <div class="flex items-center">
           <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
