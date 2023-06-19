@@ -2,7 +2,8 @@
 export const state = () => ({
   products: [],
   errorMessages: [],
-  message: ''
+  message: '',
+  cartProduct: []
 })
 
 export const getters = {
@@ -14,6 +15,9 @@ export const getters = {
   },
   getMessage(state) {
     return state.message
+  },
+  getProductToCart(state) {
+    return state.cartProduct
   }
 }
 
@@ -50,15 +54,21 @@ export const actions = {
   async reviewProduct({ commit }, {id, data}) {
     console.log(data)
     try {
-      // const requestData = {
-      //   rating: data.rating,
-      //   comment: data.comment,
-      // };
-
       await this.$axios.post(`/api/products/reviews/${id}`, data);
     } catch (error) {
       console.error(error);
     }
+  },
+  async toCart({ commit }, id ){
+    try {
+      const { data } = await this.$axios.get(`api/products/${id}/edit`)
+      commit('setProductToCart', data)
+    }catch (err){
+      console.log(err)
+    }
+  },
+  deleteProductFromCart({commit}, index){
+    commit('deleteProductByIndex', index)
   }
 }
 
@@ -72,5 +82,11 @@ export const mutations = {
   },
   DELETE_PRODUCT_SUCCESS(state, message){
     state.message = message
+  },
+  setProductToCart(state, product){
+    state.cartProduct.push(product)
+  },
+  deleteProductByIndex(state, index){
+    state.cartProduct.splice(index, 1)
   }
 }

@@ -7,6 +7,21 @@
         </nuxt-link>
 
         <div class="flex items-center ju md:order-2">
+          <button
+            class="relative text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            data-drawer-target="open-bag"
+            data-drawer-show="open-bag"
+            data-drawer-placement="right"
+            aria-controls="open-bag"
+          >
+            <svg fill="none" class="w-5 h-5" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
+            </svg>
+            <span class="absolute top-0 right-1.5 text-base">
+              {{ cartProductCount }}
+            </span>
+          </button>
+
           <button @click="toggle" id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon" v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
             <svg id="theme-toggle-light-icon" v-if="isLight" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -209,6 +224,7 @@
 <script>
 import { initFlowbite } from 'flowbite'
 import {mapActions, mapGetters} from "vuex";
+import YourCart from "@/components/your-cart";
 export default {
   name: "Index-Header",
   async fetch(){
@@ -222,14 +238,17 @@ export default {
         { id: 4, name: 'Category', linkTo: '/products/category'},
       ],
       isDark: false,
-      isLight: true
+      isLight: true,
+      cartProductCount: 0
     }
   },
   computed: {
-    ...mapGetters('authCustom', ['getUser'])
+    ...mapGetters('authCustom', ['getUser']),
+    // ...mapGetters('products', ['getProductToCart'])
   },
   mounted() {
     initFlowbite();
+    // console.log(this.getProductToCart)
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');
@@ -255,7 +274,8 @@ export default {
           this.isDark = false
         }
       }
-    }
+    },
+
   },
 }
 </script>

@@ -15,6 +15,7 @@
 <script>
 import CategoryContent from "@/components/products/Category-Content";
 import {mapActions, mapGetters} from "vuex";
+import {initFlowbite} from "flowbite";
 export default {
   name: "index",
   components: {CategoryContent},
@@ -24,6 +25,9 @@ export default {
   },
   async fetch() {
     await this.fetchCategory()
+  },
+  mounted() {
+    initFlowbite()
   },
   methods: {
     ...mapActions('category', ['fetchCategory']),
