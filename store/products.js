@@ -3,7 +3,8 @@ export const state = () => ({
   products: [],
   errorMessages: [],
   message: '',
-  cartProduct: []
+  cartProduct: [],
+  showProduct: []
 })
 
 export const getters = {
@@ -16,8 +17,11 @@ export const getters = {
   getMessage(state) {
     return state.message
   },
-  getProductToCart(state) {
+  getProduct(state) {
     return state.cartProduct
+  },
+  getShowedProduct(state){
+    return state.showProduct
   }
 }
 
@@ -44,31 +48,37 @@ export const actions = {
   async deleteSelectedProduct({ commit }, id) {
     try {
       const res = await this.$axios.delete(`/api/products/${id}`)
-      console.log(res)
       commit('DELETE_PRODUCT_SUCCESS', id)
     } catch (error) {
       console.error(error)
-      // Handle error case here if needed
     }
   },
   async reviewProduct({ commit }, {id, data}) {
-    console.log(data)
     try {
       await this.$axios.post(`/api/products/reviews/${id}`, data);
     } catch (error) {
       console.error(error);
     }
   },
-  async toCart({ commit }, id ){
+  async fetchProduct({ commit }, id ){
     try {
-      const { data } = await this.$axios.get(`api/products/${id}/edit`)
-      commit('setProductToCart', data)
+      const { data } = await this.$axios.get(`api/products/${id}`)
+      commit('setProduct', data)
     }catch (err){
       console.log(err)
     }
   },
   deleteProductFromCart({commit}, index){
     commit('deleteProductByIndex', index)
+  },
+  async fetchShowProduct({commit}, id){
+    try {
+      const { data } = await this.$axios.get(`api/products/${id}`)
+      commit('setShowedProduct', data)
+    }catch (err){
+      console.log(err)
+    }
+
   }
 }
 
@@ -83,10 +93,13 @@ export const mutations = {
   DELETE_PRODUCT_SUCCESS(state, message){
     state.message = message
   },
-  setProductToCart(state, product){
+  setProduct(state, product){
     state.cartProduct.push(product)
   },
   deleteProductByIndex(state, index){
     state.cartProduct.splice(index, 1)
+  },
+  setShowedProduct(state, product){
+    state.showProduct = product
   }
 }

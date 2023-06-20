@@ -244,11 +244,10 @@ export default {
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
-    // ...mapGetters('products', ['getProductToCart'])
+    // ...mapGetters('products', ['getProduct'])
   },
   mounted() {
     initFlowbite();
-    // console.log(this.getProductToCart)
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');

@@ -11,6 +11,7 @@
       :description="product.description"
       :price="product.price"
       @addToCart="addToCart(product.id)"
+      :edit-product="product.id"
       />
     </div>
 
@@ -28,7 +29,7 @@
       </button>
 
       <YourCart
-        :products="getProductToCart"
+        :products="getProduct"
         @deleteProduct="deleteProduct"
         @checkout="checkout"
       />
@@ -59,7 +60,7 @@ export default {
     await this.fetchProducts()
   },
   methods: {
-    ...mapActions('products', ['fetchProducts', 'toCart', 'deleteProductFromCart']),
+    ...mapActions('products', ['fetchProducts', 'fetchProduct', 'deleteProductFromCart']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/products-images/${image}`;
     },
@@ -71,7 +72,7 @@ export default {
       }
     },
     addToCart(id){
-      this.toCart(id)
+      this.fetchProduct(id)
     },
     deleteProduct(index){
       this.deleteProductFromCart(index)
@@ -81,7 +82,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('products', ['getProducts', 'getProductToCart'])
+    ...mapGetters('products', ['getProducts', 'getProduct'])
   },
 }
 </script>

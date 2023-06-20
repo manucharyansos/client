@@ -1,7 +1,7 @@
 <template>
   <div>
     <Shipping
-      :products="getProductToCart"
+      :products="getProduct"
     />
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     Shipping
   },
   computed: {
-    ...mapGetters('products', ['getProductToCart'])
+    ...mapGetters('products', ['getProduct'])
   },
 
 }

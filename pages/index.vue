@@ -19,11 +19,11 @@
       </div>
     </section>
 
-    <carousel class="w-full">
-      <div v-for="category of getCategory" class="w-64 h-48">
+    <carousel-3d >
+      <slide v-for="(category, index) of getCategory" :index="index">
         <img :src="`http://127.0.0.1:8000/category-images/${category.image}`">
-      </div>
-    </carousel>
+      </slide>
+    </carousel-3d>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   auth: 'guest',
   serverPrefetch() {
     this.fetchProducts()
+    this.fetchCategory()
   },
   data(){
     return {
@@ -42,7 +43,6 @@ export default {
     }
   },
   mounted() {
-    this.fetchCategory()
   },
   computed: {
     ...mapGetters('category', ['getCategory'])

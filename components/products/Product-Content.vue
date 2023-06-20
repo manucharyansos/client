@@ -1,6 +1,6 @@
 <template>
   <div class="grid-cols-4 my-6 overflow-hidden border border-gray-100 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-md">
-    <a class="relative flex w-full h-60 overflow-hidden" href="#">
+    <nuxt-link class="relative flex w-full h-60 overflow-hidden" :to="`/products/${editProduct}`">
       <img class="absolute top-0 right-0 h-full w-full object-cover"
            :src="image_url" alt="product image" />
 
@@ -11,7 +11,7 @@
           </svg>
         </button>
       </div>
-    </a>
+    </nuxt-link>
 
     <div class="w-60 mt-4 px-5 pb-5">
       <div class="flex items-center mt-2.5 mb-5">
@@ -64,6 +64,9 @@ export default {
     },
     saleTo: {
       type: String
+    },
+    editProduct: {
+      type: Number
     }
   },
   data() {
