@@ -10,7 +10,7 @@
 import editProduct from "~/components/products/edit-product";
 import {mapActions, mapGetters} from "vuex";
 export default {
-  name: "_id",
+  name: "product-id",
   layout: 'UserLayout',
   components: {
     editProduct

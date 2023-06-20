@@ -33,9 +33,9 @@ export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  serverPrefetch() {
-    this.fetchProducts()
-    this.fetchCategory()
+  async fetch() {
+    await this.fetchProducts()
+    await this.fetchCategory()
   },
   data(){
     return {

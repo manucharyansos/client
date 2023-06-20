@@ -2,20 +2,20 @@
   <section class="pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden">
     <div class="container px-4 mx-auto">
       <div class="flex flex-wrap -mx-4">
-        <div class="w-full px-4">
+        <div class="w-full px-4 my-6">
           <Breadcrumb/>
         </div>
         <div class="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
           <div class="flex -mx-4 flex-wrap items-center justify-between lg:justify-start lg:items-start xl:items-center">
 
-            <div class="w-full sm:w-9/12 px-4">
-              <img class="mb-5" :src="`http://127.0.0.1:8000/products-images/${product_data.images[0].image_path}`" alt="">
+            <div class="w-full sm:w-8/12 mx-auto flex flex-col items-center">
+              <img class="w-full mb-5 mx-auto" v-if="product_data.images" :src="`http://127.0.0.1:8000/products-images/${product_data.images[0].image_path}`" alt="">
               <p class="text-sm text-gray-300">Roll over image to zoom in</p>
             </div>
           </div>
-          <carousel-3d >
+          <carousel-3d v-if="product_data.images">
             <slide v-for="(image, index) of product_data.images" :index="index">
-              <img :src="`http://127.0.0.1:8000/products-images/${image.image_path}`">
+              <img :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="image">
             </slide>
           </carousel-3d>
         </div>

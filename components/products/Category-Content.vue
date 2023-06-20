@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
       <div v-for="image of data">
         <img
           class="h-40 md:h-64 w-40 md:w-64 rounded-lg object-cover object-center"
