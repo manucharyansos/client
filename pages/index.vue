@@ -19,29 +19,43 @@
 <!--      </div>-->
 <!--    </section>-->
 
-    <slider animation="fade">
+    <slider class="mt-16 z-20" animation="fade" height="500px">
       <slider-item
         v-for="(i, index) in list"
         :key="index"
         :style="i"
       >
-        <img class="w-full h-72 object-cover object-center" :src="i.backgroundImage" alt="">
+        <img class="w-full h-full object-cover object-center" :src="i.backgroundImage" alt="">
       </slider-item>
     </slider>
 
 
     <carousel-3d >
       <slide v-for="(category, index) of getCategory" :index="index">
-        <img :src="`http://127.0.0.1:8000/category-images/${category.image}`">
+        <img :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
       </slide>
     </carousel-3d>
+
+
+<!--    <carousel>-->
+
+<!--      <img src="/slide-2.jpg" alt="">-->
+
+<!--      <img src="/slide-1.jpeg" alt="">-->
+
+<!--      <img src="/slide-3.jpg" alt="">-->
+
+<!--      <img src="/slide-1.jpeg" alt="">-->
+
+<!--    </carousel>-->
+
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
-
+// import carousel from 'vue-owl-carousel'
 
 export default {
   name: 'IndexPage',
@@ -54,6 +68,7 @@ export default {
   components: {
     Slider,
     SliderItem,
+    // carousel
   },
   data(){
     return {

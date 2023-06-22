@@ -11,7 +11,7 @@
               </h5>
               <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-10 ({{ getProducts.length }})</h5>
               <button type="button" class="group" data-tooltip-target="results-tooltip">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewbox="0 0 20 20" fill="currentColor">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 object-center object-cover text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewbox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                 </svg>
                 <span class="sr-only">More info</span>
@@ -21,14 +21,6 @@
                 <div class="tooltip-arrow" data-popper-arrow=""></div>
               </div>
             </div>
-            <!--            <div class="flex-shrink-0 flex flex-col items-start md:flex-row md:items-center lg:justify-end space-y-3 md:space-y-0 md:space-x-3">-->
-            <!--              <button type="button" class="flex-shrink-0 inline-flex items-center justify-center py-2 px-3 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">-->
-            <!--                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="mr-2 w-4 h-4" aria-hidden="true">-->
-            <!--                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 01-.517.608 7.45 7.45 0 00-.478.198.798.798 0 01-.796-.064l-.453-.324a1.875 1.875 0 00-2.416.2l-.243.243a1.875 1.875 0 00-.2 2.416l.324.453a.798.798 0 01.064.796 7.448 7.448 0 00-.198.478.798.798 0 01-.608.517l-.55.092a1.875 1.875 0 00-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 01-.064.796l-.324.453a1.875 1.875 0 00.2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 01.796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 01.517-.608 7.52 7.52 0 00.478-.198.798.798 0 01.796.064l.453.324a1.875 1.875 0 002.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 01-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 001.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 01-.608-.517 7.507 7.507 0 00-.198-.478.798.798 0 01.064-.796l.324-.453a1.875 1.875 0 00-.2-2.416l-.243-.243a1.875 1.875 0 00-2.416-.2l-.453.324a.798.798 0 01-.796.064 7.462 7.462 0 00-.478-.198.798.798 0 01-.517-.608l-.091-.55a1.875 1.875 0 00-1.85-1.566h-.344zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" />-->
-            <!--                </svg>-->
-            <!--                Table settings-->
-            <!--              </button>-->
-            <!--            </div>-->
           </div>
           <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
             <div class="w-full md:w-1/2">
@@ -47,11 +39,10 @@
             <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
               <button
                 type="button"
-                id="createProductButton"
-                data-modal-toggle="createProductModal"
                 class="flex items-center justify-center text-white bg-blue-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                @click="addProduct"
               >
-                <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <svg class="h-5 w-5 mr-1.5 -ml-1 object-center object-cover" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                 </svg>
                 Add product
@@ -359,226 +350,9 @@
               @editProduct="editProduct"
             />
           </div>
-<!--          table-navbar-->
         </div>
       </div>
     </section>
-    <!-- End block -->
-    <div id="createProductModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-28 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] md:h-full">
-      <div class="relative p-4 pt-10 mt-32 w-full max-w-3xl h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-          <!-- Modal header -->
-          <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Add Product</h3>
-            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="createProductModal">
-              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-<!--          <form action="#">-->
-            <div class="grid gap-4 mb-8 sm:grid-cols-2">
-              <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type product name"
-                  required=""
-                  v-model="product.title">
-                <p
-                  class="mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.title"
-                  v-for="err of errors.title"
-                >
-                  {{ err }}
-                </p>
-              </div>
-              <div>
-                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Category
-                </label>
-                <select
-                  id="category"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  v-model="product.category_id"
-                >
-                  <option selected="">Select category</option>
-                  <option
-                    v-for="category of getCategory"
-                    :key="category.id"
-                    :value="category.id">
-                    {{category.name}}
-                  </option>
-                </select>
-                <p
-                  class="mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.category_id"
-                  v-for="err of errors.category_id"
-                >
-                  {{ err }}
-                </p>
-              </div>
-<!--              <div>-->
-<!--                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>-->
-<!--                <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required="">-->
-<!--              </div>-->
-              <div>
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="$2999"
-                  required=""
-                  v-model="product.price"
-                >
-                <p
-                  class="mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.price"
-                  v-for="err of errors.price"
-                >
-                  {{ err }}
-                </p>
-              </div>
-              <div>
-                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
-                <input
-                  type="number"
-                  name="stock"
-                  id="stock"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Stock"
-                  required=""
-                  v-model="product.stock"
-                >
-                <p
-                  class="mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.stock"
-                  v-for="err of errors.stock"
-                >
-                  {{ err }}
-                </p>
-              </div>
-<!--              <div class="grid gap-4 sm:col-span-2 md:gap-6 sm:grid-cols-4">-->
-<!--                <div>-->
-<!--                  <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item weight (kg)</label>-->
-<!--                  <input type="number" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12" required="">-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label for="length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lenght (cm)</label>-->
-<!--                  <input type="number" name="length" id="length" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="105" required="">-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label for="breadth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Breadth (cm)</label>-->
-<!--                  <input type="number" name="breadth" id="breadth" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="15" required="">-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label for="width" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Width (cm)</label>-->
-<!--                  <input type="number" name="width" id="width" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="23" required="">-->
-<!--                </div>-->
-<!--              </div>-->
-              <div class="sm:col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Description
-                </label>
-                <textarea
-                  id="description"
-                  rows="4"
-                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"
-                  v-model="product.description"
-                >
-                </textarea>
-                <p
-                  class="mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.description"
-                  v-for="err of errors.description"
-                >
-                  {{ err }}
-                </p>
-              </div>
-            </div>
-            <div class="mb-4 space-y-4 sm:flex sm:space-y-0">
-              <div class="flex items-center mr-4">
-                <input id="inline-checkbox" type="checkbox" value="" name="sellingType" class="w-4 h-4 bg-gray-100 rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="inline-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">In-store only</label>
-              </div>
-              <div class="flex items-center mr-4">
-                <input id="inline-2-checkbox" type="checkbox" value="" name="sellingType" class="w-4 h-4 bg-gray-100 rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="inline-2-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online selling only</label>
-              </div>
-              <div class="flex items-center mr-4">
-                <input checked="" id="inline-checked-checkbox" type="checkbox" value="" name="sellingType" class="w-4 h-4 bg-gray-100 rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Both in-store and online</label>
-              </div>
-            </div>
-            <div class="mb-4">
-              <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>
-              <div class="flex justify-center items-center">
-                <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                    <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span class="font-semibold">Click to upload</span>
-                      or drag and drop
-                    </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                  </div>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    class="hidden"
-                    multiple
-                    @change="handleFileUpload"
-                  >
-
-
-                </label>
-                <img class="w-full h-64 rounded-xl object-cover object-center " :src="product.imageUrl" alt="Selected Image">
-                <p
-                  class="mx-auto mt-2 text-sm text-red-600 dark:text-red-500"
-                  v-if="errors.images"
-                  v-for="err of errors.images"
-                  >
-                  {{ err }}
-                </p>
-              </div>
-            </div>
-            <div class="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-              <button
-                type="button"
-                class="w-full sm:w-auto justify-center text-white inline-flex bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                @click="create"
-              >
-                Add product
-              </button>
-              <button
-                class="w-full sm:w-auto text-white justify-center inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                </svg>
-                Schedule
-              </button>
-              <button data-modal-toggle="createProductModal" type="button" class="w-full justify-center sm:w-auto text-gray-500 inline-flex items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                Discard
-              </button>
-            </div>
-<!--          </form>-->
-        </div>
-      </div>
-    </div>
 
     <!-- drawer component -->
     <UpdateProductDrawer
@@ -598,10 +372,10 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import Table from "~/components/table"
-import PreviewDrawer from "@/components/table/preview-drawer";
-import UpdateProductDrawer from "@/components/table/update-product-drawer";
-import DeleteModal from "@/components/table/delete-modal";
+import Table from "~/components/products/product-table"
+import PreviewDrawer from "@/components/products/product-table/preview-drawer";
+import UpdateProductDrawer from "@/components/products/product-table/update-product-drawer";
+import DeleteModal from "@/components/products/product-table/delete-modal";
 import { initFlowbite } from 'flowbite'
 export default {
   name: "index",
@@ -645,7 +419,9 @@ export default {
   methods :{
     ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct']),
     ...mapActions('category', ['fetchCategory']),
-
+    addProduct(){
+      this.$router.push('/admin/products/create')
+    },
     editProduct(product){
       this.selectedProduct = product
     },
@@ -661,37 +437,6 @@ export default {
     async deleteProduct(){
       await this.deleteSelectedProduct(this.id)
       await this.$router.push('/admin')
-    },
-    handleFileUpload(event) {
-      const files = event.target.files;
-      for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-        const imageFile = files[i];
-        reader.onload = () => {
-          this.product.imageUrl = reader.result;
-        };
-        reader.readAsDataURL(imageFile);
-        this.product.imageFiles.push(imageFile);
-      }
-    },
-    async create() {
-      const formData = new FormData();
-      formData.append('title', this.product.title);
-      formData.append('description', this.product.description);
-      formData.append('price', this.product.price);
-      formData.append('stock', this.product.stock);
-      formData.append('category_id', this.product.category_id);
-
-      this.product.imageFiles.forEach((file) => {
-        formData.append('images[]', file);
-      });
-
-      const response = await this.createProduct(formData);
-      if (response) {
-        await this.$router.push('/admin/products');
-      }else{
-        this.errors = this.getErrorMessages
-      }
     },
   }
 }

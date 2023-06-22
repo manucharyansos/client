@@ -100,49 +100,8 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-
 export default {
-  name: "index",
-  layout: 'AdminLayout',
-  middleware: 'admin',
-  data (){
-    return {
-      isImage: false,
-      category: {
-        name: '',
-        description: '',
-        imageUrl: '',
-        imageFile: [],
-      },
-      errors: {}
-    }
-  },
-  mounted() {
-  },
-  methods :{
-    ...mapActions('category', ['createCategory']),
-    handleFileUpload(event) {
-      this.category.imageFile = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.category.imageUrl = reader.result;
-      };
-      this.isImage = true
-      reader.readAsDataURL(this.category.imageFile);
-    },
-    async create(){
-      const formData = new FormData();
-      formData.append('name', this.category.name);
-      formData.append('description', this.category.description);
-      formData.append('image', this.category.imageFile);
-      const response = await this.createCategory(formData)
-      if (response) {
-        await this.$router.push('/admin/categories');
-      }
-    }
-
-  }
+  name: "index"
 }
 </script>
 
