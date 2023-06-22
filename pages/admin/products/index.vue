@@ -348,6 +348,8 @@
               @removeProduct="removeProduct"
               @previewSelectedProduct="previewSelectedProduct"
               @editProduct="editProduct"
+              target="delete-modal"
+              toggle="delete-modal"
             />
           </div>
         </div>
@@ -367,7 +369,6 @@
     <DeleteModal
       @deleteClick="deleteProduct"
       id="delete-modal"
-      toggle="delete-modal"
     />
   </div>
 </template>
