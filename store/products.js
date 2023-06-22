@@ -30,8 +30,10 @@ export const actions = {
     try {
       const { data }  = await this.$axios.get('/api/products')
       commit('setProducts', data)
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data.errors)
+      return false
     }
   },
   async createProduct({commit}, products){
@@ -47,25 +49,31 @@ export const actions = {
   },
   async deleteSelectedProduct({ commit }, id) {
     try {
-      const res = await this.$axios.delete(`/api/products/${id}`)
+       await this.$axios.delete(`/api/products/${id}`)
       commit('DELETE_PRODUCT_SUCCESS', id)
-    } catch (error) {
-      console.error(error)
+      return true
+    } catch (err) {
+      commit('setErrorMessages', err.response.data)
+      return false
     }
   },
   async reviewProduct({ commit }, {id, data}) {
     try {
       await this.$axios.post(`/api/products/reviews/${id}`, data);
-    } catch (error) {
-      console.error(error);
+      return true
+    } catch (err) {
+      commit('setErrorMessages', err.response.data.errors)
+      return false
     }
   },
   async fetchProduct({ commit }, id ){
     try {
       const { data } = await this.$axios.get(`api/products/${id}`)
       commit('setProduct', data)
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data)
+      return false
     }
   },
   deleteProductFromCart({commit}, index){
@@ -75,8 +83,10 @@ export const actions = {
     try {
       const { data } = await this.$axios.get(`api/products/${id}`)
       commit('setShowedProduct', data)
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data)
+      return false
     }
 
   }

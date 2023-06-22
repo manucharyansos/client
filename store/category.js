@@ -25,7 +25,7 @@ export const actions = {
       commit('setCategory', response.data)
       console.log(response.data)
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data)
     }
   },
   async createCategory({commit}, categoryData){
@@ -35,16 +35,18 @@ export const actions = {
       })
       return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data.errors)
+      return false
     }
   },
   async deleteSelectedCategory({commit}, id) {
     try {
       const res = await this.$axios.delete(`/api/categories/${id}`)
-      console.log(res)
       commit('DELETE_CATEGORY_SUCCESS', id)
+      return true
     } catch (error) {
-      console.error(error)
+      commit('setErrorMessages', error.response.data)
+      return false
     }
   },
   async createSubcategory({commit}, data){
@@ -59,8 +61,7 @@ export const actions = {
     }
   },
   async fetchSubCategory({commit}){
-    const y = await this.$axios.get(`/api/subcategories`)
-    console.log(y)
+    await this.$axios.get(`/api/subcategories`)
   }
 }
 
@@ -71,7 +72,7 @@ export const mutations = {
   DELETE_CATEGORY_SUCCESS(state, message){
     state.message = message
   },
-  setErrorMessage(state, err){
+  setErrorMessages(state, err){
     state.error = err
   }
 }

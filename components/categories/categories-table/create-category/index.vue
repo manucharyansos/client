@@ -3,46 +3,17 @@
     <div class="grid gap-4 mb-8 sm:grid-cols-2">
       <div>
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="Type product name"
-          required=""
-          v-model="category.name">
-        <p
-          class="mt-2 text-sm text-red-600 dark:text-red-500"
-          v-if="errors.name"
-          v-for="err of errors.name"
-        >
-          {{ err }}
-        </p>
+        <slot name="name"></slot>
       </div>
       <div>
         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-        <input
-          type="text"
-          name="description"
-          id="price"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          placeholder="Description"
-          required=""
-          v-model="category.description"
-        >
-        <p
-          class="mt-2 text-sm text-red-600 dark:text-red-500"
-          v-if="errors.description"
-          v-for="err of errors.description"
-        >
-          {{ err }}
-        </p>
+        <slot name="description"></slot>
       </div>
     </div>
     <div class="mb-4">
-      <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>
+      <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Image</span>
       <div class="flex justify-center items-center">
-        <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <label for="dropzone-file" class="flex flex-col justify-center items-center w-1/2 md:mr-6 h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
           <div class="flex flex-col justify-center items-center pt-5 pb-6">
             <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -53,29 +24,19 @@
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
           </div>
-          <input
-            id="dropzone-file"
-            type="file"
-            class="hidden"
-            multiple
-            @change="handleFileUpload"
-          >
+          <slot name="image"></slot>
         </label>
-        <img class="w-full h-64 rounded-xl object-cover object-center " :src="category.imageUrl" alt="Selected Image">
-        <p
-          class="mx-auto mt-2 text-sm text-red-600 dark:text-red-500"
-          v-if="errors.images"
-          v-for="err of errors.images"
-        >
-          {{ err }}
-        </p>
+        <div class="w-1/2 flex flex-col justify-between">
+          <img class="w-full h-64 rounded-xl object-cover object-center " :src="imageUrl" alt="Selected Image">
+          <slot name="img_err"></slot>
+        </div>
       </div>
     </div>
     <div class="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
       <button
         type="button"
         class="w-full sm:w-auto justify-center text-white inline-flex bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        @click="create"
+        @click="$emit('create')"
       >
         Add product
       </button>
@@ -101,7 +62,13 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  props: {
+    imageUrl: {
+      type: String,
+      default: () => ''
+    }
+  }
 }
 </script>
 
