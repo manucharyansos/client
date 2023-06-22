@@ -30,7 +30,7 @@
 
       <YourCart
         :products="getProduct"
-        @deleteProduct="deleteProduct"
+        @deleteClick="deleteProduct"
         @checkout="checkout"
       />
 

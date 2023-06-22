@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="delete-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div :id="id" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full h-auto max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="delete-modal">
@@ -18,7 +18,7 @@
             data-modal-toggle="delete-modal"
             type="button"
             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-            @click="$emit('deleteProduct')"
+            @click="$emit('deleteClick')"
           >
             Yes, I'm sure
           </button>
@@ -32,7 +32,12 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  props: {
+    id: {
+      type: String
+    }
+  }
 }
 </script>
 

@@ -356,8 +356,14 @@
               @removeCategory="removeCategory"
               @previewSelectedCategory="previewSelectedCategory"
               @editCategory="editCategory"
+              target="delete-modal"
+              toggle="delete-modal"
             />
           </div>
+          <DeleteModal
+            id="delete-modal"
+            @deleteClick="deleteCategory"
+          />
         </div>
       </div>
     </section>
@@ -368,6 +374,7 @@
 import {mapActions, mapGetters} from "vuex";
 import { initFlowbite } from "flowbite";
 import CategoriesTable from "@/components/categories/categories-table";
+import DeleteModal from "@/components/products/product-table/delete-modal";
 
 export default {
   name: "index",
@@ -379,7 +386,8 @@ export default {
     }
   },
   components: {
-    CategoriesTable
+    CategoriesTable,
+    DeleteModal
   },
   async fetch(){
     await this.fetchCategory()

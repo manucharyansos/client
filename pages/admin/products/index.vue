@@ -365,7 +365,9 @@
     />
     <!-- Delete Modal -->
     <DeleteModal
-      @deleteProduct="deleteProduct"
+      @deleteClick="deleteProduct"
+      id="delete-modal"
+      toggle="delete-modal"
     />
   </div>
 </template>
