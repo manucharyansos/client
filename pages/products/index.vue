@@ -12,6 +12,7 @@
       :price="product.price"
       @addToCart="addToCart(product.id)"
       :edit-product="product.id"
+      button-name="Add"
       />
     </div>
 
