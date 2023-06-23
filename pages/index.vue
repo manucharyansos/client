@@ -23,9 +23,9 @@
 
 
     <div class="flex items-start flex-col p-20 h-full">
-      <h2 class="font-sans font-bold">Browse Categories</h2>
+      <h3 class="text-lg md:text-2xl lg:text-3xl 3xl:text-4xl xl:leading-10 font-bold text-gray-600 dark:text-white my-6">Browse Categories</h3>
       <carousel-3d
-        style="margin: 0;"
+        style="margin: 0"
         v-if="!isLoading"
         :disable3d="true"
         :space="285"
@@ -39,17 +39,27 @@
         <slide
           v-for="(category, index) of getCategory"
           :index="index"
+          style="border: none; background-color: white;"
         >
           <figure>
-            <div class="h-56">
-              <img class="h-full object-cover object-center" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
+            <div class="h-56 overflow-hidden">
+              <img class="h-full hover:scale-125 transition duration-500 object-cover object-center cursor-pointer" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
             </div>
-            <figcaption>
-              <p>{{category.name}}</p>
-            </figcaption>
+            <div class="flex items-center justify-center mt-6">
+              <h4 class="text-gray-600 dark:text-white text-sm md:text-base font-extralight	 xl:text-lg font-semibold capitalize cursor-pointer">{{category.name}}</h4>
+            </div>
           </figure>
         </slide>
       </carousel-3d>
+    </div>
+
+
+    <div class="new_arrivals items-center flex flex-col p-20 h-full">
+      <h3 class="text-lg mr-auto md:text-2xl lg:text-3xl 3xl:text-4xl xl:leading-10 font-bold text-gray-600 dark:text-white my-6">New Arrivals</h3>
+
+
+      <Products :data="getProducts"/>
+
     </div>
 
 
@@ -60,6 +70,7 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
+import Products from "@/components/products";
 
 export default {
   name: 'IndexPage',
@@ -72,6 +83,7 @@ export default {
   components: {
     Slider,
     SliderItem,
+    Products
   },
   data(){
     return {
@@ -88,7 +100,8 @@ export default {
     this.loadingControl()
   },
   computed: {
-    ...mapGetters('category', ['getCategory'])
+    ...mapGetters('category', ['getCategory']),
+    ...mapGetters('products', ['getProducts'])
   },
   methods: {
     ...mapActions('products', ['fetchProducts']),
@@ -102,6 +115,8 @@ export default {
 }
 </script>
 <style scoped>
-.carousel-3d-slider{
+carousel-3d a{
+  color: red!important;
+  background: #000!important;
 }
 </style>
