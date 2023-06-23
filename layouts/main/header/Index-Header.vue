@@ -2,7 +2,7 @@
   <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div class="max-w-screen-full flex flex-wrap items-center justify-between mx-auto p-4">
         <nuxt-link to="/" class="flex items-center">
-          <img src="/logo.jpg" class="h-8 mr-3"  alt="img"/>
+          <img src="/logo.jpg" class="h-8 mr-3 rounded-full"  alt="img"/>
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Example</span>
         </nuxt-link>
 
@@ -244,10 +244,9 @@ export default {
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
-    // ...mapGetters('products', ['getProduct'])
   },
   mounted() {
-    initFlowbite();
+    // initFlowbite();
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');

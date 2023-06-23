@@ -1,25 +1,17 @@
 <template>
   <div>
-<!--    <section class="bg-white dark:bg-gray-900">-->
-<!--      <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">-->
-<!--        <div class="mr-auto place-self-center lg:col-span-7">-->
-<!--          <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Payments tool for software companies</h1>-->
-<!--          <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">From checkout to global sales tax compliance, companies around the world use Flowbite to simplify their payment stack.</p>-->
-<!--          <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">-->
-<!--            Get started-->
-<!--            <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>-->
-<!--          </a>-->
-<!--          <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">-->
-<!--            Speak to Sales-->
-<!--          </a>-->
-<!--        </div>-->
-<!--        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">-->
-<!--          <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </section>-->
+    <div class="fixed w-screen h-screen z-50 bg-gray-300 flex items-center justify-center" v-if="isLoading">
+      <div class=" mx-auto my-auto" role="status">
+        <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
 
-    <slider class="mt-16 z-20" animation="fade" height="500px">
+
+    <slider class="mt-16 z-20" animation="fade" height="500px" v-if="!isLoading">
       <slider-item
         v-for="(i, index) in list"
         :key="index"
@@ -30,24 +22,37 @@
     </slider>
 
 
-    <carousel-3d >
-      <slide v-for="(category, index) of getCategory" :index="index">
-        <img :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
-      </slide>
-    </carousel-3d>
+    <div class="flex items-start flex-col p-20 h-full">
+      <h2 class="font-sans font-bold">Browse Categories</h2>
+      <carousel-3d
+        style="margin: 0;"
+        v-if="!isLoading"
+        :disable3d="true"
+        :space="285"
+        :width="270"
+        :clickable="false"
+        :controls-visible="true"
+        :autoplay="true"
+        :autoplay-timeout="3000"
+        :display="5"
+      >
+        <slide
+          v-for="(category, index) of getCategory"
+          :index="index"
+        >
+          <figure>
+            <div class="h-56">
+              <img class="h-full object-cover object-center" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
+            </div>
+            <figcaption>
+              <p>{{category.name}}</p>
+            </figcaption>
+          </figure>
+        </slide>
+      </carousel-3d>
+    </div>
 
 
-<!--    <carousel>-->
-
-<!--      <img src="/slide-2.jpg" alt="">-->
-
-<!--      <img src="/slide-1.jpeg" alt="">-->
-
-<!--      <img src="/slide-3.jpg" alt="">-->
-
-<!--      <img src="/slide-1.jpeg" alt="">-->
-
-<!--    </carousel>-->
 
   </div>
 </template>
@@ -55,7 +60,6 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
-// import carousel from 'vue-owl-carousel'
 
 export default {
   name: 'IndexPage',
@@ -68,7 +72,6 @@ export default {
   components: {
     Slider,
     SliderItem,
-    // carousel
   },
   data(){
     return {
@@ -78,21 +81,27 @@ export default {
         { backgroundImage: '/slide-2.jpg' },
         { backgroundImage: '/slide-3.jpg' },
       ],
+      isLoading: true
     }
   },
   mounted() {
+    this.loadingControl()
   },
   computed: {
     ...mapGetters('category', ['getCategory'])
   },
   methods: {
     ...mapActions('products', ['fetchProducts']),
-    ...mapActions('category', ['fetchCategory'])
+    ...mapActions('category', ['fetchCategory']),
+    loadingControl(){
+      if (this.getCategory){
+        this.isLoading = false
+      }
+    }
   }
 }
 </script>
 <style scoped>
-.owl-item{
-  width: auto;
+.carousel-3d-slider{
 }
 </style>
