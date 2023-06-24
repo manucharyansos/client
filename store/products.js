@@ -47,6 +47,14 @@ export const actions = {
       return false
     }
   },
+  async updateProduct({commit}, {id, data}){
+    try {
+      console.log(id)
+      const x = await this.$axios.$put(`/api/products/${id}`, data)
+    }catch (err){
+      console.log(err)
+    }
+  },
   async deleteSelectedProduct({ commit }, id) {
     try {
        await this.$axios.delete(`/api/products/${id}`)

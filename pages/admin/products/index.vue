@@ -359,8 +359,65 @@
     <!-- drawer component -->
     <UpdateProductDrawer
       @removeSelectedProduct="removeSelectedProduct"
-      :data="selectedProduct"
-    />
+      @updateSelectedProduct="updateSelectedProduct"
+      :categories="getCategory"
+      @handleFileUpload="handleFileUpload"
+    >
+      <template v-slot:name>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="Apple iMac 27&ldquo;"
+          placeholder="Type product name"
+          required=""
+          v-model="selectedProduct.title"
+        >
+      </template>
+      <template v-slot:description>
+        <textarea
+          id="description"
+          rows="8"
+          class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+          placeholder="Write product description here"
+          required=""
+          v-model="selectedProduct.description"
+        ></textarea>
+      </template>
+      <template v-slot:image>
+        <div class="grid grid-cols-3 gap-8 mb-4">
+          <div
+            v-for="image of selectedProduct.images"
+            class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
+            <img
+              :src="`http://127.0.0.1:8000/products-images/${image.image_path}`"
+              alt="imac image"
+              class="w-36 h-28 object-cover object-center">
+            <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+              <span class="sr-only">Remove image</span>
+            </button>
+          </div>
+        </div>
+      </template>
+      <template v-slot:categories>
+        <select
+          id="category"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          v-model="selectedProduct.category_id"
+        >
+          <option selected="">Select category</option>
+          <option
+            v-for="category of getCategory"
+            :key="category.id"
+            :value="category.id">
+            {{category.name}}
+          </option>
+        </select>
+      </template>
+    </UpdateProductDrawer>
     <!-- Preview Drawer -->
     <PreviewDrawer
       :data="previewProduct"
@@ -420,7 +477,7 @@ export default {
     ...mapGetters('products', ['getErrorMessages', 'getProducts'])
   },
   methods :{
-    ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct']),
+    ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
     ...mapActions('category', ['fetchCategory']),
     addProduct(){
       this.$router.push('/admin/products/create')
@@ -441,6 +498,42 @@ export default {
       await this.deleteSelectedProduct(this.id)
       await this.$router.push('/admin')
     },
+    handleFileUpload(event) {
+      const files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        const imageFile = files[i];
+        reader.onload = () => {
+          this.product.imageUrl = reader.result;
+        };
+        reader.readAsDataURL(imageFile);
+        this.product.imageFiles.push(imageFile);
+      }
+    },
+    async updateSelectedProduct(){
+      const formData = new FormData();
+      // formData.append('title', this.selectedProduct.title);
+      // formData.append('description', this.selectedProduct.description);
+      // formData.append('price', this.selectedProduct.price);
+      // formData.append('stock', this.selectedProduct.stock);
+      // formData.append('category_id', this.selectedProduct.category_id);
+
+      this.product.imageFiles.forEach((file) => {
+        formData.append('images[]', file);
+      });
+      const id = this.selectedProduct.id;
+      await this.updateProduct({
+        id: id,
+        data: {
+          category_id: this.selectedProduct.category_id,
+          title: this.selectedProduct.title,
+          description: this.selectedProduct.description,
+          price: this.selectedProduct.price,
+          stock: this.selectedProduct.stock,
+          images: formData
+        }
+      })
+    }
   }
 }
 </script>

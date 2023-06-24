@@ -63,6 +63,26 @@
     </div>
 
 
+    <div class="fixed top-0 left-0 h-80 mb-7 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-[75px]">
+      <div class="md:grid md:grid-cols-3 md:gap-2 xl:gap-1.5 relative">
+        <div class="mx-auto col-span-2">
+          <a class="h-full group flex justify-center relative overflow-hidden" href="/#">
+            <span  class="box-border inline overflow-hidden h-80">
+              <img alt="" aria-hidden="true" src="/banner-3.webp"  class="max-w-full m-0 p-0">
+            </span>
+          </a>
+        </div>
+        <div class="mx-auto col-span-1">
+          <a class="group flex justify-center relative overflow-hidden" href="/#">
+            <span class="box-border inline overflow-hidden h-80">
+              <img class="max-w-full m-0 p-0" alt="" aria-hidden="true" src="/banner-4.webp">
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
 
   </div>
 </template>
