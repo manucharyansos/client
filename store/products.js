@@ -9,6 +9,7 @@ export const state = () => ({
   lastPage: 1,
   perPage: 5,
   total: 0,
+  links: []
 })
 
 export const getters = {
@@ -39,18 +40,22 @@ export const getters = {
   getTotal(state){
     return state.total
   },
+  getLinks(state){
+    return state.links
+  }
 }
 
 export const actions = {
   async fetchProducts({ commit }, page ) {
     try {
       const { data } = await this.$axios.get(`/api/products?page=${page}`);
-      console.log(data)
+      console.log(data.productData)
       commit('setProducts', data.productData.data);
       commit('setCurrentPage', data.productData.current_page);
       commit('setLastPage', data.productData.last_page);
       commit('setPerPage', data.productData.per_page);
       commit('setTotal', data.productData.total);
+      commit('setLinks', data.productData.links);
       return true;
     } catch (err) {
       commit('setErrorMessages', err.response.data.errors)
@@ -154,4 +159,7 @@ export const mutations = {
   setTotal(state, total) {
     state.total = total;
   },
+  setLinks(state, links){
+    state.links = links
+  }
 }
