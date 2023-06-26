@@ -4,7 +4,11 @@ export const state = () => ({
   errorMessages: [],
   message: '',
   cartProduct: [],
-  showProduct: []
+  showProduct: [],
+  currentPage: 1,
+  lastPage: 1,
+  perPage: 5,
+  total: 0,
 })
 
 export const getters = {
@@ -22,18 +26,35 @@ export const getters = {
   },
   getShowedProduct(state){
     return state.showProduct
-  }
+  },
+  getCurrentPage(state){
+    return state.currentPage
+  },
+  getLastPage(state){
+    return state.lastPage
+  },
+  getPerPage(state){
+    return state.perPage
+  },
+  getTotal(state){
+    return state.total
+  },
 }
 
 export const actions = {
-  async fetchProducts({commit}){
+  async fetchProducts({ commit }, page ) {
     try {
-      const { data }  = await this.$axios.get('/api/products')
-      commit('setProducts', data)
-      return true
-    }catch (err){
+      const { data } = await this.$axios.get(`/api/products?page=${page}`);
+      console.log(data)
+      commit('setProducts', data.productData.data);
+      commit('setCurrentPage', data.productData.current_page);
+      commit('setLastPage', data.productData.last_page);
+      commit('setPerPage', data.productData.per_page);
+      commit('setTotal', data.productData.total);
+      return true;
+    } catch (err) {
       commit('setErrorMessages', err.response.data.errors)
-      return false
+      return false;
     }
   },
   async createProduct({commit}, products){
@@ -47,12 +68,13 @@ export const actions = {
       return false
     }
   },
-  async updateProduct({commit}, {id, data}){
+  async updateProduct(commit){
     try {
-      console.log(id)
-      const x = await this.$axios.$put(`/api/products/${id}`, data)
+      await this.$axios.$put(`/api/products/${id}`, data)
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessages', err.response.data.errors)
+      return false
     }
   },
   async deleteSelectedProduct({ commit }, id) {
@@ -119,5 +141,17 @@ export const mutations = {
   },
   setShowedProduct(state, product){
     state.showProduct = product
-  }
+  },
+  setCurrentPage(state, page) {
+    state.currentPage = page;
+  },
+  setLastPage(state, lastPage) {
+    state.lastPage = lastPage;
+  },
+  setPerPage(state, perPage) {
+    state.perPage = perPage;
+  },
+  setTotal(state, total) {
+    state.total = total;
+  },
 }

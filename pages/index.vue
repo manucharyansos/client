@@ -96,10 +96,12 @@ export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  async fetch() {
-    await this.fetchProducts()
-    await this.fetchCategory()
-  },
+  // async serverPrefetch({commit}) {
+  //   await Promise.all([
+  //     this.fetchProducts({ commit }),
+  //     this.fetchCategory()
+  //   ])
+  // },
   components: {
     Slider,
     SliderItem,
@@ -117,6 +119,8 @@ export default {
     }
   },
   mounted() {
+    this.fetchProducts()
+    this.fetchCategory()
     this.loadingControl()
   },
   computed: {
@@ -127,7 +131,7 @@ export default {
     ...mapActions('products', ['fetchProducts']),
     ...mapActions('category', ['fetchCategory']),
     loadingControl(){
-      if (this.getCategory){
+      if (this.getCategory && this.getProducts){
         this.isLoading = false
       }
     }

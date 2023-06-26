@@ -7,9 +7,9 @@
             <div class="flex-1 flex items-center space-x-2">
               <h5>
                 <span class="text-gray-500">All Products:</span>
-                <span class="dark:text-white">{{ getProducts.length }}</span>
+                <span class="dark:text-white">{{ getTotal }}</span>
               </h5>
-              <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-10 ({{ getProducts.length }})</h5>
+              <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-10 ({{ getTotal }})</h5>
               <button type="button" class="group" data-tooltip-target="results-tooltip">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 object-center object-cover text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewbox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
@@ -17,7 +17,7 @@
                 <span class="sr-only">More info</span>
               </button>
               <div id="results-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Showing 1-10 of {{ getProducts.length }} results
+                Showing {{ getCurrentPage }} - {{ getPerPage }} of {{ getTotal }} results
                 <div class="tooltip-arrow" data-popper-arrow=""></div>
               </div>
             </div>
@@ -352,6 +352,30 @@
               toggle="delete-modal"
             />
           </div>
+
+          <div class="flex flex-col items-center">
+            <!-- Help text -->
+            <span class="text-sm text-gray-700 dark:text-gray-400">
+              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ getCurrentPage }}</span>
+              to
+              <span class="font-semibold text-gray-900 dark:text-white">{{ getPerPage }}</span>
+              of
+              <span class="font-semibold text-gray-900 dark:text-white">{{ getTotal }}</span>
+              Entries
+            </span>
+            <div class="inline-flex mt-2 xs:mt-0">
+              <!-- Buttons -->
+              <button @click="prevPage" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                Prev
+              </button>
+              <button @click="nextPage" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                Next
+                <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -448,7 +472,7 @@ export default {
     UpdateProductDrawer
   },
   async fetch(){
-    await this.fetchProducts()
+    await this.fetchProducts(this.page)
     await this.fetchCategory()
   },
   data (){
@@ -466,7 +490,8 @@ export default {
         category_id: '',
         selectedImage: ''
       },
-      errors: {}
+      errors: {},
+      page: 1
     }
   },
   mounted() {
@@ -474,7 +499,15 @@ export default {
   },
   computed: {
     ...mapGetters('category', ['getCategory']),
-    ...mapGetters('products', ['getErrorMessages', 'getProducts'])
+    ...mapGetters('products',
+      [
+      'getErrorMessages',
+      'getProducts',
+      'getLastPage',
+      'getPerPage',
+      'getTotal',
+      'getCurrentPage'
+    ])
   },
   methods :{
     ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
@@ -512,18 +545,12 @@ export default {
     },
     async updateSelectedProduct(){
       const formData = new FormData();
-      // formData.append('title', this.selectedProduct.title);
-      // formData.append('description', this.selectedProduct.description);
-      // formData.append('price', this.selectedProduct.price);
-      // formData.append('stock', this.selectedProduct.stock);
-      // formData.append('category_id', this.selectedProduct.category_id);
 
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
       });
-      const id = this.selectedProduct.id;
       await this.updateProduct({
-        id: id,
+        id: this.selectedProduct.id,
         data: {
           category_id: this.selectedProduct.category_id,
           title: this.selectedProduct.title,
@@ -533,6 +560,16 @@ export default {
           images: formData
         }
       })
+    },
+    prevPage(){
+      if (this.page > 1){
+        this.page --
+        this.fetchProducts(this.page)
+      }
+    },
+    nextPage(){
+      this.page ++
+      this.fetchProducts(this.page)
     }
   }
 }

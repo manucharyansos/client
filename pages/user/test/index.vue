@@ -2,13 +2,13 @@
   <div>
     <carousel>
 
-      <img src="https://placeimg.com/200/200/any?1">
+      <img src="https://placeimg.com/200/200/any?1" alt="">
 
-      <img src="https://placeimg.com/200/200/any?2">
+      <img src="https://placeimg.com/200/200/any?2" alt="">
 
-      <img src="https://placeimg.com/200/200/any?3">
+      <img src="https://placeimg.com/200/200/any?3" alt="">
 
-      <img src="https://placeimg.com/200/200/any?4">
+      <img src="https://placeimg.com/200/200/any?4" alt="">
 
     </carousel>
     <div v-for="product of getProducts">
@@ -83,3 +83,4 @@ export default {
   },
 };
 </script>
+
