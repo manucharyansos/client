@@ -4,7 +4,7 @@
       <div class="flex mb-3 md:mb-3.5">
         <div class="m-2 w-full h-64">
           <img alt="" :src="`http://127.0.0.1:8000/products-images/${item.images[0].image_path}`"
-               class="w-full h-full object-cover object-center">
+               class="w-auto h-full object-cover object-center">
         </div>
       </div>
       <div class="w-full overflow-hidden p-2 md:px-2.5 xl:px-4">

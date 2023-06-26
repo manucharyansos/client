@@ -41,9 +41,9 @@
           :index="index"
           style="border: none; background-color: white;"
         >
-          <figure>
+          <figure class="bg-white dark:bg-gray-700">
             <div class="h-56 overflow-hidden">
-              <img class="h-full hover:scale-125 transition duration-500 object-cover object-center cursor-pointer" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
+              <img class="h-full w-full hover:scale-125 transition duration-500 object-cover object-center cursor-pointer" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
             </div>
             <div class="flex items-center justify-center mt-6">
               <h4 class="text-gray-600 dark:text-white text-sm md:text-base font-extralight	 xl:text-lg font-semibold capitalize cursor-pointer">{{category.name}}</h4>
@@ -63,7 +63,7 @@
     </div>
 
 
-    <div class="fixed top-0 left-0 h-80 mb-7 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-[75px]">
+    <div class="h-80 mb-7 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-[75px]">
       <div class="md:grid md:grid-cols-3 md:gap-2 xl:gap-1.5 relative">
         <div class="mx-auto col-span-2">
           <a class="h-full group flex justify-center relative overflow-hidden" href="/#">
