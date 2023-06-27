@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     ...mapActions('products', ['createProduct']),
-    ...mapActions('category', ['fetchCategory']),
+    ...mapActions('category', ['fetchCategories']),
     handleFileUpload(event) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
@@ -178,7 +178,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchCategory()
+    this.fetchCategories()
   }
 }
 </script>

@@ -107,7 +107,7 @@ export default {
   // async serverPrefetch({commit}) {
   //   await Promise.all([
   //     this.fetchProducts({ commit }),
-  //     this.fetchCategory()
+  //     this.fetchCategories()
   //   ])
   // },
   components: {
@@ -129,7 +129,7 @@ export default {
   },
   mounted() {
     this.fetchProducts()
-    this.fetchCategory()
+    this.fetchCategories()
     this.loadingControl()
   },
   computed: {
@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     ...mapActions('products', ['fetchProducts']),
-    ...mapActions('category', ['fetchCategory']),
+    ...mapActions('category', ['fetchCategories']),
     loadingControl(){
       if (this.getCategory && this.getProducts){
         this.isLoading = false
@@ -158,7 +158,7 @@ export default {
         await this.fetchProducts(page);
       } catch (error) {
         console.error(error);
-        const defaultPage = 1; // Set your default page value here
+        const defaultPage = 1;
         await this.fetchProducts(defaultPage);
       }
     },

@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     ...mapActions('products', ['fetchProducts']),
-    ...mapActions('category', ['fetchCategory']),
+    ...mapActions('category', ['fetchCategories']),
     ...mapActions('userSettings', ['users'])
   },
   mounted() {

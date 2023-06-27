@@ -170,13 +170,13 @@ export default {
     }
   },
   async fetch() {
-    await this.fetchCategory()
+    await this.fetchCategories()
   },
   computed: {
     ...mapGetters('category', ['getCategory', 'getErrorMessage'])
   },
   methods :{
-    ...mapActions('category', ['createSubcategory', 'fetchCategory']),
+    ...mapActions('category', ['createSubcategory', 'fetchCategories']),
     handleFileUpload(event) {
       this.category.imageFile = event.target.files[0];
       const reader = new FileReader();

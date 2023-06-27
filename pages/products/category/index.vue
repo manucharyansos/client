@@ -9,6 +9,13 @@
         @categoryButton="findProductsBuId"
       />
     </template>
+    <Pagination
+      :total="getTotal"
+      :per-page="getPerPage"
+      :links="getLinks"
+      :current-page="getCurrentPage"
+      @handleLinkClick="handleLinkClick"
+    />
   </div>
 </template>
 
@@ -16,27 +23,46 @@
 import CategoryContent from "@/components/products/Category-Content";
 import {mapActions, mapGetters} from "vuex";
 import {initFlowbite} from "flowbite";
+import Pagination from "@/components/pagination";
 export default {
   name: "index",
-  components: {CategoryContent},
+  components: {CategoryContent, Pagination},
   layout: 'UserLayout',
   computed: {
-    ...mapGetters('category', ['getCategory'])
+    ...mapGetters('category', [
+      'getCategory',
+      'getLastPage',
+      'getPerPage',
+      'getTotal',
+      'getCurrentPage',
+      'getLinks'
+    ])
   },
   async fetch() {
-    await this.fetchCategory()
+    await this.fetchCategories()
   },
   mounted() {
     initFlowbite()
   },
   methods: {
-    ...mapActions('category', ['fetchCategory']),
+    ...mapActions('category', ['fetchCategories']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/category-images/${image}`;
     },
     findProductsBuId(id){
       alert(id)
-    }
+    },
+    async handleLinkClick(link) {
+      try {
+        const url = new URL(link.url);
+        const page = url.searchParams.get('page');
+        await this.fetchCategories(page);
+      } catch (error) {
+        console.error(error);
+        const defaultPage = 1;
+        await this.fetchCategories(defaultPage);
+      }
+    },
   }
 }
 </script>

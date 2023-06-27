@@ -360,6 +360,17 @@
               toggle="delete-modal"
             />
           </div>
+
+          <div class="mx-12">
+            <Pagination
+              :current-page="getCurrentPage"
+              :links="getLinks"
+              :per-page="getPerPage"
+              :total="getTotal"
+              @handleLinkClick="handleLinkClick"
+            />
+          </div>
+
           <DeleteModal
             id="delete-modal"
             @deleteClick="deleteCategory"
@@ -375,6 +386,7 @@ import {mapActions, mapGetters} from "vuex";
 import { initFlowbite } from "flowbite";
 import CategoriesTable from "@/components/categories/categories-table";
 import DeleteModal from "@/components/products/product-table/delete-modal";
+import Pagination from "@/components/pagination";
 
 export default {
   name: "index",
@@ -387,19 +399,29 @@ export default {
   },
   components: {
     CategoriesTable,
-    DeleteModal
+    DeleteModal,
+    Pagination
   },
   async fetch(){
-    await this.fetchCategory()
+    await this.fetchCategories()
   },
   mounted() {
     initFlowbite()
   },
   computed: {
-    ...mapGetters('category', ['getCategory'])
+    ...mapGetters('category', [
+      'getCategory',
+      'getLastPage',
+      'getPerPage',
+      'getTotal',
+      'getCurrentPage',
+      'getLinks'])
   },
   methods: {
-    ...mapActions('category', ['fetchCategory', 'deleteSelectedCategory']),
+    ...mapActions('category', [
+      'fetchCategories',
+      'deleteSelectedCategory',
+    ]),
     addCategory(){
       this.$router.push('/admin/categories/create')
     },
@@ -409,6 +431,17 @@ export default {
     },
     removeCategory(id){
       this.id = id
+    },
+    async handleLinkClick(link) {
+      try {
+        const url = new URL(link.url);
+        const page = url.searchParams.get('page');
+        await this.fetchCategories(page);
+      } catch (error) {
+        console.error(error);
+        const defaultPage = 1;
+        await this.fetchCategories(defaultPage);
+      }
     },
     editCategory(){},
     previewSelectedCategory(){},
