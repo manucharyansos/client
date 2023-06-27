@@ -1,42 +1,60 @@
 <template>
-  <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
-    <div
-      class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
-      v-for="(product, index) of getProducts"
-      :key="index"
-    >
-      <product-content
-      :image_url="getFirstImage(product)"
-      :title="product.title"
-      :description="product.description"
-      :price="product.price"
-      @addToCart="addToCart(product.id)"
-      :edit-product="product.id"
-      button-name="Add"
-      />
+  <div>
+    <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
+      <div
+        class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
+        v-for="(product, index) of getProducts"
+        :key="index"
+      >
+        <product-content
+          :image_url="getFirstImage(product)"
+          :title="product.title"
+          :description="product.description"
+          :price="product.price"
+          @addToCart="addToCart(product.id)"
+          :edit-product="product.id"
+          button-name="Add"
+        />
+      </div>
+      <div
+        id="open-bag"
+        class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-1/2 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+        <button
+          type="button"
+          data-drawer-hide="open-bag"
+          aria-controls="open-bag"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-4 right-5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          <span class="sr-only">Close menu</span>
+        </button>
+        <YourCart
+          :products="getProduct"
+          @deleteClick="deleteProduct"
+          @checkout="checkout"
+        />
+      </div>
     </div>
-
-
-    <div
-      id="open-bag"
-      class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-1/2 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
-      <button
-        type="button"
-        data-drawer-hide="open-bag"
-        aria-controls="open-bag"
-        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-4 right-5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Close menu</span>
-      </button>
-
-      <YourCart
-        :products="getProduct"
-        @deleteClick="deleteProduct"
-        @checkout="checkout"
-      />
-
+    <div class="flex flex-col md:items-end items-center m-4">
+      <!-- Help text -->
+      <span class="text-sm text-gray-700 dark:text-gray-400">
+              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ getCurrentPage }}</span>
+              to
+              <span class="font-semibold text-gray-900 dark:text-white">{{ getPerPage }}</span>
+              of
+              <span class="font-semibold text-gray-900 dark:text-white">{{ getTotal }}</span>
+              Entries
+            </span>
+      <div class="flex mt-2 xs:mt-0">
+        <div v-for="link of getLinks">
+          <button
+            @click="handleLinkClick(link)"
+            :class="[link.active ? 'active' : '']"
+            class="inline-flex items-center mx-0.5 px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span v-html="link.label"></span>
+          </button>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -80,10 +98,29 @@ export default {
     },
     checkout(){
       this.$router.push('/checkout' )
-    }
+    },
+    async handleLinkClick(link) {
+      try {
+        const url = new URL(link.url);
+        const page = url.searchParams.get('page');
+        await this.fetchProducts(page);
+      } catch (error) {
+        console.error(error);
+        const defaultPage = 1; // Set your default page value here
+        await this.fetchProducts(defaultPage);
+      }
+    },
   },
   computed: {
-    ...mapGetters('products', ['getProducts', 'getProduct'])
+    ...mapGetters('products', [
+      'getProducts',
+      'getProduct',
+      'getLastPage',
+      'getPerPage',
+      'getTotal',
+      'getCurrentPage',
+      'getLinks'
+    ])
   },
 }
 </script>
