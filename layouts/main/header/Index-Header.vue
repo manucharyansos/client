@@ -39,6 +39,7 @@
               @checkout="checkout"
               @plusFromCart="plus"
               @minusFromCart="minus"
+              :basket-total="basketTotal()"
             />
           </div>
 
@@ -250,6 +251,9 @@ export default {
   async fetch(){
     await this.fetchUser()
   },
+  components: {
+    YourCart
+  },
   data(){
     return {
       allPages: [
@@ -259,12 +263,16 @@ export default {
       ],
       isDark: false,
       isLight: true,
-      cartProductCount: 0
+      cartProductCount: 0,
+      total: 0
     }
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
     ...mapGetters('products', ['getProduct'])
+  },
+  mounted() {
+    initFlowbite()
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');
@@ -304,15 +312,14 @@ export default {
     plus(index) {
       this.plusProduct(index)
     },
-    basketTotal(){
-      let res = []
-      for (const item of this.getProduct){
-        res.push(item.price * item.quantity)
+    basketTotal() {
+      if (this.getProduct && this.getProduct.length > 0) {
+        const res = this.getProduct.reduce((sum, item) => {
+          return sum + item.price * item.quantity;
+        }, 0);
+        return Math.floor(res);
       }
-      res = res.reduce( (sum, el) => {
-        return sum + el
-      })
-      return Math.floor(res)
+      return 0; // Return 0 or any other default value if there are no products
     }
   },
 }

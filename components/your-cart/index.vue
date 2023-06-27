@@ -66,7 +66,7 @@
                   <span class="text-xs font-normal text-gray-400">
                     USD
                   </span>
-                  {{ total }}
+                  {{ basketTotal }}
                 </p>
               </div>
 
@@ -99,7 +99,7 @@ export default {
   name: "index",
   props: {
     products: { type: Array },
-    total: { type: Number }
+    basketTotal: { type: Number }
   },
 }
 </script>
