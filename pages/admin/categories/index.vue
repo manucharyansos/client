@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-12">
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
       <div class="mx-auto max-w-screen-2xl">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -359,9 +359,9 @@
               target="delete-modal"
               toggle="delete-modal"
             />
+
           </div>
 
-          <div class="mx-12">
             <Pagination
               :current-page="getCurrentPage"
               :links="getLinks"
@@ -369,7 +369,6 @@
               :total="getTotal"
               @handleLinkClick="handleLinkClick"
             />
-          </div>
 
           <DeleteModal
             id="delete-modal"

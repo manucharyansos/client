@@ -9,13 +9,15 @@
         @categoryButton="findProductsBuId"
       />
     </template>
-    <Pagination
-      :total="getTotal"
-      :per-page="getPerPage"
-      :links="getLinks"
-      :current-page="getCurrentPage"
-      @handleLinkClick="handleLinkClick"
-    />
+    <div class="mx-12">
+      <Pagination
+        :total="getTotal"
+        :per-page="getPerPage"
+        :links="getLinks"
+        :current-page="getCurrentPage"
+        @handleLinkClick="handleLinkClick"
+      />
+    </div>
   </div>
 </template>
 
