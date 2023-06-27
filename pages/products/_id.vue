@@ -2,6 +2,7 @@
   <div>
     <editProduct
       :product_data="getShowedProduct"
+      @addToBag="addToCart"
     />
   </div>
 </template>
@@ -23,7 +24,10 @@ export default {
     ...mapGetters('products', ['getShowedProduct'])
   },
   methods: {
-    ...mapActions('products', ['fetchShowProduct'])
+    ...mapActions('products', ['fetchShowProduct', "fetchProduct"]),
+    addToCart(id){
+      this.fetchProduct(id)
+    },
   }
 }
 </script>

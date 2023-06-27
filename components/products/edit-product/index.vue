@@ -30,34 +30,34 @@
             <p class="text-lg text-gray-400">{{ product_data.description }}</p>
           </div>
           <div class="flex mb-6 items-center">
-<!--            <div class="inline-flex mr-4">-->
-<!--              <button class="mr-1">-->
-<!--                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--              <button class="mr-1">-->
-<!--                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--              <button class="mr-1">-->
-<!--                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--              <button class="mr-1">-->
-<!--                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--              <button>-->
-<!--                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <span class="text-md text-gray-400">4.59</span>-->
+            <div class="inline-flex mr-4">
+              <button class="mr-1">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>
+                </svg>
+              </button>
+              <button class="mr-1">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>
+                </svg>
+              </button>
+              <button class="mr-1">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>
+                </svg>
+              </button>
+              <button class="mr-1">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>
+                </svg>
+              </button>
+              <button>
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 7.91679H12.4167L10 0.416779L7.58333 7.91679H0L6.18335 12.3168L3.81668 19.5835L10 15.0835L16.1834 19.5835L13.8167 12.3168L20 7.91679Z" fill="#C1C9D3"></path>
+                </svg>
+              </button>
+            </div>
+            <span class="text-md text-gray-400">4.59</span>
             {{ product_data.reviews}}
           </div>
           <div class="mb-6">
@@ -83,7 +83,11 @@
             <input class="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" type="text" placeholder="1">
           </div>
           <div class="flex flex-wrap -mx-2 mb-12">
-            <div class="w-full md:w-2/3 px-2 mb-2 md:mb-0"><a class="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl" href="#">Add to bag</a></div>
+            <div class="w-full md:w-2/3 px-2 mb-2 md:mb-0">
+              <span @click="$emit('addToBag', product_data.id)" class="block cursor-pointer py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl">
+              Add to bag
+            </span>
+            </div>
             <div class="w-full md:w-1/3 px-2">
               <a class="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-xl" href="#">
                 <span class="mr-2">Wishlist</span>
@@ -131,10 +135,17 @@ export default {
   },
   components: {
     Breadcrumb,
+  },
+  methods: {
+    addToBag(product){
+      console.log(product, "asd")
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.active{
+  background: darkgray;
+}
 </style>

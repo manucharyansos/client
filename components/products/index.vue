@@ -2,10 +2,22 @@
   <div class="w-full grid bg-white dark:bg-gray-700 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
     <div v-for="item of data" class="box-border overflow-hidden flex cursor-pointer flex-col items-start transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product  bg-red">
       <div class="flex mb-3 md:mb-3.5">
-        <div class="m-2 w-full h-64" v-if="item.images">
+<!--        <div class="m-2 w-full h-64" v-if="item.images">-->
+<!--          <img alt="" :src="`http://127.0.0.1:8000/products-images/${item.images[0].image_path}`"-->
+<!--               class="w-auto h-full object-cover object-center">-->
+<!--        </div>-->
+        <nuxt-link class="relative flex w-full h-60 overflow-hidden" :to="`/products/${item.id}`">
           <img alt="" :src="`http://127.0.0.1:8000/products-images/${item.images[0].image_path}`"
                class="w-auto h-full object-cover object-center">
-        </div>
+
+          <div class="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
+            <button class="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition hover:bg-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </nuxt-link>
       </div>
       <div class="w-full overflow-hidden p-2 md:px-2.5 xl:px-4">
         <div class="flex flex-col md:flex-row md:items-center lg:flex-row xl:flex-row 2xl:flex-row mb-0.5 items-start">
@@ -45,6 +57,9 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    editProduct: {
+      type: Number
     }
   }
 }

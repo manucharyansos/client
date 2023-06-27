@@ -4,7 +4,7 @@
     <div class="px-4 pt-8">
       <p class="text-xl font-medium">Order Summary</p>
       <p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
-      <div class="overflow-scroll mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6" v-for="product of products">
+      <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6" v-for="product of products">
         <div class="flex flex-col rounded-lg bg-white sm:flex-row">
           <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
                :src="`http://127.0.0.1:8000/products-images/${product.images[0].image_path}`" alt="" />

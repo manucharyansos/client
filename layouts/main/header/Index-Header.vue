@@ -21,6 +21,26 @@
               {{ cartProductCount }}
             </span>
           </button>
+          <div
+            v-if="getProduct"
+            id="open-bag"
+            class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-1/2 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+            <button
+              type="button"
+              data-drawer-hide="open-bag"
+              aria-controls="open-bag"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-4 right-5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close menu</span>
+            </button>
+            <YourCart
+              :products="getProduct"
+              @deleteClick="deleteProduct"
+              @checkout="checkout"
+              @plusFromCart="plus"
+              @minusFromCart="minus"
+            />
+          </div>
 
           <button @click="toggle" id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon" v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -244,15 +264,14 @@ export default {
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
-  },
-  mounted() {
-    // initFlowbite();
+    ...mapGetters('products', ['getProduct'])
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');
   },
   methods: {
     ...mapActions('authCustom', ['fetchUser']),
+    ...mapActions('products', ['minusProduct', 'plusProduct', 'deleteProductFromCart']),
     async userLogout(){
       await this.$auth.logout()
       await this.$router.push('/')
@@ -273,7 +292,28 @@ export default {
         }
       }
     },
-
+    deleteProduct(index){
+      this.deleteProductFromCart(index)
+    },
+    checkout(){
+      this.$router.push('/checkout' )
+    },
+    minus(index) {
+      this.minusProduct(index)
+    },
+    plus(index) {
+      this.plusProduct(index)
+    },
+    basketTotal(){
+      let res = []
+      for (const item of this.getProduct){
+        res.push(item.price * item.quantity)
+      }
+      res = res.reduce( (sum, el) => {
+        return sum + el
+      })
+      return Math.floor(res)
+    }
   },
 }
 </script>

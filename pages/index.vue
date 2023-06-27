@@ -58,7 +58,9 @@
       <h3 class="text-lg mr-auto md:text-2xl lg:text-3xl 3xl:text-4xl xl:leading-10 font-bold text-gray-600 dark:text-white my-6">New Arrivals</h3>
 
 
-      <Products :data="getProducts"/>
+      <Products
+        :data="getProducts"
+      />
 
       <div class="flex flex-col md:items-end items-center m-4">
         <!-- Help text -->
@@ -182,5 +184,8 @@ export default {
 carousel-3d a{
   color: red!important;
   background: #000!important;
+}
+.active{
+  background: darkgray;
 }
 </style>
