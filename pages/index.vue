@@ -57,35 +57,18 @@
     <div class="new_arrivals items-center flex flex-col p-20 h-full">
       <h3 class="text-lg mr-auto md:text-2xl lg:text-3xl 3xl:text-4xl xl:leading-10 font-bold text-gray-600 dark:text-white my-6">New Arrivals</h3>
 
-
       <Products
         :data="getProducts"
       />
 
-      <div class="flex flex-col md:items-end items-center m-4">
-        <!-- Help text -->
-        <span class="text-sm text-gray-700 dark:text-gray-400">
-              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ getCurrentPage }}</span>
-              to
-              <span class="font-semibold text-gray-900 dark:text-white">{{ getPerPage }}</span>
-              of
-              <span class="font-semibold text-gray-900 dark:text-white">{{ getTotal }}</span>
-              Entries
-            </span>
-        <div class="flex mt-2 xs:mt-0">
-          <div v-for="link of getLinks">
-            <button
-              @click="handleLinkClick(link)"
-              :class="[link.active ? 'active' : '']"
-              class="inline-flex items-center mx-0.5 px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              <span v-html="link.label"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <Pagination
+        :current-page="getCurrentPage"
+        :links="getLinks"
+        :per-page="getPerPage"
+        :total="getTotal"
+        @handleLinkClick="handleLinkClick"
+      />
     </div>
-
 
     <div class="h-80 mb-7 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-[75px]">
       <div class="md:grid md:grid-cols-3 md:gap-2 xl:gap-1.5 relative">
@@ -115,6 +98,7 @@
 import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
 import Products from "@/components/products";
+import Pagination from "@/components/pagination";
 
 export default {
   name: 'IndexPage',
@@ -129,7 +113,8 @@ export default {
   components: {
     Slider,
     SliderItem,
-    Products
+    Products,
+    Pagination
   },
   data(){
     return {
@@ -184,8 +169,5 @@ export default {
 carousel-3d a{
   color: red!important;
   background: #000!important;
-}
-.active{
-  background: darkgray;
 }
 </style>

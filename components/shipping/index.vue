@@ -9,9 +9,9 @@
           <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
                :src="`http://127.0.0.1:8000/products-images/${product.images[0].image_path}`" alt="" />
           <div class="flex w-full flex-col px-4 py-4">
-            <span class="font-semibold">{{ product.description }}</span>
+            <span class="font-semibold text-white dark:text-gray-600">{{ product.description }}</span>
             <span class="float-right text-gray-400">42EU - 8.5US</span>
-            <p class="text-lg font-bold">$ {{ product.price }}</p>
+            <p class="text-lg font-bold text-white dark:text-gray-600">$ {{ product.price }}</p>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@
         </div>
         <div class="mt-6 flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Total</p>
-          <p class="text-2xl font-semibold text-gray-900">$408.00</p>
+          <p class="text-2xl font-semibold text-gray-900">$ {{ total }}</p>
         </div>
       </div>
       <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
@@ -120,7 +120,8 @@
 export default {
   name: "index",
   props: {
-    products: {type: Array}
+    products: { type: Array },
+    total: { type: Number }
   },
 }
 </script>
