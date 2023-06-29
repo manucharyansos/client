@@ -227,7 +227,9 @@ export default {
   name: "index",
   layout: 'UserLayout',
   mounted() {
+    if (this.$auth.loggedIn) {
       this.fetchUser()
+    }
   },
   computed: {
     ...mapGetters('userSettings', ['getUser'])

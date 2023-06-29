@@ -48,7 +48,7 @@ export const getters = {
 export const actions = {
   async fetchProducts({ commit }, page ) {
     try {
-      const { data } = await this.$axios.get(`/api/products?page=${page}`);
+      const { data } = await this.$axios.get(`/api/guests/getProducts?page=${page}`);
       commit('setProducts', data.productData.data);
       commit('setCurrentPage', data.productData.current_page);
       commit('setLastPage', data.productData.last_page);
@@ -59,36 +59,6 @@ export const actions = {
     } catch (err) {
       commit('setErrorMessages', err.response.data.errors)
       return false;
-    }
-  },
-  async createProduct({commit}, products){
-    try {
-      await this.$axios.post('/api/products', products, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      return true
-    }catch (err){
-      commit('setErrorMessages', err.response.data.errors)
-      return false
-    }
-  },
-  async updateProduct(commit){
-    try {
-      await this.$axios.$put(`/api/products/${id}`, data)
-      return true
-    }catch (err){
-      commit('setErrorMessages', err.response.data.errors)
-      return false
-    }
-  },
-  async deleteSelectedProduct({ commit }, id) {
-    try {
-       await this.$axios.delete(`/api/products/${id}`)
-      commit('DELETE_PRODUCT_SUCCESS', id)
-      return true
-    } catch (err) {
-      commit('setErrorMessages', err.response.data)
-      return false
     }
   },
   async reviewProduct({ commit }, {id, data}) {
@@ -115,7 +85,7 @@ export const actions = {
   },
   async fetchShowProduct({commit}, id){
     try {
-      const { data } = await this.$axios.get(`api/products/${id}`)
+      const { data } = await this.$axios.get(`api/guests/product/${id}`)
       commit('setShowedProduct', data)
       return true
     }catch (err){
@@ -143,25 +113,25 @@ export const mutations = {
   DELETE_PRODUCT_SUCCESS(state, message){
     state.message = message
   },
-  // setProduct(state, product){
-  //   this._vm.$set(product, 'quantity', 1)
-  //   let productExist = false
-  //   if (state.cartProduct.length){
-  //     state.cartProduct.map((item) => {
-  //       if (item.id === product.id){
-  //         productExist = true
-  //         item.quantity++
-  //       }
-  //     })
-  //     if (!productExist){
-  //       state.cartProduct.push(product)
-  //       product.quantity = 1
-  //     }
-  //   }else{
-  //     state.cartProduct.push(product)
-  //     product.quantity = 1
-  //   }
-  // },
+  setProduct(state, product){
+    this._vm.$set(product, 'quantity', 1)
+    let productExist = false
+    if (state.cartProduct.length){
+      state.cartProduct.map((item) => {
+        if (item.id === product.id){
+          productExist = true
+          item.quantity++
+        }
+      })
+      if (!productExist){
+        state.cartProduct.push(product)
+        product.quantity = 1
+      }
+    }else{
+      state.cartProduct.push(product)
+      product.quantity = 1
+    }
+  },
   setMinusProduct(state, index){
     if (state.cartProduct[index].quantity > 1){
       state.cartProduct[index].quantity--

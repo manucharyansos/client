@@ -21,10 +21,10 @@ export default {
     this.fetchShowProduct(id)
   },
   computed: {
-    ...mapGetters('products', ['getShowedProduct'])
+    ...mapGetters('guestsProducts', ['getShowedProduct'])
   },
   methods: {
-    ...mapActions('products', ['fetchShowProduct', "fetchProduct"]),
+    ...mapActions('guestsProducts', ['fetchShowProduct', "fetchProduct"]),
     addToCart(id){
       this.fetchProduct(id)
     },

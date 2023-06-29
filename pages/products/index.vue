@@ -59,7 +59,7 @@ export default {
     initFlowbite()
   },
   async fetch() {
-    await this.fetchProducts()
+    await this.fetchProducts(1)
   },
   methods: {
     ...mapActions('products', ['fetchProducts', 'fetchProduct']),
@@ -89,7 +89,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('products', [
+    ...mapGetters('guestsProducts', [
       'getProducts',
       'getProduct',
       'getLastPage',

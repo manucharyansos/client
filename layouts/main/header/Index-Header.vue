@@ -249,7 +249,9 @@ import YourCart from "@/components/your-cart";
 export default {
   name: "Index-Header",
   async fetch(){
-    await this.fetchUser()
+    if (this.$auth.loggedIn) {
+     await this.fetchUser()
+    }
   },
   components: {
     YourCart

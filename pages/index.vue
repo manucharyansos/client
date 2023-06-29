@@ -104,12 +104,12 @@ export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  // async serverPrefetch({commit}) {
-  //   await Promise.all([
-  //     this.fetchProducts({ commit }),
-  //     this.fetchCategories()
-  //   ])
-  // },
+  async serverPrefetch({commit}) {
+    await Promise.all([
+      await this.fetchProducts({ commit }),
+      await this.fetchCategories(1)
+    ])
+  },
   components: {
     Slider,
     SliderItem,
@@ -128,13 +128,13 @@ export default {
     }
   },
   mounted() {
-    this.fetchProducts()
-    this.fetchCategories()
+    // this.handleLinkClick()
+    // this.fetchCategories()
     this.loadingControl()
   },
   computed: {
-    ...mapGetters('category', ['getCategory']),
-    ...mapGetters('products', [
+    ...mapGetters('guestsCategories', ['getCategory']),
+    ...mapGetters('guestsProducts', [
       'getProducts',
       'getLastPage',
       'getPerPage',
@@ -144,10 +144,10 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('products', ['fetchProducts']),
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('guestsProducts', ['fetchProducts']),
+    ...mapActions('guestsCategories', ['fetchCategories']),
     loadingControl(){
-      if (this.getCategory && this.getProducts){
+      if (this.getProducts){
         this.isLoading = false
       }
     },

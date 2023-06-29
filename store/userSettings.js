@@ -30,8 +30,12 @@ export const mutations = {
 
 export const actions = {
   async fetchUser({commit}){
-    const { data } = await this.$axios.get('/api/user',)
-    commit('setUser', data)
+    try {
+      const res = await this.$axios.get('/api/user')
+      commit('setUser', res.data)
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   async updateUser({ commit }, { id, userData }) {

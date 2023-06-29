@@ -85,7 +85,9 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   name: "Index",
   async fetch(){
-    await this.fetchUser()
+    if (this.$auth.loggedIn){
+      await this.fetchUser()
+    }
   },
   data(){
     return {

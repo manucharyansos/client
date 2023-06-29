@@ -23,8 +23,12 @@ export const mutations = {
 
 export const actions = {
   async fetchUser({commit}){
-    const res = await this.$axios.get('/api/user')
-    commit('setUser', res.data)
+    try {
+      const res = await this.$axios.get('/api/user')
+      commit('setUser', res.data)
+    } catch (error) {
+      console.error(error);
+    }
   },
   async loginUser({commit}, userData){
     try {

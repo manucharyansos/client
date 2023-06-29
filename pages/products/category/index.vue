@@ -31,7 +31,7 @@ export default {
   components: {CategoryContent, Pagination},
   layout: 'UserLayout',
   computed: {
-    ...mapGetters('category', [
+    ...mapGetters('guestsCategories', [
       'getCategory',
       'getLastPage',
       'getPerPage',
@@ -41,7 +41,7 @@ export default {
     ])
   },
   async fetch() {
-    await this.fetchCategories()
+    await this.fetchCategories(1)
   },
   mounted() {
     initFlowbite()
