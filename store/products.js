@@ -122,7 +122,6 @@ export const actions = {
       commit('setErrorMessages', err.response.data)
       return false
     }
-
   },
   minusProduct({commit}, index){
     commit('setMinusProduct', index)
@@ -142,33 +141,6 @@ export const mutations = {
   },
   DELETE_PRODUCT_SUCCESS(state, message){
     state.message = message
-  },
-  // setProduct(state, product){
-  //   this._vm.$set(product, 'quantity', 1)
-  //   let productExist = false
-  //   if (state.cartProduct.length){
-  //     state.cartProduct.map((item) => {
-  //       if (item.id === product.id){
-  //         productExist = true
-  //         item.quantity++
-  //       }
-  //     })
-  //     if (!productExist){
-  //       state.cartProduct.push(product)
-  //       product.quantity = 1
-  //     }
-  //   }else{
-  //     state.cartProduct.push(product)
-  //     product.quantity = 1
-  //   }
-  // },
-  setMinusProduct(state, index){
-    if (state.cartProduct[index].quantity > 1){
-      state.cartProduct[index].quantity--
-    }
-  },
-  setPlusProduct(state, index){
-    state.cartProduct[index].quantity++
   },
   deleteProductByIndex(state, index){
     state.cartProduct.splice(index, 1)

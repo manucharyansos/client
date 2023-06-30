@@ -271,7 +271,7 @@ export default {
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
-    ...mapGetters('products', ['getProduct'])
+    ...mapGetters('guestsProducts', ['getProduct'])
   },
   mounted() {
     initFlowbite()
@@ -281,7 +281,7 @@ export default {
   },
   methods: {
     ...mapActions('authCustom', ['fetchUser']),
-    ...mapActions('products', ['minusProduct', 'plusProduct', 'deleteProductFromCart']),
+    ...mapActions('guestsProducts', ['minusProduct', 'plusProduct', 'deleteProductFromCart']),
     async userLogout(){
       await this.$auth.logout()
       await this.$router.push('/')

@@ -128,8 +128,6 @@ export default {
     }
   },
   mounted() {
-    // this.handleLinkClick()
-    // this.fetchCategories()
     this.loadingControl()
   },
   computed: {

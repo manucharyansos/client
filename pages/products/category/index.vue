@@ -47,12 +47,12 @@ export default {
     initFlowbite()
   },
   methods: {
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('guestsCategories', ['fetchCategories']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/category-images/${image}`;
     },
     findProductsBuId(id){
-      alert(id)
+      this.$router.push(`/products/category/${id}`)
     },
     async handleLinkClick(link) {
       try {

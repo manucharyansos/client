@@ -7,7 +7,8 @@ export const state = () => ({
   lastPage: 1,
   perPage: 10,
   total: 0,
-  links: []
+  links: [],
+  categoryWithProducts: []
 })
 
 export const getters = {
@@ -34,6 +35,9 @@ export const getters = {
   },
   getLinks(state){
     return state.links
+  },
+  getCategoryWithProducts(state) {
+    return state.categoryWithProducts
   }
 }
 
@@ -53,19 +57,16 @@ export const actions = {
       return false
     }
   },
-  async createCategory({commit}, categoryData){
-    try {
-      await this.$axios.post('/api/categories', categoryData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      return true
-    }catch (err){
-      commit('setErrorMessages', err.response.data.errors)
-      return false
-    }
-  },
   async fetchSubCategory({commit}){
     await this.$axios.get(`/api/subcategories`)
+  },
+  async fetchCategoryWithProducts({commit}, id){
+    try {
+      const {data} = await this.$axios.get(`/api/guests/findCategoryProducts/${id}`)
+      commit('setCategoryProducts', data.category)
+    }catch (err){
+      commit('setErrorMessages', err.response)
+    }
   }
 }
 
@@ -90,5 +91,8 @@ export const mutations = {
   },
   setLinks(state, links){
     state.links = links
+  },
+  setCategoryProducts(state, products){
+    state.categoryWithProducts = products
   }
 }

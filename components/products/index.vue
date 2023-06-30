@@ -2,10 +2,6 @@
   <div class="w-full grid bg-white dark:bg-gray-700 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
     <div v-for="item of data" class="box-border overflow-hidden flex cursor-pointer flex-col items-start transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product  bg-red">
       <div class="flex mb-3 md:mb-3.5">
-<!--        <div class="m-2 w-full h-64" v-if="item.images">-->
-<!--          <img alt="" :src="`http://127.0.0.1:8000/products-images/${item.images[0].image_path}`"-->
-<!--               class="w-auto h-full object-cover object-center">-->
-<!--        </div>-->
         <nuxt-link class="relative flex w-full h-60 overflow-hidden" :to="`/products/${item.id}`">
           <img alt="" :src="`http://127.0.0.1:8000/products-images/${item.images[0].image_path}`"
                class="w-auto h-full object-cover object-center">

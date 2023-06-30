@@ -62,7 +62,7 @@ export default {
     await this.fetchProducts(1)
   },
   methods: {
-    ...mapActions('products', ['fetchProducts', 'fetchProduct']),
+    ...mapActions('guestsProducts', ['fetchProducts', 'fetchProduct']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/products-images/${image}`;
     },

@@ -72,7 +72,7 @@ export const actions = {
   },
   async fetchProduct({ commit }, id ){
     try {
-      const { data } = await this.$axios.get(`api/products/${id}`)
+      const { data } = await this.$axios.get(`api/guests/product/${id}`)
       commit('setProduct', data)
       return true
     }catch (err){
