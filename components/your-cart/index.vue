@@ -15,6 +15,7 @@
                     <div class="shrink-0">
                       <img
                         class="h-24 w-24 max-w-full rounded-lg object-cover"
+                        v-if="product.images"
                         :src="`http://127.0.0.1:8000/products-images/${product.images[0].image_path}`" alt="" />
                     </div>
 

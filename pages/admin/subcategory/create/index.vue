@@ -38,7 +38,7 @@
             >
               <option selected>Choose a country</option>
               <option
-                v-for="category of getCategory"
+                v-for="category of getCategories"
                 :key="category.id"
                 :value="category.id">
                 {{category.name}}
@@ -173,7 +173,7 @@ export default {
     await this.fetchCategories()
   },
   computed: {
-    ...mapGetters('category', ['getCategory', 'getErrorMessage'])
+    ...mapGetters('category', ['getCategories', 'getErrorMessage'])
   },
   methods :{
     ...mapActions('category', ['createSubcategory', 'fetchCategories']),

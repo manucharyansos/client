@@ -7,6 +7,7 @@
       <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6" v-for="product of products">
         <div class="flex flex-col rounded-lg bg-white sm:flex-row">
           <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+               v-if="product.images"
                :src="`http://127.0.0.1:8000/products-images/${product.images[0].image_path}`" alt="" />
           <div class="flex w-full flex-col px-4 py-4">
             <span class="font-semibold text-white dark:text-gray-600">{{ product.description }}</span>

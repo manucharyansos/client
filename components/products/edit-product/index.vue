@@ -15,7 +15,7 @@
           </div>
           <carousel-3d v-if="product_data.images">
             <slide v-for="(image, index) of product_data.images" :index="index">
-              <img :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="image">
+              <img v-if="image" :src="`http://127.0.0.1:8000/products-images/${image.image_path}`" alt="image">
             </slide>
           </carousel-3d>
         </div>

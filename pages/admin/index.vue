@@ -66,13 +66,13 @@ export default {
     }
   },
   async fetch(){
-    await this.fetchProducts()
+    await this.fetchProducts(1)
     await this.users()
-    await this.fetchCategory()
+    await this.fetchCategories(1)
   },
   computed: {
     ...mapGetters('products', ['getProducts']),
-    ...mapGetters('category', ['getCategory']),
+    ...mapGetters('category', ['getCategories']),
     ...mapGetters('userSettings', ['getUsers'])
   },
   methods: {
@@ -85,8 +85,8 @@ export default {
     this.updatedProduct = this.getProducts.length
     this.countUsers = this.getUsers.length
     this.updatedUsers = this.getUsers.length
-    this.countCategory = this.getCategory.length
-    this.updatedCategory = this.getCategory
+    this.countCategory = this.getCategories.length
+    this.updatedCategory = this.getCategories
   }
 }
 </script>

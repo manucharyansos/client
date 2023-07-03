@@ -20,24 +20,24 @@
         {{ err }}
       </p>
     </template>
-    <template v-slot:select_category>
+    <template v-slot:select_subcategory>
       <select
         id="category"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        v-model="product.category_id"
+        v-model="product.subcategory_id"
       >
         <option selected="">Select category</option>
         <option
-          v-for="category of getCategory"
-          :key="category.id"
-          :value="category.id">
-          {{category.name}}
+          v-for="subcategory of getSubcategories"
+          :key="subcategory.id"
+          :value="subcategory.id">
+          {{subcategory.name}}
         </option>
       </select>
       <p
         class="mt-2 text-sm text-red-600 dark:text-red-500"
-        v-if="errors.category_id"
-        v-for="err of errors.category_id"
+        v-if="errors.subcategory_id"
+        v-for="err of errors.subcategory_id"
       >
         {{ err }}
       </p>
@@ -133,19 +133,19 @@ export default {
         stock: '',
         imageUrl: '',
         imageFiles: [],
-        category_id: '',
+        subcategory_id: '',
         selectedImage: ''
       },
       errors: {}
     }
   },
   computed: {
-    ...mapGetters('category', ['getCategory']),
+    ...mapGetters('category', ['getCategory', 'getSubcategories']),
     ...mapGetters('products', ['getErrorMessages'])
   },
   methods: {
     ...mapActions('products', ['createProduct']),
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('category', ['fetchCategories', 'fetchSubCategories']),
     handleFileUpload(event) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
@@ -164,7 +164,7 @@ export default {
       formData.append('description', this.product.description);
       formData.append('price', this.product.price);
       formData.append('stock', this.product.stock);
-      formData.append('category_id', this.product.category_id);
+      formData.append('subcategory_id', this.product.subcategory_id);
 
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
@@ -178,7 +178,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchCategories()
+    this.fetchSubCategories()
   }
 }
 </script>

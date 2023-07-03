@@ -7,9 +7,9 @@
             <div class="flex-1 flex items-center space-x-2">
               <h5>
                 <span class="text-gray-500">All Products:</span>
-                <span class="dark:text-white">{{ getCategory.length }}</span>
+                <span class="dark:text-white">{{ getCategories.length }}</span>
               </h5>
-              <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-10 ({{ getCategory.length }})</h5>
+              <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-10 ({{ getCategories.length }})</h5>
               <button type="button" class="group" data-tooltip-target="results-tooltip">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 object-center object-cover text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewbox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
@@ -17,7 +17,7 @@
                 <span class="sr-only">More info</span>
               </button>
               <div id="results-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Showing 1-10 of {{ getCategory.length }} results
+                Showing 1-10 of {{ getCategories.length }} results
                 <div class="tooltip-arrow" data-popper-arrow=""></div>
               </div>
             </div>
@@ -352,7 +352,7 @@
           </div>
           <div class="overflow-x-auto">
             <CategoriesTable
-              :data="getCategory"
+              :data="getCategories"
               @removeCategory="removeCategory"
               @previewSelectedCategory="previewSelectedCategory"
               @editCategory="editCategory"
@@ -402,14 +402,14 @@ export default {
     Pagination
   },
   async fetch(){
-    await this.fetchCategories()
+    await this.fetchCategories(1)
   },
   mounted() {
     initFlowbite()
   },
   computed: {
     ...mapGetters('category', [
-      'getCategory',
+      'getCategories',
       'getLastPage',
       'getPerPage',
       'getTotal',

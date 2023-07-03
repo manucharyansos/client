@@ -368,7 +368,7 @@
     <UpdateProductDrawer
       @removeSelectedProduct="removeSelectedProduct"
       @updateSelectedProduct="updateSelectedProduct"
-      :categories="getCategory"
+      :categories="getSubcategories"
       @handleFileUpload="handleFileUpload"
     >
       <template v-slot:name>
@@ -398,6 +398,7 @@
             v-for="image of selectedProduct.images"
             class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
             <img
+              v-if="image"
               :src="`http://127.0.0.1:8000/products-images/${image.image_path}`"
               alt="imac image"
               class="w-36 h-28 object-cover object-center">
@@ -418,10 +419,10 @@
         >
           <option selected="">Select category</option>
           <option
-            v-for="category of getCategory"
-            :key="category.id"
-            :value="category.id">
-            {{category.name}}
+            v-for="subcategory of getSubcategories"
+            :key="subcategory.id"
+            :value="subcategory.id">
+            {{subcategory.name}}
           </option>
         </select>
       </template>
@@ -459,7 +460,7 @@ export default {
   },
   async fetch(){
     await this.fetchProducts(this.page)
-    await this.fetchCategories()
+    await this.fetchSubCategories()
   },
   data (){
     return {
@@ -473,7 +474,7 @@ export default {
         stock: '',
         imageUrl: '',
         imageFiles: [],
-        category_id: '',
+        subcategory_id: '',
         selectedImage: ''
       },
       errors: {},
@@ -484,7 +485,7 @@ export default {
     initFlowbite()
   },
   computed: {
-    ...mapGetters('category', ['getCategory']),
+    ...mapGetters('category', ['getSubcategories']),
     ...mapGetters('products',
       [
       'getErrorMessages',
@@ -498,7 +499,7 @@ export default {
   },
   methods :{
     ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('category', ['fetchSubCategories']),
     addProduct(){
       this.$router.push('/admin/products/create')
     },
@@ -539,7 +540,7 @@ export default {
       await this.updateProduct({
         id: this.selectedProduct.id,
         data: {
-          category_id: this.selectedProduct.category_id,
+          subcategory_id: this.selectedProduct.subcategory_id,
           title: this.selectedProduct.title,
           description: this.selectedProduct.description,
           price: this.selectedProduct.price,

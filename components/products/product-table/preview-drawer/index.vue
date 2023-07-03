@@ -26,6 +26,7 @@
           class="p-2 bg-gray-100 rounded-lg dark:bg-gray-700"
           v-for="image of data.images">
           <img
+            v-if="image"
             class="w-36 h-28 object-cover object-center"
             :src="`http://127.0.0.1:8000/products-images/${image.image_path}`"
             alt="Image">

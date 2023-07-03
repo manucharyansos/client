@@ -1,7 +1,8 @@
 
 
 export const state = () => ({
-  category: [],
+  categories: [],
+  subcategories: [],
   message: '',
   error: [],
   currentPage: 1,
@@ -12,8 +13,11 @@ export const state = () => ({
 })
 
 export const getters = {
-  getCategory(state) {
-    return state.category
+  getCategories(state) {
+    return state.categories
+  },
+  getSubcategories(state) {
+    return state.subcategories
   },
   getMessage(state){
     return state.message
@@ -86,14 +90,22 @@ export const actions = {
       return false
     }
   },
-  async fetchSubCategory({commit}){
-    await this.$axios.get(`/api/subcategories`)
+  async fetchSubCategories({commit}){
+    try {
+      const { data } = await this.$axios.get(`/api/subcategories`)
+      commit('setSubcategories', data)
+    }catch (err) {
+      console.log(err.response)
+    }
   }
 }
 
 export const mutations = {
-  setCategory(state, category){
-    state.category = category
+  setCategory(state, categories){
+    state.categories = categories
+  },
+  setSubcategories(state, categories){
+    state.subcategories = categories
   },
   DELETE_CATEGORY_SUCCESS(state, message){
     state.message = message
