@@ -6,7 +6,9 @@
     <template v-if="getCategory">
       <category-content
         :data="getCategory"
-        @categoryButton="findProductsBuId"
+        :subcategories="getSubcategories"
+        @categoryButton="findSubcategoriesBuId"
+        @subcategoryButton="findProductsBuId"
       />
     </template>
     <div class="mx-12">
@@ -37,7 +39,8 @@ export default {
       'getPerPage',
       'getTotal',
       'getCurrentPage',
-      'getLinks'
+      'getLinks',
+      'getSubcategories'
     ])
   },
   async fetch() {
@@ -47,12 +50,15 @@ export default {
     initFlowbite()
   },
   methods: {
-    ...mapActions('guestsCategories', ['fetchCategories']),
+    ...mapActions('guestsCategories', ['fetchCategories', 'fetchSubCategoryById']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/category-images/${image}`;
     },
     findProductsBuId(id){
       this.$router.push(`/products/category/${id}`)
+    },
+    async findSubcategoriesBuId(id){
+      await this.fetchSubCategoryById(id)
     },
     async handleLinkClick(link) {
       try {
