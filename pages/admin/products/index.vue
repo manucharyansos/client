@@ -484,7 +484,7 @@ export default {
     initFlowbite()
   },
   computed: {
-    ...mapGetters('admin/categories', ['getSubcategories']),
+    ...mapGetters('admin/categories/subcategories', ['getSubcategories']),
     ...mapGetters('admin/products',
       [
       'getErrorMessages',
@@ -498,7 +498,7 @@ export default {
   },
   methods :{
     ...mapActions('admin/products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
-    ...mapActions('admin/categories', ['fetchSubCategories']),
+    ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
     addProduct(){
       this.$router.push('/admin/products/create')
     },
@@ -555,7 +555,7 @@ export default {
         await this.fetchProducts(page);
       } catch (error) {
         console.error(error);
-        const defaultPage = 1; // Set your default page value here
+        const defaultPage = 1;
         await this.fetchProducts(defaultPage);
       }
     },
