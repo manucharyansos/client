@@ -459,7 +459,7 @@ export default {
     Pagination
   },
   async fetch(){
-    await this.fetchProducts(this.page)
+    await this.fetchProducts(1)
     await this.fetchSubCategories()
   },
   data (){
@@ -478,15 +478,14 @@ export default {
         selectedImage: ''
       },
       errors: {},
-      page: 1
     }
   },
   mounted() {
     initFlowbite()
   },
   computed: {
-    ...mapGetters('category', ['getSubcategories']),
-    ...mapGetters('products',
+    ...mapGetters('admin/categories', ['getSubcategories']),
+    ...mapGetters('admin/products',
       [
       'getErrorMessages',
       'getProducts',
@@ -498,8 +497,8 @@ export default {
     ])
   },
   methods :{
-    ...mapActions('products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
-    ...mapActions('category', ['fetchSubCategories']),
+    ...mapActions('admin/products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
+    ...mapActions('admin/categories', ['fetchSubCategories']),
     addProduct(){
       this.$router.push('/admin/products/create')
     },

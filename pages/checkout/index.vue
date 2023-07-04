@@ -18,7 +18,7 @@ export default {
     Shipping
   },
   computed: {
-    ...mapGetters('guestsProducts', ['getProduct'])
+    ...mapGetters('guests/products', ['getProduct'])
   },
   methods: {
     basketTotal(){

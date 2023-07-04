@@ -140,12 +140,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('category', ['getCategory', 'getSubcategories']),
-    ...mapGetters('products', ['getErrorMessages'])
+    ...mapGetters('admin/categories', ['getCategories', 'getSubcategories']),
+    ...mapGetters('admin/products', ['getErrorMessages'])
   },
   methods: {
-    ...mapActions('products', ['createProduct']),
-    ...mapActions('category', ['fetchCategories', 'fetchSubCategories']),
+    ...mapActions('admin/products', ['createProduct']),
+    ...mapActions('admin/categories', ['fetchCategories', 'fetchSubCategories']),
     handleFileUpload(event) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {

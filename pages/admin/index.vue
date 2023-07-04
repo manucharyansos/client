@@ -71,13 +71,13 @@ export default {
     await this.fetchCategories(1)
   },
   computed: {
-    ...mapGetters('products', ['getProducts']),
-    ...mapGetters('category', ['getCategories']),
+    ...mapGetters('admin/products', ['getProducts']),
+    ...mapGetters('admin/categories', ['getCategories']),
     ...mapGetters('userSettings', ['getUsers'])
   },
   methods: {
-    ...mapActions('products', ['fetchProducts']),
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('admin/products', ['fetchProducts']),
+    ...mapActions('admin/categories', ['fetchCategories']),
     ...mapActions('userSettings', ['users'])
   },
   mounted() {

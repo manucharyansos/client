@@ -1,7 +1,4 @@
-
-
 export const state = () => ({
-  categories: [],
   subcategories: [],
   message: '',
   error: [],
@@ -13,9 +10,6 @@ export const state = () => ({
 })
 
 export const getters = {
-  getCategories(state) {
-    return state.categories
-  },
   getSubcategories(state) {
     return state.subcategories
   },
@@ -41,44 +35,7 @@ export const getters = {
     return state.links
   }
 }
-
 export const actions = {
-  async fetchCategories({ commit }, page ){
-    try {
-      const { data } = await this.$axios.get(`/api/categories?page=${page}`)
-      commit('setCategory', data.category.data);
-      commit('setCurrentPage', data.category.current_page);
-      commit('setLastPage', data.category.last_page);
-      commit('setPerPage', data.category.per_page);
-      commit('setTotal', data.category.total);
-      commit('setLinks', data.category.links);
-      return true
-    }catch (err){
-      commit('setErrorMessages', err.response.data)
-      return false
-    }
-  },
-  async createCategory({commit}, categoryData){
-    try {
-      await this.$axios.post('/api/categories', categoryData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      return true
-    }catch (err){
-      commit('setErrorMessages', err.response.data.errors)
-      return false
-    }
-  },
-  async deleteSelectedCategory({commit}, id) {
-    try {
-      const res = await this.$axios.delete(`/api/categories/${id}`)
-      commit('DELETE_CATEGORY_SUCCESS', id)
-      return true
-    } catch (error) {
-      commit('setErrorMessages', error.response.data)
-      return false
-    }
-  },
   async createSubcategory({commit}, data){
     try {
       await this.$axios.post('/api/subcategories', data, {
@@ -100,10 +57,8 @@ export const actions = {
   }
 }
 
+
 export const mutations = {
-  setCategory(state, categories){
-    state.categories = categories
-  },
   setSubcategories(state, categories){
     state.subcategories = categories
   },

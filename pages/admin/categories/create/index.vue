@@ -82,10 +82,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('category', ['getErrorMessage'])
+    ...mapGetters('admin/categories', ['getErrorMessage'])
   },
   methods :{
-    ...mapActions('category', ['createCategory']),
+    ...mapActions('admin/categories', ['createCategory']),
     handleFileUpload(event) {
       this.category.imageFile = event.target.files[0];
       const reader = new FileReader();

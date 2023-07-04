@@ -33,7 +33,7 @@ export default {
   components: {CategoryContent, Pagination},
   layout: 'UserLayout',
   computed: {
-    ...mapGetters('guestsCategories', [
+    ...mapGetters('guests/categories', [
       'getCategory',
       'getLastPage',
       'getPerPage',
@@ -50,7 +50,7 @@ export default {
     initFlowbite()
   },
   methods: {
-    ...mapActions('guestsCategories', ['fetchCategories', 'fetchSubCategoryById']),
+    ...mapActions('guests/categories', ['fetchCategories', 'fetchSubCategoryById']),
     getImageUrl(image) {
       return `http://127.0.0.1:8000/category-images/${image}`;
     },

@@ -170,13 +170,15 @@ export default {
     }
   },
   async fetch() {
-    await this.fetchCategories()
+    await this.fetchCategories(1)
   },
   computed: {
-    ...mapGetters('category', ['getCategories', 'getErrorMessage'])
+    ...mapGetters('admin/categories', ['getCategories']),
+    ...mapGetters('admin/categories/subcategories', ['getErrorMessage'])
   },
   methods :{
-    ...mapActions('category', ['createSubcategory', 'fetchCategories']),
+    ...mapActions('admin/categories', ['fetchCategories']),
+    ...mapActions('admin/categories/subcategories', ['fetchSubCategories', 'createSubcategory']),
     handleFileUpload(event) {
       this.category.imageFile = event.target.files[0];
       const reader = new FileReader();

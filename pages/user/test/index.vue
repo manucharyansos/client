@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     ...mapActions('products', ['reviewProduct', 'fetchProducts']),
+    ...mapActions('test', ['registerUser']),
     async submitReview() {
       await this.reviewProduct({
         id: this.productId,

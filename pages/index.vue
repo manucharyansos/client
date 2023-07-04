@@ -131,8 +131,8 @@ export default {
     this.loadingControl()
   },
   computed: {
-    ...mapGetters('guestsCategories', ['getCategory']),
-    ...mapGetters('guestsProducts', [
+    ...mapGetters('guests/categories', ['getCategory']),
+    ...mapGetters('guests/products', [
       'getProducts',
       'getLastPage',
       'getPerPage',
@@ -142,8 +142,8 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('guestsProducts', ['fetchProducts']),
-    ...mapActions('guestsCategories', ['fetchCategories']),
+    ...mapActions('guests/products', ['fetchProducts']),
+    ...mapActions('guests/categories', ['fetchCategories']),
     loadingControl(){
       if (this.getProducts){
         this.isLoading = false

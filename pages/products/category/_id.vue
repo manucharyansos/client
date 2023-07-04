@@ -63,10 +63,10 @@ export default {
     this.subcategories = this.getSubcategoryWithProducts
   },
   computed: {
-    ...mapGetters('guestsCategories', ['getSubcategoryWithProducts'])
+    ...mapGetters('guests/categories', ['getSubcategoryWithProducts'])
   },
   methods: {
-    ...mapActions('guestsCategories', ['fetchSubcategoryWithProducts']),
+    ...mapActions('guests/categories', ['fetchSubcategoryWithProducts']),
     getFirstImage(product) {
         if (product.images.length > 0) {
           return `http://127.0.0.1:8000/products-images/${product.images[0].image_path}`;

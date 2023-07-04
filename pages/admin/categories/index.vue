@@ -408,7 +408,7 @@ export default {
     initFlowbite()
   },
   computed: {
-    ...mapGetters('category', [
+    ...mapGetters('admin/categories', [
       'getCategories',
       'getLastPage',
       'getPerPage',
@@ -417,7 +417,7 @@ export default {
       'getLinks'])
   },
   methods: {
-    ...mapActions('category', [
+    ...mapActions('admin/categories', [
       'fetchCategories',
       'deleteSelectedCategory',
     ]),
