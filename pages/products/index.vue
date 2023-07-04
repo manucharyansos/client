@@ -64,11 +64,11 @@ export default {
   methods: {
     ...mapActions('guests/products', ['fetchProducts', 'fetchProduct']),
     getImageUrl(image) {
-      return `http://127.0.0.1:8000/products-images/${image}`;
+      return `http://127.0.0.1:8000/storage/products-images/${image}`;
     },
     getFirstImage(product) {
       if (product.images.length > 0) {
-        return `http://127.0.0.1:8000/products-images/${product.images[0].image_path}`;
+        return `http://127.0.0.1:8000/storage/products-images/${product.images[0].image_path}`;
       } else {
         return '/download.png';
       }
@@ -83,7 +83,7 @@ export default {
         await this.fetchProducts(page);
       } catch (error) {
         console.error(error);
-        const defaultPage = 1; // Set your default page value here
+        const defaultPage = 1;
         await this.fetchProducts(defaultPage);
       }
     },

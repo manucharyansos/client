@@ -69,7 +69,7 @@ export default {
     ...mapActions('guests/categories', ['fetchSubcategoryWithProducts']),
     getFirstImage(product) {
         if (product.images.length > 0) {
-          return `http://127.0.0.1:8000/products-images/${product.images[0].image_path}`;
+          return `http://127.0.0.1:8000/storage/products-images/${product.images[0].image_path}`;
         } else {
           return '/download.png';
       }

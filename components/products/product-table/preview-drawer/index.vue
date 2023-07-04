@@ -28,7 +28,7 @@
           <img
             v-if="image"
             class="w-36 h-28 object-cover object-center"
-            :src="`http://127.0.0.1:8000/products-images/${image.image_path}`"
+            :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`"
             alt="Image">
         </div>
       </div>

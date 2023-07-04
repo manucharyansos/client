@@ -399,7 +399,7 @@
             class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
             <img
               v-if="image"
-              :src="`http://127.0.0.1:8000/products-images/${image.image_path}`"
+              :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`"
               alt="imac image"
               class="w-36 h-28 object-cover object-center">
             <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">

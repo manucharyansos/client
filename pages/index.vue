@@ -107,8 +107,10 @@ export default {
   async serverPrefetch({commit}) {
     await Promise.all([
       await this.fetchProducts({ commit }),
-      await this.fetchCategories(1)
     ])
+  },
+  async fetch(){
+    await this.fetchCategories(1)
   },
   components: {
     Slider,

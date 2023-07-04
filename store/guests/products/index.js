@@ -4,7 +4,7 @@ export const state = () => ({
   errorMessages: [],
   message: '',
   cartProduct: [],
-  showProduct: [],
+  showProduct: {},
   currentPage: 1,
   lastPage: 1,
   perPage: 10,
