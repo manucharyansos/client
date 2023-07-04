@@ -63,7 +63,7 @@ export const actions = {
   },
   async reviewProduct({ commit }, {id, data}) {
     try {
-      await this.$axios.post(`/api/products/reviews/${id}`, data);
+      await this.$axios.post(`/api/guests/reviews/${id}`, data);
       return true
     } catch (err) {
       commit('setErrorMessages', err.response.data.errors)
