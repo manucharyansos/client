@@ -115,6 +115,7 @@ export const mutations = {
   },
   setProduct(state, product){
     this._vm.$set(product, 'quantity', 1)
+    this._vm.$set(product, 'count', 1)
     let productExist = false
     if (state.cartProduct.length){
       state.cartProduct.map((item) => {
