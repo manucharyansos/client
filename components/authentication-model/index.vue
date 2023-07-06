@@ -16,7 +16,7 @@
           <div class="text-center mb-6 pt-2.5"><div>
             <a class="inline-flex focus:outline-none" href="/">
             <span class="box-border inline-block overflow-hidden bg-no-repeat opacity-100	relative m-0 p-0" style=" width: 95px; height: 30px">
-              <img alt="ChawkBazar" srcset="/assets/images/logo.svg 1x, /assets/images/logo.svg 2x" src="/assets/images/logo.svg" decoding="async" data-nimg="fixed"
+              <img alt="Logo" src="/logo.jpg" decoding="async" data-nimg="fixed"
                    class="absolute ring-inset box-border p-0 mx-auto block max-w-full max-h-full">
             </span>
             </a>
@@ -32,9 +32,16 @@
               <div class="block">
                 <label for="password" class="block text-gray-600 font-semibold text-sm leading-none mb-3 cursor-pointer">Password</label>
                 <div class="relative">
-                  <input id="password" name="password" type="password" class="py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border border-gray-500 text-input text-xs lg:text-sm font-body rounded-md placeholder-gray-600  transition duration-200 ease-in-out bg-white border border-gray-100 focus:outline-none focus:border-heading h-11 md:h-12" autocomplete="off" autocapitalize="off" spellcheck="false">
-                  <label for="password" class="absolute ltr:right-4 rtl:left-4 top-5 -mt-2 text-gray-500 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                  <input
+                    id="password"
+                    name="password"
+                    :type="type"
+                    class="py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border border-gray-500 text-input text-xs lg:text-sm font-body rounded-md placeholder-gray-600  transition duration-200 ease-in-out bg-white border border-gray-100 focus:outline-none focus:border-heading h-11 md:h-12"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false">
+                  <label for="password" class="absolute right-5 top-5 -mt-2 text-gray-500 cursor-pointer">
+                    <svg @click="changeType" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                     </svg>
@@ -58,7 +65,7 @@
                 </div>
               </div>
               <div class="relative">
-                <button data-variant="flat" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-heading text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-11 md:h-12 w-full mt-1.5" type="submit">
+                <button data-variant="flat" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-gray-800 text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-11 md:h-12 w-full mt-1.5" type="submit">
                   Login
                 </button>
               </div>
@@ -70,18 +77,16 @@
           </div>
           <button
             data-variant="flat"
-            class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-heading text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-11 md:h-12 w-full mt-2.5 bg-facebook hover:bg-facebookHover">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" class="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-gray-600 text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-800 hover:shadow-cart h-11 md:h-12 w-full mt-2.5 bg-facebook hover:bg-facebookHover">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" class="flex items-center text-sm rounded-full mx-2 sm:text-base ltr:mr-1.5 rtl:ml-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.5 0h-13c-0.825 0-1.5 0.675-1.5 1.5v13c0 0.825 0.675 1.5 1.5 1.5h6.5v-7h-2v-2h2v-1c0-1.653 1.347-3 3-3h2v2h-2c-0.55 0-1 0.45-1 1v1h3l-0.5 2h-2.5v7h4.5c0.825 0 1.5-0.675 1.5-1.5v-13c0-0.825-0.675-1.5-1.5-1.5z">
               </path>
             </svg>
             Login With Facebook
           </button>
-          <button data-variant="flat" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-heading text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-600 hover:shadow-cart h-11 md:h-12 w-full mt-2.5 bg-google hover:bg-googleHover">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" class="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.5 0h-13c-0.825 0-1.5 0.675-1.5 1.5v13c0 0.825 0.675 1.5 1.5 1.5h13c0.825 0 1.5-0.675 1.5-1.5v-13c0-0.825-0.675-1.5-1.5-1.5zM8.119 14c-3.316 0-6-2.684-6-6s2.684-6 6-6c1.619 0 2.975 0.591 4.019 1.569l-1.628 1.569c-0.447-0.428-1.225-0.925-2.391-0.925-2.050 0-3.719 1.697-3.719 3.787s1.672 3.787 3.719 3.787c2.375 0 3.266-1.706 3.403-2.588h-3.403v-2.056h5.666c0.050 0.3 0.094 0.6 0.094 0.994 0.003 3.428-2.294 5.863-5.759 5.863z">
-
-              </path>
+          <button data-variant="flat" class="text-[13px] md:text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-body text-center justify-center border-0 border-transparent placeholder-white focus-visible:outline-none focus:outline-none rounded-md  bg-gray-600 text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-gray-800 hover:shadow-cart h-11 md:h-12 w-full mt-2.5 bg-google hover:bg-googleHover">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" class="text-sm sm:text-base rounded-full mx-2 ltr:mr-1.5 rtl:ml-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.5 0h-13c-0.825 0-1.5 0.675-1.5 1.5v13c0 0.825 0.675 1.5 1.5 1.5h13c0.825 0 1.5-0.675 1.5-1.5v-13c0-0.825-0.675-1.5-1.5-1.5zM8.119 14c-3.316 0-6-2.684-6-6s2.684-6 6-6c1.619 0 2.975 0.591 4.019 1.569l-1.628 1.569c-0.447-0.428-1.225-0.925-2.391-0.925-2.050 0-3.719 1.697-3.719 3.787s1.672 3.787 3.719 3.787c2.375 0 3.266-1.706 3.403-2.588h-3.403v-2.056h5.666c0.050 0.3 0.094 0.6 0.094 0.994 0.003 3.428-2.294 5.863-5.759 5.863z"></path>
             </svg>Login With Google</button>
           <div class="mt-5 mb-1 text-sm text-center sm:text-base text-body">Don't have any account?
             <button type="button" class="text-sm font-bold underline sm:text-base text-heading hover:no-underline focus:outline-none">
@@ -103,6 +108,16 @@ export default {
     },
     modal_hide: {
       type :String
+    }
+  },
+  data (){
+    return {
+      type: 'password'
+    }
+  },
+  methods: {
+    changeType(){
+      this.type = 'text'
     }
   }
 }

@@ -94,7 +94,9 @@
 
 
     <notifications />
-    <AuthenticationModel id="authentication-modal" modal_hide="authentication-modal"/>
+    <template v-if="!$auth.loggedIn">
+      <AuthenticationModel id="authentication-modal" modal_hide="authentication-modal"/>
+    </template>
   </div>
 </template>
 
