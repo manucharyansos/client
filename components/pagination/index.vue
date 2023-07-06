@@ -1,14 +1,13 @@
 <template>
   <div class="flex flex-col md:items-end items-center m-4">
-    <!-- Help text -->
     <span class="text-sm text-gray-700 dark:text-gray-400">
-              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ currentPage }}</span>
-              to
-              <span class="font-semibold text-gray-900 dark:text-white">{{ perPage }}</span>
-              of
-              <span class="font-semibold text-gray-900 dark:text-white">{{ total }}</span>
-              Entries
-            </span>
+      Showing<span class="font-semibold text-gray-900 dark:text-white">{{ currentPage }}</span>
+      to
+      <span class="font-semibold text-gray-900 dark:text-white">{{ perPage }}</span>
+      of
+      <span class="font-semibold text-gray-900 dark:text-white">{{ total }}</span>
+      Entries
+    </span>
     <div class="flex mt-2 xs:mt-0">
       <div v-for="link of links">
         <button

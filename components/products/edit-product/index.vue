@@ -19,10 +19,9 @@
 
         <div class="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
           <div class="flex -mx-4 flex-wrap items-center justify-between lg:justify-start lg:items-start xl:items-center">
-
             <div class="w-full sm:w-8/12 mx-auto flex flex-col items-center">
               <img
-                class="w-full mb-5 mx-auto"
+                class="w-full h-full mb-5 mx-auto object-cover object-center"
                 v-if="product_data.images"
                 :src="`http://127.0.0.1:8000/storage/products-images/${product_data.images[0].image_path}`"
                 alt="">
@@ -31,7 +30,7 @@
           </div>
           <carousel-3d>
             <slide v-for="(image, index) of product_data.images" :index="index">
-              <img :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`" alt="Product Image">
+              <img class="object-cover object-center w-full h-full" :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`" alt="Product Image">
             </slide>
           </carousel-3d>
         </div>

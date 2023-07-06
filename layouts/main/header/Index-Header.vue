@@ -3,7 +3,7 @@
       <div class="max-w-screen-full flex flex-wrap items-center justify-between mx-auto p-4">
         <nuxt-link to="/" class="flex items-center">
           <img src="/logo.jpg" class="h-8 mr-3 rounded-full"  alt="img"/>
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Example</span>
+          <span class="self-center md:text-2xl sm:after:hidden text-xl font-semibold whitespace-nowrap dark:text-white">Example</span>
         </nuxt-link>
 
         <div class="flex items-center ju md:order-2">

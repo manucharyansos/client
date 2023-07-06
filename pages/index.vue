@@ -166,8 +166,4 @@ export default {
 }
 </script>
 <style scoped>
-carousel-3d a{
-  color: red!important;
-  background: #000!important;
-}
 </style>

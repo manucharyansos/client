@@ -1,19 +1,19 @@
 <template>
-  <div class="grid-cols-4 my-6 overflow-hidden border border-gray-100 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-md">
-    <nuxt-link class="relative flex w-full h-60 overflow-hidden" :to="`/products/${editProduct}`">
-      <img class="absolute top-0 right-0 h-full w-full object-cover"
-           :src="image_url" alt="product image" />
-
-      <div class="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
+  <div>
+    <div class="relative flex w-full h-80 overflow-hidden">
+      <nuxt-link class="relative flex w-full h-full mx-2 overflow-hidden" :to="`/products/${editProduct}`">
+        <img class="object-cover object-center w-full h-full" :src="image_url" alt="product image" />
+      </nuxt-link>
+      <div class="absolute mr-auto bottom-0 mb-4 transition-all duration-300 group-hover:right-0">
         <button class="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition hover:bg-gray-700">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
           </svg>
         </button>
       </div>
-    </nuxt-link>
+    </div>
 
-    <div class="w-60 mt-4 px-5 pb-5">
+    <div class=" mt-4 px-5 pb-5">
       <div class="flex items-center mt-2.5 mb-5">
         <div v-for="star in stars" :key="star">
           <span class="text-green-400" v-if="star <= average_rating">
