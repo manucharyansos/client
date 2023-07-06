@@ -94,9 +94,9 @@
 
 
     <notifications />
-    <template v-if="!$auth.loggedIn">
-      <AuthenticationModel id="authentication-modal" modal_hide="authentication-modal"/>
-    </template>
+<!--    <template v-if="!$auth.loggedIn">-->
+<!--      <AuthenticationModel id="authentication-modal" modal_hide="authentication-modal"/>-->
+<!--    </template>-->
   </div>
 </template>
 
@@ -165,7 +165,6 @@ export default {
         const page = url.searchParams.get('page');
         await this.fetchProducts(page);
       } catch (error) {
-        console.error(error);
         const defaultPage = 1;
         await this.fetchProducts(defaultPage);
       }
