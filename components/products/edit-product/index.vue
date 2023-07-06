@@ -153,7 +153,7 @@
 
 <script>
 import Breadcrumb from "~/components/Breadcrumb";
-import { Slider, SliderItem } from 'vue-easy-slider'
+
 import Rating from "@/components/products/rating";
 import {mapActions, mapGetters} from "vuex";
 export default {
@@ -174,8 +174,6 @@ export default {
   },
   components: {
     Breadcrumb,
-    Slider,
-    SliderItem,
     Rating
   },
   computed: {
