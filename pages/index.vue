@@ -59,6 +59,9 @@
 
       <Products
         :data="getProducts"
+        @wishlistButton="wishlistButton"
+        toggle="authentication-modal"
+        target="authentication-modal"
       />
 
       <Pagination
@@ -90,7 +93,8 @@
     </div>
 
 
-
+    <notifications />
+    <AuthenticationModel id="authentication-modal" modal_hide="authentication-modal"/>
   </div>
 </template>
 
@@ -99,6 +103,7 @@ import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
 import Products from "@/components/products";
 import Pagination from "@/components/pagination";
+import AuthenticationModel from "~/components/authentication-model";
 
 export default {
   name: 'IndexPage',
@@ -116,7 +121,8 @@ export default {
     Slider,
     SliderItem,
     Products,
-    Pagination
+    Pagination,
+    AuthenticationModel
   },
   data(){
     return {
@@ -162,6 +168,25 @@ export default {
         await this.fetchProducts(defaultPage);
       }
     },
+    wishlistButton(id){
+      if (this.$auth.loggedIn){
+        this.$notify({
+          text: `Thank you for your review. It has been submitted to the webmaster for approval.${id}`,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'success',
+        });
+      }else{
+        this.$notify({
+          text: 'Thank you for your review. It has been submitted to the webmaster for approval.',
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'error',
+        });
+      }
+    }
   }
 }
 </script>

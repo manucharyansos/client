@@ -2,17 +2,23 @@
   <div class="grid bg-white dark:bg-gray-700 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
     <div v-for="item of data" class="box-border overflow-hidden flex cursor-pointer flex-col items-center transition duration-200 ease-in-out transform hover:-translate-y-1 md:hover:-translate-y-1.5 hover:shadow-product mx-2">
       <div class="w-[calc(100%-2rem)] flex mb-3 md:mb-3.5" v-if="item.images">
-        <nuxt-link class="relative flex w-full h-60 overflow-hidden" :to="`/products/${item.id}`">
-          <img alt="" :src="`http://127.0.0.1:8000/storage/products-images/${item.images[0].image_path}`"
-               class="object-cover object-center w-full h-full">
-          <div class="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
-            <button class="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition hover:bg-gray-700">
+        <div class="group relative flex hover:bg-pink-200">
+          <nuxt-link class="w-full h-60 overflow-hidden" :to="`/products/${item.id}`">
+            <img alt="" :src="`http://127.0.0.1:8000/storage/products-images/${item.images[0].image_path}`"
+                 class="object-cover object-center w-full h-full">
+          </nuxt-link>
+          <div class="hidden absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0 transition group-hover:flex">
+            <button
+              :data-modal-target="target"
+              :data-modal-toggle="toggle"
+              @click="$emit('wishlistButton', item.id)"
+              class="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition hover:bg-gray-700">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
               </svg>
             </button>
           </div>
-        </nuxt-link>
+        </div>
       </div>
       <div class="w-full overflow-hidden p-2 md:px-2.5 xl:px-4">
         <div class="flex flex-row md:items-center mb-0.5 items-start">
@@ -45,6 +51,12 @@ export default {
     },
     editProduct: {
       type: Number
+    },
+    target: {
+      type : String
+    },
+    toggle: {
+      type : String
     }
   },
   data(){
