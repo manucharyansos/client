@@ -1,10 +1,22 @@
 <template>
   <section class="pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden">
+    <div v-if="isAlert" class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium">Success alert!</span> Change a few things up and try submitting again.
+      </div>
+    </div>
     <div class="container px-4 mx-auto">
       <div class="flex flex-wrap -mx-4">
         <div class="w-full px-4 my-6">
           <Breadcrumb/>
         </div>
+
+        <notifications />
+
         <div class="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
           <div class="flex -mx-4 flex-wrap items-center justify-between lg:justify-start lg:items-start xl:items-center">
 
@@ -47,7 +59,7 @@
                     <input type="number" v-model="rating" hidden>
                   </div>
                   <div>
-                    <span class="text-md text-gray-400 ml-12">4.59</span>
+                    <span class="text-md text-gray-400 ml-12">{{ product_data.average_rating }}</span>
                   </div>
                 </div>
                 <div>
@@ -144,16 +156,16 @@
 import Breadcrumb from "~/components/Breadcrumb";
 import { Slider, SliderItem } from 'vue-easy-slider'
 import Rating from "@/components/products/rating";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "index",
   data(){
     return {
       rating: 1,
       comment: '',
-      productId: 1,
       stars: [1, 2, 3, 4, 5],
       selectedRating: 0,
+      isAlert: false
     }
   },
   props: {
@@ -168,6 +180,7 @@ export default {
     Rating
   },
   computed: {
+    ...mapGetters('guests/products', ['getErrorMessages']),
     averageRating() {
       // this.product_data.reviews
     }
@@ -175,23 +188,35 @@ export default {
   methods: {
     ...mapActions('guests/products', ['reviewProduct']),
     async submitReview() {
-      alert()
-      console.log(this.product_data.id)
-      await this.reviewProduct({
+      const response = await this.$store.dispatch('guests/products/reviewProduct', {
         id: this.product_data.id,
         data: {
           rating: this.rating,
           comment: this.comment,
         }
-      })
+      });
+      if (response) {
+        this.$notify({
+          text: 'Thank you for your review. It has been submitted to the webmaster for approval.',
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'success',
+        });
+      } else {
+        this.$notify({
+          text: this.getErrorMessages.comment[0],
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'error',
+        });
+      }
     },
     selectRating(rating) {
       this.selectedRating = rating;
       this.rating = rating
     },
-    addToBag(product){
-      console.log(product, "asd")
-    }
   }
 }
 </script>

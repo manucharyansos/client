@@ -53,13 +53,15 @@ export default {
   },
   data(){
     return {
-      subcategories: []
+      subcategories: [],
+      id: ''
     }
   },
-  async fetch(){
-    await this.fetchSubcategoryWithProducts(this.$route.params.id)
+  mounted(){
+    this.fetchSubcategoryWithProducts(this.id)
   },
   created() {
+    this.id = this.$route.params.id
     this.subcategories = this.getSubcategoryWithProducts
   },
   computed: {

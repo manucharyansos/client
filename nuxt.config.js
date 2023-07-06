@@ -24,7 +24,9 @@ export default {
   plugins: [
     '~/plugins/services.js',
     { src: "@/plugins/carousel3d.js", mode: 'client', ssr: false},
-    { src: "@/plugins/vueEasySlider.js", mode: 'client', ssr: false }
+    { src: "@/plugins/vueEasySlider.js", mode: 'client', ssr: false },
+    { src: '~/plugins/notifications-ssr', ssr: true },
+    { src: '~/plugins/notifications-client', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -11,6 +11,7 @@
           :title="product.title"
           :description="product.description"
           :price="product.price"
+          :average_rating="product.average_rating"
           @addToCart="addToCart(product.id)"
           :edit-product="product.id"
           button-name="Add"

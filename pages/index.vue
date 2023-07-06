@@ -104,10 +104,10 @@ export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  async serverPrefetch({commit}) {
-    await Promise.all([
-      await this.fetchProducts({ commit }),
-    ])
+  async serverPrefetch() {
+    // await Promise.all([
+      await this.fetchProducts(1)
+    // ])
   },
   async fetch(){
     await this.fetchCategories(1)

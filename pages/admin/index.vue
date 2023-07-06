@@ -65,11 +65,11 @@ export default {
       updatedUsers: null,
     }
   },
-  async fetch(){
-    await this.fetchProducts(1)
-    await this.users()
-    await this.fetchCategories(1)
-  },
+  // async fetch(){
+  //   await this.fetchProducts(1)
+  //   await this.users()
+  //   await this.fetchCategories(1)
+  // },
   computed: {
     ...mapGetters('admin/products', ['getProducts']),
     ...mapGetters('admin/categories', ['getCategories']),
@@ -81,6 +81,9 @@ export default {
     ...mapActions('userSettings', ['users'])
   },
   mounted() {
+    this.fetchProducts(1)
+    this.users()
+    this.fetchCategories(1)
     this.countProduct = this.getProducts.length
     this.updatedProduct = this.getProducts.length
     this.countUsers = this.getUsers.length

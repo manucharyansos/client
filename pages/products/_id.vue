@@ -16,9 +16,16 @@ export default {
   components: {
     editProduct
   },
+  data(){
+    return {
+      id: ''
+    }
+  },
+  created() {
+    this.id = this.$route.params.id
+  },
   mounted() {
-    const id = this.$route.params.id
-    this.fetchShowProduct(id)
+    this.fetchShowProduct(this.id)
   },
   computed: {
     ...mapGetters('guests/products', ['getShowedProduct'])

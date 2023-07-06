@@ -61,13 +61,13 @@ export const actions = {
       return false;
     }
   },
-  async reviewProduct({ commit }, {id, data}) {
+  async reviewProduct({ commit }, { id, data }) {
     try {
       await this.$axios.post(`/api/guests/reviews/${id}`, data);
-      return true
+      return true;
     } catch (err) {
-      commit('setErrorMessages', err.response.data.errors)
-      return false
+      commit('setErrorMessages', err.response.data.errors);
+      return false;
     }
   },
   async fetchProduct({ commit }, id ){
