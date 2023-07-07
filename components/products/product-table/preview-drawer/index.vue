@@ -97,7 +97,7 @@ export default {
   name: "index",
   props: {
     data: {
-      type: Array
+      type: Object
     }
   },
 }

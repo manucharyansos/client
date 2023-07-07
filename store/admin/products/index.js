@@ -130,8 +130,15 @@ export const actions = {
   plusProduct({commit}, index){
     commit('setPlusProduct', index)
   },
-  deleteImage({commit}, index){
-    commit('DELETE_IMAGE', index)
+  async deleteImage({commit}, {index, id}){
+    console.log(index)
+    try {
+      await this.$axios.delete(`/api/deleteImage/${id}`)
+      commit('DELETE_IMAGE', index)
+      return true
+    }catch (e){
+      return false
+    }
   }
 }
 
