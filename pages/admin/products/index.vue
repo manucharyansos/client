@@ -366,7 +366,6 @@
 
     <!-- drawer component -->
     <UpdateProductDrawer
-      @removeSelectedProduct="removeSelectedProduct"
       @updateSelectedProduct="updateSelectedProduct"
       :categories="getSubcategories"
       @handleFileUpload="handleFileUpload"
@@ -396,14 +395,14 @@
       <template v-slot:image>
         <div class="grid grid-cols-3 gap-8 mb-4">
           <div
-            v-for="image of product.imageFiles"
+            v-for="(image, index) of product.imageFiles"
             class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
             <img
               v-if="image"
               :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`"
               alt="imac image"
               class="w-36 h-28 object-cover object-center">
-            <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
+            <button @click="removeSelectedImage(index)" type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
               <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
               </svg>
@@ -494,6 +493,7 @@ export default {
         selectedImage: ''
       },
       errors: {},
+      idForRemoveImages: ''
     }
   },
   mounted() {
@@ -505,6 +505,7 @@ export default {
       [
       'getErrorMessages',
       'getProducts',
+      'getProduct',
       'getLastPage',
       'getPerPage',
       'getTotal',
@@ -513,26 +514,39 @@ export default {
     ])
   },
   methods :{
-    ...mapActions('admin/products', ['fetchProducts', 'deleteSelectedProduct', 'createProduct', 'updateProduct']),
+    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'deleteImage']),
     ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
     addProduct(){
       this.$router.push('/admin/products/create')
     },
-    editProduct(product){
-      this.product.id = product.id
-      this.product.title = product.title
-      this.product.description = product.description
-      this.product.price = product.price
-      this.product.imageUrl = product.imageUrl
-      this.product.stock = product.stock
-      this.product.imageFiles = product.images
-      this.product.subcategory_id = product.subcategory_id
+    // editProduct(product){
+    //   this.product.id = product.id
+    //   this.product.title = product.title
+    //   this.product.description = product.description
+    //   this.product.price = product.price
+    //   this.product.imageUrl = product.imageUrl
+    //   this.product.stock = product.stock
+    //   this.product.imageFiles = product.images
+    //   this.product.subcategory_id = product.subcategory_id
+    // },
+    async editProduct(id){
+      const response = await this.fetchProduct(id)
+      if (response){
+        this.product.id = this.getProduct.id
+        this.product.title = this.getProduct.title
+        this.product.description = this.getProduct.description
+        this.product.price = this.getProduct.price
+        this.product.imageUrl = this.getProduct.imageUrl
+        this.product.stock = this.getProduct.stock
+        this.product.imageFiles = this.getProduct.images
+        this.product.subcategory_id = this.getProduct.subcategory_id
+      }
     },
     previewSelectedProduct(product){
       this.previewProduct = product
     },
-    removeSelectedProduct(){
-      this.selectedProduct = []
+    removeSelectedImage(index){
+      this.deleteImage(index)
     },
     removeProduct(id){
       this.id = id

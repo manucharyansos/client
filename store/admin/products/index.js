@@ -1,9 +1,9 @@
 
 export const state = () => ({
   products: [],
+  product: [],
   errorMessages: [],
   message: '',
-  cartProduct: [],
   showProduct: [],
   currentPage: 1,
   lastPage: 1,
@@ -23,7 +23,7 @@ export const getters = {
     return state.message
   },
   getProduct(state) {
-    return state.cartProduct
+    return state.product
   },
   getShowedProduct(state){
     return state.showProduct
@@ -104,7 +104,7 @@ export const actions = {
   async fetchProduct({ commit }, id ){
     try {
       const { data } = await this.$axios.get(`api/products/${id}`)
-      commit('setProduct', data)
+      commit('SET_PRODUCT', data)
       return true
     }catch (err){
       commit('setErrorMessages', err.response.data)
@@ -130,6 +130,9 @@ export const actions = {
   plusProduct({commit}, index){
     commit('setPlusProduct', index)
   },
+  deleteImage({commit}, index){
+    commit('DELETE_IMAGE', index)
+  }
 }
 
 
@@ -163,5 +166,11 @@ export const mutations = {
   },
   setLinks(state, links){
     state.links = links
+  },
+  SET_PRODUCT(state, product){
+    state.product = product
+  },
+  DELETE_IMAGE(state, index){
+    state.product.images.splice(index, 1)
   }
 }

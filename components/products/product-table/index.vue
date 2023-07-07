@@ -66,7 +66,7 @@
             data-drawer-show="drawer-update-product"
             aria-controls="drawer-update-product"
             class="py-2 px-3 flex items-center text-sm font-medium text-center text-blue-600 bg-white rounded-lg border border-blue-600 hover:bg-primary-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-gray-800 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            @click="$emit('editProduct', product)"
+            @click="$emit('editProduct', product.id)"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 -ml-0.5 object-center object-cover" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
