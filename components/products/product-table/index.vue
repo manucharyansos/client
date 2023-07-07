@@ -80,7 +80,7 @@
             data-drawer-show="drawer-read-product-advanced"
             aria-controls="drawer-read-product-advanced"
             class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-            @click="$emit('previewSelectedProduct', product)"
+            @click="$emit('previewSelectedProduct', product.id)"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-5 object-center object-cover mr-2 -ml-0.5">
               <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />

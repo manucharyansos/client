@@ -442,7 +442,7 @@
     </UpdateProductDrawer>
     <!-- Preview Drawer -->
     <PreviewDrawer
-      :data="previewProduct"
+      :data="getProduct"
     />
     <!-- Delete Modal -->
     <DeleteModal
@@ -532,8 +532,8 @@ export default {
         this.product.subcategory_id = this.getProduct.subcategory_id
       }
     },
-    previewSelectedProduct(product){
-      this.previewProduct = product
+    previewSelectedProduct(id){
+      this.fetchProduct(id)
     },
     removeSelectedImage(id, index){
       this.deleteImage({index, id})
