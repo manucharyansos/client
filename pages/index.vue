@@ -59,6 +59,7 @@
 
       <Products
         :data="getProducts"
+        @wishlistButton="wishlistButton"
       />
 
       <Pagination
@@ -162,12 +163,27 @@ export default {
         await this.fetchProducts(defaultPage);
       }
     },
+    wishlistButton(id){
+      if (this.$auth.loggedIn){
+        this.$notify({
+          text: `Thank you for your review. It has been submitted to the webmaster for approval.${id}`,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'success',
+        });
+      }else{
+        this.$notify({
+          text: 'Thank you for your review. It has been submitted to the webmaster for approval.',
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'error',
+        });
+      }
+    }
   }
 }
 </script>
 <style scoped>
-carousel-3d a{
-  color: red!important;
-  background: #000!important;
-}
 </style>

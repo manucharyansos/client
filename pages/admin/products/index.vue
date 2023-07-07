@@ -370,6 +370,7 @@
       @updateSelectedProduct="updateSelectedProduct"
       :categories="getSubcategories"
       @handleFileUpload="handleFileUpload"
+      id="drawer-update-product"
     >
       <template v-slot:name>
         <input
@@ -379,7 +380,7 @@
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="Apple iMac 27&ldquo;"
           placeholder="Type product name"
           required=""
-          v-model="selectedProduct.title"
+          v-model="product.title"
         >
       </template>
       <template v-slot:description>
@@ -389,13 +390,26 @@
           class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
           placeholder="Write product description here"
           required=""
-          v-model="selectedProduct.description"
+          v-model="product.description"
         ></textarea>
       </template>
       <template v-slot:image>
         <div class="grid grid-cols-3 gap-8 mb-4">
+          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span class="font-semibold">Click to upload</span>
+                or drag and drop
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input @change="handleFileUpload" id="dropzone-file" type="file" class="hidden">
+          </label>
           <div
-            v-for="image of selectedProduct.images"
+            v-for="image of product.imageFiles"
             class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
             <img
               v-if="image"
@@ -415,7 +429,7 @@
         <select
           id="category"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          v-model="selectedProduct.category_id"
+          v-model="product.subcategory_id"
         >
           <option selected="">Select category</option>
           <option
@@ -436,6 +450,8 @@
       @deleteClick="deleteProduct"
       id="delete-modal"
     />
+
+    <notifications />
   </div>
 </template>
 
@@ -503,7 +519,14 @@ export default {
       this.$router.push('/admin/products/create')
     },
     editProduct(product){
-      this.selectedProduct = product
+      this.product.id = product.id
+      this.product.title = product.title
+      this.product.description = product.description
+      this.product.price = product.price
+      this.product.imageUrl = product.imageUrl
+      this.product.stock = product.stock
+      this.product.imageFiles = product.images
+      this.product.subcategory_id = product.subcategory_id
     },
     previewSelectedProduct(product){
       this.previewProduct = product
@@ -536,17 +559,35 @@ export default {
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
       });
-      await this.updateProduct({
-        id: this.selectedProduct.id,
+      const res = await this.updateProduct({
+        id: this.product.id,
         data: {
-          subcategory_id: this.selectedProduct.subcategory_id,
-          title: this.selectedProduct.title,
-          description: this.selectedProduct.description,
-          price: this.selectedProduct.price,
-          stock: this.selectedProduct.stock,
+          subcategory_id: this.product.subcategory_id,
+          title: this.product.title,
+          description: this.product.description,
+          price: this.product.price,
+          stock: this.product.stock,
           images: formData
         }
       })
+      if (res){
+        this.$notify({
+          text: `Product updated successfully`,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'success',
+        });
+      }else{
+        const error = this.getErrorMessages
+        this.$notify({
+          text: error,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'error',
+        });
+      }
     },
     async handleLinkClick(link) {
       try {
@@ -554,7 +595,6 @@ export default {
         const page = url.searchParams.get('page');
         await this.fetchProducts(page);
       } catch (error) {
-        console.error(error);
         const defaultPage = 1;
         await this.fetchProducts(defaultPage);
       }

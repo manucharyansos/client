@@ -22,7 +22,7 @@
 
             <div class="w-full sm:w-8/12 mx-auto flex flex-col items-center">
               <img
-                class="w-full mb-5 mx-auto"
+                class="w-full h-full mb-5 mx-auto object-cover object-center"
                 v-if="product_data.images"
                 :src="`http://127.0.0.1:8000/storage/products-images/${product_data.images[0].image_path}`"
                 alt="">
@@ -31,13 +31,12 @@
           </div>
           <carousel-3d>
             <slide v-for="(image, index) of product_data.images" :index="index">
-              <img :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`" alt="Product Image">
+              <img class="object-cover object-center w-full h-full" :src="`http://127.0.0.1:8000/storage/products-images/${image.image_path}`" alt="Product Image">
             </slide>
           </carousel-3d>
         </div>
         <div class="w-full lg:w-1/2 px-4">
           <div class="max-w-md mb-6">
-<!--            <span class="text-xs text-gray-400 tracking-wider">APPLE #3299803</span>-->
             <h2 class="mt-6 mb-4 text-2xl md:text-4xl lg:text-5xl font-heading font-medium">{{ product_data.title }}</h2>
             <p class="flex items-center mb-6">
               <span class="mr-2 text-sm text-blue-500 font-medium">$</span>
@@ -68,7 +67,8 @@
                       <label for="comment" class="sr-only">Your comment</label>
                       <textarea
                         id="comment"
-                        rows="3"
+                        rows="2"
+                        cols="44"
                         class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                         placeholder="Write a comment..."
                         required
@@ -154,7 +154,6 @@
 
 <script>
 import Breadcrumb from "~/components/Breadcrumb";
-import { Slider, SliderItem } from 'vue-easy-slider'
 import Rating from "@/components/products/rating";
 import {mapActions, mapGetters} from "vuex";
 export default {
@@ -175,8 +174,6 @@ export default {
   },
   components: {
     Breadcrumb,
-    Slider,
-    SliderItem,
     Rating
   },
   computed: {

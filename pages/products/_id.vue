@@ -10,11 +10,14 @@
 <script>
 import editProduct from "~/components/products/edit-product";
 import {mapActions, mapGetters} from "vuex";
+import { Slider, SliderItem } from 'vue-easy-slider'
 export default {
   name: "product-id",
   layout: 'UserLayout',
   components: {
-    editProduct
+    editProduct,
+    Slider,
+    SliderItem,
   },
   data(){
     return {

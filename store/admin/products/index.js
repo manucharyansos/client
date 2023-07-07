@@ -73,7 +73,7 @@ export const actions = {
       return false
     }
   },
-  async updateProduct(commit){
+  async updateProduct({commit}, {id, data}){
     try {
       await this.$axios.$put(`/api/products/${id}`, data)
       return true
