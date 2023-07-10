@@ -7,7 +7,7 @@
             <img alt="" :src="`http://127.0.0.1:8000/storage/products-images/${item.images[0].image_path}`"
                  class="object-cover object-center w-full h-full">
           </nuxt-link>
-          <div class="hidden absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0 transition group-hover:flex">
+          <div class="hidden absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0 group-hover:flex">
             <button
               :data-modal-target="target"
               :data-modal-toggle="toggle"

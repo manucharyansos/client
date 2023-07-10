@@ -75,10 +75,11 @@ export const actions = {
   async fetchSubcategoryWithProducts({commit}, id){
     try {
       const {data} = await this.$axios.get(`/api/guests/findSubcategoryProducts/${id}`)
-      console.log(data)
       commit('setCategoryProducts', data.subcategory)
+      return true
     }catch (err){
       commit('setErrorMessages', err.response)
+      return false
     }
   }
 }

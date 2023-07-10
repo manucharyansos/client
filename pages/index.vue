@@ -43,10 +43,10 @@
         >
           <figure class="bg-white dark:bg-gray-700">
             <div class="h-56 overflow-hidden">
-              <img class="h-full w-full hover:scale-125 transition duration-500 object-cover object-center cursor-pointer" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
+              <img class="h-full w-full hover:scale-110 transition duration-300 object-cover object-center cursor-pointer" :src="`http://127.0.0.1:8000/category-images/${category.image}`" alt="">
             </div>
             <div class="flex items-center justify-center mt-6">
-              <h4 class="text-gray-600 dark:text-white text-sm md:text-base font-extralight	 xl:text-lg font-semibold capitalize cursor-pointer">{{category.name}}</h4>
+              <h4 class="text-gray-600 dark:text-white text-sm md:text-base font-extralight	 xl:text-lg capitalize cursor-pointer">{{category.name}}</h4>
             </div>
           </figure>
         </slide>

@@ -20,7 +20,7 @@
         <div class="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
           <div class="flex -mx-4 flex-wrap items-center justify-between lg:justify-start lg:items-start xl:items-center">
 
-            <div class="w-full sm:w-8/12 mx-auto flex flex-col items-center">
+            <div class="w-full sm:w-8/12 h-96 mx-auto flex flex-col items-center">
               <img
                 class="w-full h-full mb-5 mx-auto object-cover object-center"
                 v-if="product_data.images"
