@@ -20,14 +20,13 @@
       </td>
       <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <div class="flex items-center space-x-4">
-<!--          data-drawer-target="drawer-update-category"-->
-<!--          data-drawer-show="drawer-update-category"-->
-<!--          aria-controls="drawer-update-category"-->
           <button
             type="button"
-
+            data-drawer-target="drawer-update-category"
+            data-drawer-show="drawer-update-category"
+            aria-controls="drawer-update-category"
             class="py-2 px-3 flex items-center text-sm font-medium text-center text-blue-600 bg-white rounded-lg border border-blue-600 hover:bg-primary-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-gray-800 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            @click="$emit('editCategory', category)"
+            @click="$emit('editCategory', category.id)"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 -ml-0.5 object-center object-cover" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
@@ -35,9 +34,6 @@
             </svg>
             Edit
           </button>
-<!--          data-drawer-target="drawer-read-category-advanced"-->
-<!--          data-drawer-show="drawer-read-category-advanced"-->
-<!--          aria-controls="drawer-read-category-advanced"-->
           <button
             type="button"
             class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -84,7 +80,6 @@ export default {
   },
   methods: {
     getImage(image) {
-      console.log(image)
       if (image) {
         return `http://127.0.0.1:8000/category-images/${image}`;
       } else {

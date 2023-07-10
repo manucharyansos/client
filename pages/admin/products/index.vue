@@ -421,7 +421,7 @@
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
           </div>
-          <input @change="handleFileUpload" id="dropzone-file" type="file" class="hidden">
+          <input @change="handleFileUpload" id="dropzone-file" multiple type="file" class="hidden">
         </label>
       </template>
       <template v-slot:categories>

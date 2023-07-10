@@ -360,6 +360,66 @@
               toggle="delete-modal"
             />
 
+            <UpdateCategoryDrawer
+              id="drawer-update-product"
+              :categories="getCategory"
+              @updateCategory="selectCategory"
+            >
+              <template v-slot:name>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="Apple iMac 27&ldquo;"
+                  placeholder="Type category name"
+                  required=""
+                  v-model="category.name"
+                >
+              </template>
+              <template v-slot:description>
+              <textarea
+                id="description"
+                rows="8"
+                class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                placeholder="Write product description here"
+                required=""
+                v-model="category.description"
+              ></textarea>
+
+              </template>
+              <template v-slot:image>
+              <div class="grid grid-cols-3 gap-8 mb-4">
+                <div
+                  class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
+                  <img
+                    v-if="category.image"
+                    :src="`http://127.0.0.1:8000/category-images/${category.imageUrl}`"
+                    alt="imac image"
+                    class="w-36 h-28 object-cover object-center">
+                  <button @click="removeImage(category.imageUrl)" type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="sr-only">Remove image</span>
+                  </button>
+                </div>
+              </div>
+              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span>
+                    or drag and drop
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                </div>
+                <input @change="handleFileUpload" id="dropzone-file" type="file" class="hidden">
+              </label>
+            </template>
+            </UpdateCategoryDrawer>
+
           </div>
 
             <Pagination
@@ -374,6 +434,8 @@
             id="delete-modal"
             @deleteClick="deleteCategory"
           />
+
+          <notifications />
         </div>
       </div>
     </section>
@@ -386,6 +448,7 @@ import { initFlowbite } from "flowbite";
 import CategoriesTable from "@/components/categories/categories-table";
 import DeleteModal from "@/components/products/product-table/delete-modal";
 import Pagination from "@/components/pagination";
+import UpdateCategoryDrawer from "~/components/categories/categories-table/update-category-drawer/index.vue";
 
 export default {
   name: "index",
@@ -393,13 +456,20 @@ export default {
   middleware: 'admin',
   data(){
     return {
-      id: ''
+      id: '',
+      category: {
+        name: '',
+        description: '',
+        imageUrl: '',
+        imageFile: [],
+      }
     }
   },
   components: {
     CategoriesTable,
     DeleteModal,
-    Pagination
+    Pagination,
+    UpdateCategoryDrawer
   },
   async fetch(){
     await this.fetchCategories(1)
@@ -410,16 +480,20 @@ export default {
   computed: {
     ...mapGetters('admin/categories', [
       'getCategories',
+      'getCategory',
       'getLastPage',
       'getPerPage',
       'getTotal',
       'getCurrentPage',
-      'getLinks'])
+      'getLinks',
+    ])
   },
   methods: {
     ...mapActions('admin/categories', [
       'fetchCategories',
       'deleteSelectedCategory',
+      'fetchCategory',
+      'updateCategory'
     ]),
     addCategory(){
       this.$router.push('/admin/categories/create')
@@ -437,12 +511,59 @@ export default {
         const page = url.searchParams.get('page');
         await this.fetchCategories(page);
       } catch (error) {
-        console.error(error);
         const defaultPage = 1;
         await this.fetchCategories(defaultPage);
       }
     },
-    editCategory(){},
+    async editCategory(id){
+      const res = await this.fetchCategory(id)
+      if (res){
+        this.category.id = this.getCategory.id
+        this.category.name = this.getCategory.name
+        this.category.description = this.getCategory.description
+        this.category.image = this.getCategory.image
+      }
+    },
+    async removeImage(id){
+      // await this.deleteImage(id)
+    },
+    handleFileUpload(event) {
+      this.category.imageFile = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.category.imageUrl = reader.result;
+      };
+      this.isImage = true
+      reader.readAsDataURL(this.category.imageFile);
+    },
+    async selectCategory(){
+      const formData = new FormData();
+      formData.append('name', this.category.name);
+      formData.append('description', this.category.description);
+      formData.append('image', this.category.imageFile);
+      const res = await this.updateCategory({
+        id: this.category.id,
+        data: formData
+      })
+      if (res){
+        this.$notify({
+          text: `Product updated successfully`,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'success',
+        });
+      }else{
+        const error = this.getErrorMessages
+        this.$notify({
+          text: error,
+          duration: 3000,
+          speed: 1000,
+          position: 'center',
+          type: 'error',
+        });
+      }
+    },
     previewSelectedCategory(){},
   }
 }

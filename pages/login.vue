@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-auto font-roboto bg-white dark:bg-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+  <div class=" w-full mx-auto font-roboto bg-white dark:bg-gray-700 md:mt-0 sm:max-w-md xl:p-0">
     <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg shadow p-14">
       <div class="mb-6">
         <div class="relative z-0 w-full mb-6 group">

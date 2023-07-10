@@ -1,6 +1,7 @@
 
 export const state = () => ({
   categories: [],
+  category: {},
   message: '',
   error: [],
   currentPage: 1,
@@ -13,6 +14,9 @@ export const state = () => ({
 export const getters = {
   getCategories(state) {
     return state.categories
+  },
+  getCategory(state){
+    return state.category
   },
   getMessage(state){
     return state.message
@@ -41,8 +45,8 @@ export const actions = {
   async fetchCategories({ commit }, page ){
     try {
       const { data } = await this.$axios.get(`/api/categories?page=${page}`)
-      commit('setCategory', data.category.data);
-      commit('setCurrentPage', data.category.current_page);
+      commit('SET_CATEGORIES', data.category.data);
+      commit('SET_CURRENT_PAGE', data.category.current_page);
       commit('setLastPage', data.category.last_page);
       commit('setPerPage', data.category.per_page);
       commit('setTotal', data.category.total);
@@ -53,6 +57,37 @@ export const actions = {
       return false
     }
   },
+  async fetchCategory({commit}, id){
+    try {
+      const { data } = await this.$axios.get(`/api/categories/${id}/edit`)
+      commit('SET_CATEGORY', data)
+      return true
+    }catch (err){
+      console.log(err)
+      return false
+    }
+  },
+  async updateCategory({commit}, {id, data}){
+    try {
+      const res = await this.$axios.$put(`/api/categories/${id}`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      commit('SET_CATEGORY', data)
+      return true
+    }catch (err){
+      commit('setErrorMessages', err.response.data.errors)
+      return false
+    }
+  },
+  // async deleteImage({commit}, id){
+  //   try {
+  //     await this.$axios.delete(`/api/deleteCategoryImage/${id}`)
+  //     commit('DELETE_IMAGE', id)
+  //     return true
+  //   }catch (e){
+  //     return false
+  //   }
+  // },
   async createCategory({commit}, categoryData){
     try {
       await this.$axios.post('/api/categories', categoryData, {
@@ -77,16 +112,22 @@ export const actions = {
 }
 
 export const mutations = {
-  setCategory(state, categories){
+  SET_CATEGORIES(state, categories){
     state.categories = categories
+  },
+  SET_CATEGORY(state, category){
+    state.category = category
   },
   DELETE_CATEGORY_SUCCESS(state, message){
     state.message = message
   },
+  DELETE_IMAGE(state, id){
+    state.category.image.splice(id, 1)
+  },
   setErrorMessages(state, err){
     state.error = err
   },
-  setCurrentPage(state, page) {
+  SET_CURRENT_PAGE(state, page) {
     state.currentPage = page;
   },
   setLastPage(state, lastPage) {

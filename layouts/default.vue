@@ -3,7 +3,7 @@
     <header>
       <Header/>
     </header>
-    <main class="bg-white dark:bg-gray-700 h-screen flex items-center justify-center">
+    <main id="bgi" class="bg-white dark:bg-gray-700 h-screen flex items-center justify-center">
       <Nuxt/>
     </main>
   </div>
@@ -20,5 +20,9 @@ export default {
 </script>
 
 <style scoped>
+#bgi {
+  background-image: url('/bg.webp');
+  background-position: center;
 
+}
 </style>
