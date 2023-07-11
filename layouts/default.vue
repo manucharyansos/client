@@ -1,9 +1,7 @@
 <template>
   <div>
-    <header>
-      <Header/>
-    </header>
-    <main id="bgi" class="bg-white dark:bg-gray-700 h-screen flex items-center justify-center">
+    <Header/>
+    <main>
       <Nuxt/>
     </main>
   </div>

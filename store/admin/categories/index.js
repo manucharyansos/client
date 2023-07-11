@@ -63,7 +63,6 @@ export const actions = {
       commit('SET_CATEGORY', data)
       return true
     }catch (err){
-      console.log(err)
       return false
     }
   },

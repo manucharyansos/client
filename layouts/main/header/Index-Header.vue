@@ -24,7 +24,7 @@
           <div
             v-if="getProduct"
             id="open-bag"
-            class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-1/2 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+            class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-full md:w-auto dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
             <button
               type="button"
               data-drawer-hide="open-bag"

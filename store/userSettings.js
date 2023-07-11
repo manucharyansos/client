@@ -33,8 +33,9 @@ export const actions = {
     try {
       const res = await this.$axios.get('/api/user')
       commit('setUser', res.data)
+      return true
     } catch (error) {
-      console.error(error);
+      commit('setErrorMessage', error.response);
     }
   },
 
@@ -48,14 +49,17 @@ export const actions = {
       }
     } catch (err) {
       commit('setErrorMessage', err.response)
+      return false
     }
   },
   async users({commit}){
     try {
       const response = await this.$axios.get('api/users')
       commit('setUsers', response.data)
+      return true
     }catch (err){
-      console.log(err)
+      commit('setErrorMessage', err.response)
+      return false
     }
   },
   async createUser({commit}, user){
@@ -64,7 +68,6 @@ export const actions = {
       return true
     }catch (err){
       commit('setErrorMessage', err.response.data.errors)
-      console.log(err)
       return false
     }
   },
@@ -76,6 +79,7 @@ export const actions = {
       }
     }catch (err){
       commit('setErrorMessage', err.response)
+      return false
     }
   }
 };

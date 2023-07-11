@@ -73,8 +73,8 @@
 
               <div class="mt-6 text-center">
                 <button
-                  :data-drawer-hide="hide"
-                  :aria-controls="controls"
+                  data-drawer-hide="open-bag"
+                  aria-controls="open-bag"
                   @click="$emit('checkout')"
                   type="button"
                   class="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">

@@ -61,15 +61,7 @@ export const actions = {
       return false;
     }
   },
-  async reviewProduct({ commit }, { id, data }) {
-    try {
-      await this.$axios.post(`/api/guests/reviews/${id}`, data);
-      return true;
-    } catch (err) {
-      commit('setErrorMessages', err.response.data.errors);
-      return false;
-    }
-  },
+
   async fetchProduct({ commit }, id ){
     try {
       const { data } = await this.$axios.get(`api/guests/product/${id}`)
