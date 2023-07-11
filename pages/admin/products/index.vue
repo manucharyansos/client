@@ -348,6 +348,7 @@
               @removeProduct="removeProduct"
               @previewSelectedProduct="previewSelectedProduct"
               @editProduct="editProduct"
+              @editReviews="editReviews"
               target="delete-modal"
               toggle="delete-modal"
             />
@@ -450,6 +451,8 @@
       id="delete-modal"
     />
 
+    <ReviewModal :product="getProduct"/>
+
     <notifications />
   </div>
 </template>
@@ -462,6 +465,7 @@ import UpdateProductDrawer from "@/components/products/product-table/update-prod
 import DeleteModal from "@/components/products/product-table/delete-modal";
 import { initFlowbite } from 'flowbite'
 import Pagination from "@/components/pagination";
+import ReviewModal from "@/components/products/product-table/review-modal";
 export default {
   name: "index",
   layout: 'AdminLayout',
@@ -471,7 +475,8 @@ export default {
     PreviewDrawer,
     DeleteModal,
     UpdateProductDrawer,
-    Pagination
+    Pagination,
+    ReviewModal
   },
   async fetch(){
     await this.fetchProducts(1)
@@ -514,8 +519,11 @@ export default {
     ])
   },
   methods :{
-    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'deleteImage']),
+    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'fetchReview', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'deleteImage']),
     ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
+    async editReviews(id){
+      await this.fetchProduct(id)
+    },
     addProduct(){
       this.$router.push('/admin/products/create')
     },

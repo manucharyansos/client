@@ -116,7 +116,7 @@ export const actions = {
   },
   async fetchShowProduct({commit}, id){
     try {
-      const { data } = await this.$axios.get(`api/products/${id}`)
+      const { data } = await this.$axios.get(`/api/products/${id}`)
       commit('setShowedProduct', data)
       return true
     }catch (err){
@@ -138,6 +138,15 @@ export const actions = {
     }catch (e){
       return false
     }
+  },
+  async fetchReview({commit}, id){
+    try {
+      const data = this.$axios.get(`/admin/getTest/${id}`)
+      console.log(data)
+    }catch (err){
+      console.log(err)
+    }
+
   }
 }
 
