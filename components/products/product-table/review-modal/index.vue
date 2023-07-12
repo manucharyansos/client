@@ -46,7 +46,7 @@ export default {
   name: "index",
   props: {
     product: {
-      type: Object
+      type: Array
     }
   }
 }

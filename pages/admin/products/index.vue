@@ -511,6 +511,7 @@ export default {
       'getErrorMessages',
       'getProducts',
       'getProduct',
+      'getEditedProduct',
       'getLastPage',
       'getPerPage',
       'getTotal',
@@ -519,7 +520,16 @@ export default {
     ])
   },
   methods :{
-    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'fetchReview', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'updateImages', 'deleteImage']),
+    ...mapActions('admin/products', [
+      'fetchProducts',
+      'fetchProduct',
+      'selectProduct',
+      'deleteSelectedProduct',
+      'createProduct',
+      'updateProduct',
+      'updateImages',
+      'deleteImage'
+    ]),
     ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
     async editReviews(id){
       await this.fetchProduct(id)
@@ -528,14 +538,15 @@ export default {
       this.$router.push('/admin/products/create')
     },
     async editProduct(product){
-      this.product.id = product.id
-      this.product.title = product.title
-      this.product.description = product.description
-      this.product.price = product.price
-      this.product.imageUrl = product.imageUrl
-      this.product.stock = product.stock
-      this.product.imageFiles = product.images
-      this.product.subcategory_id = product.subcategory_id
+      await this.selectProduct(product)
+      this.product.id = this.getEditedProduct.id
+      this.product.title = this.getEditedProduct.title
+      this.product.description = this.getEditedProduct.description
+      this.product.price = this.getEditedProduct.price
+      this.product.imageUrl = this.getEditedProduct.imageUrl
+      this.product.stock = this.getEditedProduct.stock
+      this.product.imageFiles = this.getEditedProduct.images
+      this.product.subcategory_id = this.getEditedProduct.subcategory_id
     },
     previewSelectedProduct(product){
       this.previewProduct = product

@@ -1,10 +1,10 @@
 
 export const state = () => ({
   products: [],
-  product: {},
+  product: [],
+  editProduct: [],
   errorMessages: [],
   message: '',
-  showProduct: {},
   currentPage: 1,
   lastPage: 1,
   perPage: 10,
@@ -24,6 +24,9 @@ export const getters = {
   },
   getProduct(state) {
     return state.product
+  },
+  getEditedProduct(state) {
+    return state.editProduct
   },
   getShowedProduct(state){
     return state.showProduct
@@ -145,13 +148,8 @@ export const actions = {
       return false
     }
   },
-  async fetchReview({commit}, id){
-    try {
-      const data = this.$axios.get(`/admin/getTest/${id}`)
-      console.log(data)
-    }catch (err){
-      console.log(err)
-    }
+  selectProduct({commit}, product){
+    commit('SELECT_PRODUCT', product)
   }
 }
 
@@ -167,10 +165,7 @@ export const mutations = {
     state.message = message
   },
   deleteProductByIndex(state, index){
-    state.cartProduct.splice(index, 1)
-  },
-  setShowedProduct(state, product){
-    state.showProduct = product
+    state.product.splice(index, 1)
   },
   setCurrentPage(state, page) {
     state.currentPage = page;
@@ -194,6 +189,9 @@ export const mutations = {
     state.product.images = images
   },
   DELETE_IMAGE(state, index){
-    state.product.images.splice(index, 1)
+    state.editProduct.images.splice(index, 1)
+  },
+  SELECT_PRODUCT(state, product){
+    state.editProduct = product
   }
 }
