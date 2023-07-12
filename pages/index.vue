@@ -57,10 +57,22 @@
     <div class="new_arrivals items-center flex flex-col p-20 h-full">
       <h3 class="text-lg mr-auto md:text-2xl lg:text-3xl 3xl:text-4xl xl:leading-10 font-bold text-gray-600 dark:text-white my-6">New Arrivals</h3>
 
-      <Products
-        :data="getProducts"
-        @wishlistButton="wishlistButton"
-      />
+      <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
+        <div
+          class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
+          v-for="(product, index) of getProducts"
+          :key="index"
+        >
+          <ProductContent
+            :image_url="getFirstImage(product)"
+            :title="product.title"
+            :description="product.description"
+            :price="product.price"
+            :edit-product="product.id"
+            :average_rating="product.average_rating"
+          />
+        </div>
+      </div>
 
       <Pagination
         :current-page="getCurrentPage"
@@ -100,6 +112,7 @@ import {mapActions, mapGetters} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
 import Products from "@/components/products";
 import Pagination from "@/components/pagination";
+import ProductContent from "@/components/products/Product-Content";
 
 export default {
   name: 'IndexPage',
@@ -117,7 +130,8 @@ export default {
     Slider,
     SliderItem,
     Products,
-    Pagination
+    Pagination,
+    ProductContent
   },
   data(){
     return {
@@ -181,7 +195,14 @@ export default {
           type: 'error',
         });
       }
-    }
+    },
+    getFirstImage(product) {
+      if (product.images.length > 0) {
+        return `http://127.0.0.1:8000/storage/products-images/${product.images[0].image_path}`;
+      } else {
+        return '/download.png';
+      }
+    },
   }
 }
 </script>

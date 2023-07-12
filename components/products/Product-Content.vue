@@ -78,7 +78,8 @@ export default {
       type: Number
     },
     average_rating: {
-      type: String
+      type: String,
+      default: () => ''
     }
   },
   data() {
@@ -91,6 +92,9 @@ export default {
     selectRating(rating) {
       this.selectedRating = rating;
     }
+  },
+  mounted() {
+    console.log(typeof (this.average_rating))
   }
 }
 </script>

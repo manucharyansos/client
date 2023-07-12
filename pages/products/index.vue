@@ -9,11 +9,21 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div>
-       <Products
-         :data="getProducts"
-         @wishlistButton="wishlistButton"
-       />
+    <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
+      <div
+        class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
+        v-for="(product, index) of getProducts"
+        :key="index"
+      >
+        <ProductContent
+          :image_url="getFirstImage(product)"
+          :title="product.title"
+          :description="product.description"
+          :price="product.price"
+          :edit-product="product.id"
+          :average_rating="product.average_rating"
+        />
+      </div>
     </div>
     <div class="flex flex-col md:items-end items-center m-8">
       <!-- Help text -->
@@ -44,12 +54,14 @@ import {mapActions, mapGetters} from "vuex";
 import Products from "~/components/products/index.vue";
 import YourCart from "@/components/your-cart";
 import {initFlowbite} from "flowbite";
+import ProductContent from "@/components/products/Product-Content";
 
 export default {
   name: "index",
   components: {
     Products,
-    YourCart
+    YourCart,
+    ProductContent
   },
   layout: 'UserLayout',
   auth: 'guest',

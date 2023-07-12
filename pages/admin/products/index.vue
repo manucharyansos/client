@@ -443,7 +443,7 @@
     </UpdateProductDrawer>
     <!-- Preview Drawer -->
     <PreviewDrawer
-      :data="getProduct"
+      :data="previewProduct"
     />
     <!-- Delete Modal -->
     <DeleteModal
@@ -485,7 +485,7 @@ export default {
   data (){
     return {
       selectedProduct: [],
-      previewProduct: [],
+      previewProduct: {},
       id: '',
       product: {
         title: '',
@@ -519,7 +519,7 @@ export default {
     ])
   },
   methods :{
-    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'fetchReview', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'deleteImage']),
+    ...mapActions('admin/products', ['fetchProducts', 'fetchProduct', 'fetchReview', 'deleteSelectedProduct', 'createProduct', 'updateProduct', 'updateImages', 'deleteImage']),
     ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
     async editReviews(id){
       await this.fetchProduct(id)
@@ -527,21 +527,18 @@ export default {
     addProduct(){
       this.$router.push('/admin/products/create')
     },
-    async editProduct(id){
-      const response = await this.fetchProduct(id)
-      if (response){
-        this.product.id = this.getProduct.id
-        this.product.title = this.getProduct.title
-        this.product.description = this.getProduct.description
-        this.product.price = this.getProduct.price
-        this.product.imageUrl = this.getProduct.imageUrl
-        this.product.stock = this.getProduct.stock
-        this.product.imageFiles = this.getProduct.images
-        this.product.subcategory_id = this.getProduct.subcategory_id
-      }
+    async editProduct(product){
+      this.product.id = product.id
+      this.product.title = product.title
+      this.product.description = product.description
+      this.product.price = product.price
+      this.product.imageUrl = product.imageUrl
+      this.product.stock = product.stock
+      this.product.imageFiles = product.images
+      this.product.subcategory_id = product.subcategory_id
     },
-    previewSelectedProduct(id){
-      this.fetchProduct(id)
+    previewSelectedProduct(product){
+      this.previewProduct = product
     },
     removeSelectedImage(id, index){
       this.deleteImage({index, id})
@@ -555,6 +552,7 @@ export default {
     },
     handleFileUpload(event) {
       const files = event.target.files;
+      this.updateImages(files)
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         const imageFile = files[i];
@@ -567,13 +565,13 @@ export default {
     },
     async updateSelectedProduct(){
       const formData = new FormData();
-
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
       });
+
       const res = await this.updateProduct({
-        id: this.product.id,
         data: {
+          id: this.product.id,
           subcategory_id: this.product.subcategory_id,
           title: this.product.title,
           description: this.product.description,
@@ -581,7 +579,7 @@ export default {
           stock: this.product.stock,
           images: formData
         }
-      })
+      });
       if (res){
         this.$notify({
           text: `Product updated successfully`,

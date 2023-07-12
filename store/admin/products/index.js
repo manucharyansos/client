@@ -4,7 +4,7 @@ export const state = () => ({
   product: {},
   errorMessages: [],
   message: '',
-  showProduct: [],
+  showProduct: {},
   currentPage: 1,
   lastPage: 1,
   perPage: 10,
@@ -73,14 +73,20 @@ export const actions = {
       return false
     }
   },
-  async updateProduct({commit}, {id, data}){
+  async updateProduct({ commit }, {id, data}) {
     try {
-      await this.$axios.$put(`/api/products/${id}`, data)
+      await this.$axios.put('/api/products', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+      commit('SET_PRODUCT', data)
       return true
-    }catch (err){
+    } catch (err) {
       commit('setErrorMessages', err.response.data.errors)
       return false
     }
+  },
+  updateImages({commit}, images){
+    commit('SET_IMAGES', images)
   },
   async deleteSelectedProduct({ commit }, id) {
     try {
@@ -146,7 +152,6 @@ export const actions = {
     }catch (err){
       console.log(err)
     }
-
   }
 }
 
@@ -184,6 +189,9 @@ export const mutations = {
   },
   SET_PRODUCT(state, product){
     state.product = product
+  },
+  SET_IMAGES(state, images){
+    state.product.images = images
   },
   DELETE_IMAGE(state, index){
     state.product.images.splice(index, 1)
