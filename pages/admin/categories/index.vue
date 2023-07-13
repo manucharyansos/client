@@ -422,13 +422,13 @@
 
           </div>
 
-            <Pagination
-              :current-page="getCurrentPage"
-              :links="getLinks"
-              :per-page="getPerPage"
-              :total="getTotal"
-              @handleLinkClick="handleLinkClick"
-            />
+<!--            <Pagination-->
+<!--              :current-page="getCurrentPage"-->
+<!--              :links="getLinks"-->
+<!--              :per-page="getPerPage"-->
+<!--              :total="getTotal"-->
+<!--              @handleLinkClick="handleLinkClick"-->
+<!--            />-->
 
           <DeleteModal
             id="delete-modal"

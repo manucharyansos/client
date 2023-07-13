@@ -39,20 +39,43 @@
               <button
                 class="bg-gray-50 flex items-center mx-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="button"
-                @click="isSubcategoryDropdown = !isSubcategoryDropdown">
+                @click="openCategoryDropdown(category)">
                 {{category.name}}
                 <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
               </button>
-              <div v-if="isSubcategoryDropdown" class="absolute z-10 bg-white divide-y border-gray-200 divide-gray-100 rounded-lg shadow w-1/2 h-72 overflow-y-auto dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" v-for="subcategory of category.subcategories"  :key="subcategory.id">
-                  <li class="flex items-center mx-4">{{subcategory.name}}</li>
-                </ul>
-              </div>
             </li>
           </ul>
         </div>
+        <select
+          v-if="isSubcategoryDropdown"
+          v-model="product.subcategory_id"
+          multiple
+          id="countries_multiple"
+          class="absolute z-10 bg-white divide-y border-gray-200 divide-gray-100 rounded-lg shadow w-full overflow-y-auto dark:bg-gray-700"
+        >
+          <option
+            class="cursor-pointer"
+            v-for="subcategory of subcategories"
+            :key="subcategory.id"
+            :value="subcategory.id"
+            @click="closeDropdown">
+            {{subcategory.name}}
+          </option>
+        </select>
+
+<!--          <select-->
+<!--            id="category"-->
+<!--            class="absolute z-10 bg-white divide-y border-gray-200 divide-gray-100 rounded-lg shadow w-full overflow-y-auto dark:bg-gray-700"-->
+<!--          >-->
+<!--            <option-->
+<!--              v-for="subcategory of subcategories"-->
+<!--              :key="subcategory.id"-->
+<!--              :value="subcategory.id">-->
+<!--              {{subcategory.name}}-->
+<!--            </option>-->
+<!--          </select>-->
       </div>
 
       <p
@@ -154,12 +177,13 @@ export default {
         stock: '',
         imageUrl: '',
         imageFiles: [],
-        subcategory_id: '',
+        subcategory_id: [],
         selectedImage: ''
       },
       errors: {},
       isCategoryDropdown: false,
-      isSubcategoryDropdown: false
+      isSubcategoryDropdown: false,
+      subcategories: []
     }
   },
   computed: {
@@ -201,8 +225,13 @@ export default {
         this.errors = this.getErrorMessages
       }
     },
-    openCategoryDropdown(){
-      this.isCategoryDropdown = !this.isCategoryDropdown
+    openCategoryDropdown(category){
+      this.subcategories = category.subcategories
+      this.isSubcategoryDropdown = !this.isSubcategoryDropdown
+    },
+    closeDropdown(){
+      this.isSubcategoryDropdown = false
+      this.isCategoryDropdown = false
     }
   },
   mounted() {
