@@ -42,15 +42,15 @@ export const getters = {
 }
 
 export const actions = {
-  async fetchCategories({ commit }, page ){
+  async fetchCategories({ commit } ){
     try {
-      const { data } = await this.$axios.get(`/api/categories?page=${page}`)
-      commit('SET_CATEGORIES', data.category.data);
-      commit('SET_CURRENT_PAGE', data.category.current_page);
-      commit('setLastPage', data.category.last_page);
-      commit('setPerPage', data.category.per_page);
-      commit('setTotal', data.category.total);
-      commit('setLinks', data.category.links);
+      const { data } = await this.$axios.get(`/api/categories`)
+      commit('SET_CATEGORIES', data);
+      // commit('SET_CURRENT_PAGE', data.category.current_page);
+      // commit('setLastPage', data.category.last_page);
+      // commit('setPerPage', data.category.per_page);
+      // commit('setTotal', data.category.total);
+      // commit('setLinks', data.category.links);
       return true
     }catch (err){
       commit('setErrorMessages', err.response.data)

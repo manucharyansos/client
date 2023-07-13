@@ -472,7 +472,7 @@ export default {
     UpdateCategoryDrawer
   },
   async fetch(){
-    await this.fetchCategories(1)
+    await this.fetchCategories()
   },
   mounted() {
     initFlowbite()
@@ -505,16 +505,16 @@ export default {
     removeCategory(id){
       this.id = id
     },
-    async handleLinkClick(link) {
-      try {
-        const url = new URL(link.url);
-        const page = url.searchParams.get('page');
-        await this.fetchCategories(page);
-      } catch (error) {
-        const defaultPage = 1;
-        await this.fetchCategories(defaultPage);
-      }
-    },
+    // async handleLinkClick(link) {
+    //   try {
+    //     const url = new URL(link.url);
+    //     const page = url.searchParams.get('page');
+    //     await this.fetchCategories(page);
+    //   } catch (error) {
+    //     const defaultPage = 1;
+    //     await this.fetchCategories(defaultPage);
+    //   }
+    // },
     async editCategory(id){
       const res = await this.fetchCategory(id)
       if (res){

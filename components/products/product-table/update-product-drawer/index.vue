@@ -115,6 +115,10 @@
             </label>
             <slot name="categories"></slot>
           </div>
+          <div>
+            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Price</label>
+            <slot name="price"></slot>
+          </div>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">

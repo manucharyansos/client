@@ -85,50 +85,15 @@
                       </svg>
                     </button>
                   </h2>
-                  <div id="category-body" class="hidden" aria-labelledby="category-heading">
+                  <div id="category-body" class="hidden" aria-labelledby="category-heading" v-for="category of getCategories">
                     <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
                       <ul class="space-y-2">
                         <li class="flex items-center">
                           <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Apple (56)</label>
+                          <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ category.name }}</label>
                         </li>
-                        <li class="flex items-center">
-                          <input id="microsoft" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="microsoft" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Microsoft (45)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="logitech" type="checkbox" value="" checked="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="logitech" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Logitech (97)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="sony" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="sony" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Sony (234)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="asus" type="checkbox" value="" checked="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="asus" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Asus (97)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="dell" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="dell" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Dell (56)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="msi" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="msi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">MSI (97)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="canon" type="checkbox" value="" checked="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="canon" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Canon (49)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="benq" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="benq" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">BenQ (23)</label>
-                        </li>
-                        <li class="flex items-center">
-                          <input id="razor" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                          <label for="razor" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Razor (49)</label>
-                        </li>
-                        <a href="#" class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all</a>
+
+<!--                        <a href="#" class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all</a>-->
                       </ul>
                     </div>
                   </div>
@@ -144,44 +109,7 @@
                   <div id="price-body" class="hidden" aria-labelledby="price-heading">
                     <div class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600"><select id="price-from" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><option disabled="" selected="">From</option><option>$500</option><option>$2500</option><option>$5000</option></select><select id="price-to" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><option disabled="" selected="">To</option><option>$500</option><option>$2500</option><option>$5000</option></select></div>
                   </div>
-                  <!-- Worldwide Shipping -->
-                  <h2 id="worldwide-shipping-heading">
-                    <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#worldwide-shipping-body" aria-expanded="true" aria-controls="worldwide-shipping-body">
-                      <span>Worldwide Shipping</span>
-                      <svg aria-hidden="true" data-accordion-icon="" class="w-5 h-5 rotate-180 shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                      </svg>
-                    </button>
-                  </h2>
-                  <div id="worldwide-shipping-body" class="hidden" aria-labelledby="worldwide-shipping-heading">
-                    <div class="py-2 space-y-2 font-light border-b border-gray-200 dark:border-gray-600">
-                      <label class="relative flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" name="shipping" checked="">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">North America</span>
-                      </label>
-                      <label class="relative flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" name="shipping">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">South America</span>
-                      </label>
-                      <label class="relative flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" name="shipping">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Asia</span>
-                      </label>
-                      <label class="relative flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" name="shipping" checked="">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Australia</span>
-                      </label>
-                      <label class="relative flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" name="shipping">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Europe</span>
-                      </label>
-                    </div>
-                  </div>
+
                   <!-- Rating -->
                   <h2 id="rating-heading">
                     <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#rating-body" aria-expanded="true" aria-controls="rating-body">
@@ -440,6 +368,18 @@
           </option>
         </select>
       </template>
+
+      <template v-slot:price>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="Apple iMac 27&ldquo;"
+          placeholder="Type product price"
+          required=""
+          v-model="product.price"
+        >
+      </template>
     </UpdateProductDrawer>
     <!-- Preview Drawer -->
     <PreviewDrawer
@@ -481,6 +421,7 @@ export default {
   async fetch(){
     await this.fetchProducts(1)
     await this.fetchSubCategories()
+    await this.fetchCategories()
   },
   data (){
     return {
@@ -506,6 +447,7 @@ export default {
   },
   computed: {
     ...mapGetters('admin/categories/subcategories', ['getSubcategories']),
+    ...mapGetters('admin/categories', ['getCategories']),
     ...mapGetters('admin/products',
       [
       'getErrorMessages',
@@ -531,6 +473,7 @@ export default {
       'deleteImage'
     ]),
     ...mapActions('admin/categories/subcategories', ['fetchSubCategories']),
+    ...mapActions('admin/categories', ['fetchCategories']),
     async editReviews(id){
       await this.fetchProduct(id)
     },
@@ -579,17 +522,14 @@ export default {
       this.product.imageFiles.forEach((file) => {
         formData.append('images[]', file);
       });
-
+      formData.append('subcategory_id', this.product.subcategory_id)
+      formData.append('title', this.product.title)
+      formData.append('description', this.product.description)
+      formData.append('price', this.product.price)
+      formData.append('stock', this.product.stock)
       const res = await this.updateProduct({
-        data: {
-          id: this.product.id,
-          subcategory_id: this.product.subcategory_id,
-          title: this.product.title,
-          description: this.product.description,
-          price: this.product.price,
-          stock: this.product.stock,
-          images: formData
-        }
+        id: this.product.id,
+        formData
       });
       if (res){
         this.$notify({
