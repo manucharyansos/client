@@ -8,7 +8,7 @@ export const state = () => ({
   currentPage: 1,
   lastPage: 1,
   perPage: 10,
-  total: 0,
+  productTotal: 0,
   links: []
 })
 
@@ -41,7 +41,7 @@ export const getters = {
     return state.perPage
   },
   getTotal(state){
-    return state.total
+    return state.productTotal
   },
   getLinks(state){
     return state.links
@@ -178,7 +178,7 @@ export const mutations = {
     state.perPage = perPage;
   },
   setTotal(state, total) {
-    state.total = total;
+    state.productTotal = total;
   },
   setLinks(state, links){
     state.links = links

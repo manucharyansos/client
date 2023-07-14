@@ -49,45 +49,32 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: "index",
   layout: 'AdminLayout',
   middleware: 'admin',
   data(){
-    return {
-      // countProduct: null,
-      // updatedProduct: null,
-      // countCategory: null,
-      // updatedCategory: null,
-      // countUsers: null,
-      // updatedUsers: null,
-    }
+    return {}
   },
   fetch(){
     this.fetchProducts(1)
-    this.users()
-    this.fetchCategories()
+    this.fetchUsers()
+    this.fetchCategories(1)
   },
   computed: {
-    ...mapGetters('admin/products', ['getProducts']),
-    ...mapGetters('admin/categories', ['getCategories']),
-    ...mapGetters('userSettings', ['getUsers']),
+    ...mapState('admin/products', ['productTotal']),
+    ...mapState('admin/categories', ['categoriesTotal']),
+    ...mapState('userSettings', ['users']),
     countProduct() {
-      return this.getProducts.length
-    },
-    updatedProduct(){
-      return this.getProducts.length
+      return this.productTotal
     },
     countUsers(){
-      return this.getUsers.length
-    },
-    updatedUsers(){
-      return this.getUsers.length
+      return this.users.length
     },
     countCategory(){
-      return this.getCategories.length
+      return this.categoriesTotal
     },
     updatedCategory(){
       return this.getCategories
@@ -96,19 +83,13 @@ export default {
   methods: {
     ...mapActions('admin/products', ['fetchProducts']),
     ...mapActions('admin/categories', ['fetchCategories']),
-    ...mapActions('userSettings', ['users'])
+    ...mapActions('userSettings', ['fetchUsers'])
   },
-  async mounted() {
-    await this.fetchProducts(1)
-    await this.users()
-    await this.fetchCategories()
-    // this.countProduct = this.getProducts.length
-    // this.updatedProduct = this.getProducts.length
-    // this.countUsers = this.getUsers.length
-    // this.updatedUsers = this.getUsers.length
-    // this.countCategory = this.getCategories.length
-    // this.updatedCategory = this.getCategories
-  }
+  // async mounted() {
+  //   await this.fetchProducts(1)
+  //   await this.fetchUsers()
+  //   await this.fetchCategories()
+  // }
 }
 </script>
 

@@ -7,7 +7,7 @@ export const state = () => ({
   currentPage: 1,
   lastPage: 1,
   perPage: 10,
-  total: 0,
+  categoriesTotal: 0,
   links: []
 })
 
@@ -34,7 +34,7 @@ export const getters = {
     return state.perPage
   },
   getTotal(state){
-    return state.total
+    return state.categoriesTotal
   },
   getLinks(state){
     return state.links
@@ -42,15 +42,15 @@ export const getters = {
 }
 
 export const actions = {
-  async fetchCategories({ commit } ){
+  async fetchCategories({ commit }, page){
     try {
-      const { data } = await this.$axios.get(`/api/categories`)
-      commit('SET_CATEGORIES', data);
-      // commit('SET_CURRENT_PAGE', data.category.current_page);
-      // commit('setLastPage', data.category.last_page);
-      // commit('setPerPage', data.category.per_page);
-      // commit('setTotal', data.category.total);
-      // commit('setLinks', data.category.links);
+      const { data } = await this.$axios.get(`/api/categories?page=${page}`)
+      commit('SET_CATEGORIES', data.categories.data);
+      commit('SET_CURRENT_PAGE', data.categories.current_page);
+      commit('setLastPage', data.categories.last_page);
+      commit('setPerPage', data.categories.per_page);
+      commit('setTotal', data.categories.total);
+      commit('setLinks', data.categories.links);
       return true
     }catch (err){
       commit('setErrorMessages', err.response.data)
@@ -136,7 +136,7 @@ export const mutations = {
     state.perPage = perPage;
   },
   setTotal(state, total) {
-    state.total = total;
+    state.categoriesTotal = total;
   },
   setLinks(state, links){
     state.links = links

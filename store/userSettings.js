@@ -52,7 +52,7 @@ export const actions = {
       return false
     }
   },
-  async users({commit}){
+  async fetchUsers({commit}){
     try {
       const response = await this.$axios.get('api/users')
       commit('setUsers', response.data)

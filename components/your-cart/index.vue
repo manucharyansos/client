@@ -102,7 +102,7 @@
 export default {
   name: "index",
   props: {
-    products: { type: Array },
+    products: { type: Object },
     basketTotal: { type: Number },
     hide: {type: String},
     controls: {type: String}
