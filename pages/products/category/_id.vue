@@ -18,21 +18,21 @@
         <div class="grid md:grid-cols-2">
           <div class="flex flex-col items-center justify-center">
             <h2 class="capitalize text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-heading p-7 text-center w-full">
-              # {{ getSubcategoryWithProducts.name }}
+              # {{ categoryWithProducts.name }}
             </h2>
-            <p v-if="getSubcategoryWithProducts.description">
-              {{ getSubcategoryWithProducts.description }}
+            <p v-if="categoryWithProducts.description">
+              {{ categoryWithProducts.description }}
             </p>
           </div>
           <div class="flex items-center justify-center">
-            <img v-if="getSubcategoryWithProducts.image" class="object-cover object-center w-full h-full m-8" :src="`http://127.0.0.1:8000/category-images/${getSubcategoryWithProducts.image}`" alt="">
+            <img v-if="categoryWithProducts.image" class="object-cover object-center w-full h-full m-8" :src="`http://127.0.0.1:8000/category-images/${categoryWithProducts.image}`" alt="">
             <img v-else src="/download.jpeg" alt="">
           </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
           <div
             class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
-            v-for="(product, index) of getSubcategoryWithProducts.products"
+            v-for="(product, index) of categoryWithProducts.products"
             :key="index"
           >
             <ProductContent
@@ -54,7 +54,7 @@
 <script>
 import ProductContent from "@/components/products/Product-Content";
 import Breadcrumb from "@/components/Breadcrumb";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 export default {
   name: "category-id",
   layout: 'UserLayout',
@@ -74,11 +74,11 @@ export default {
     if (res) this.isLoading = false
   },
   created() {
-    this.subcategories = this.getSubcategoryWithProducts
+    this.subcategories = this.categoryWithProducts
     this.loadingControl()
   },
   computed: {
-    ...mapGetters('guests/categories', ['getSubcategoryWithProducts'])
+    ...mapState('guests/categories', ['categoryWithProducts'])
   },
   methods: {
     ...mapActions('guests/categories', ['fetchSubcategoryWithProducts']),

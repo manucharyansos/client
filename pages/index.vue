@@ -37,7 +37,7 @@
         :display="5"
       >
         <slide
-          v-for="(category, index) of getCategory"
+          v-for="(category, index) of categories"
           :index="index"
           style="border: none; background-color: white;"
         >
@@ -60,7 +60,7 @@
       <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
         <div
           class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
-          v-for="(product, index) of getProducts"
+          v-for="(product, index) of products"
           :key="index"
         >
           <ProductContent
@@ -75,10 +75,10 @@
       </div>
 
       <Pagination
-        :current-page="getCurrentPage"
-        :links="getLinks"
-        :per-page="getPerPage"
-        :total="getTotal"
+        :current-page="currentPage"
+        :links="links"
+        :per-page="perPage"
+        :total="total"
         @handleLinkClick="handleLinkClick"
       />
     </div>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapState} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
 import Products from "@/components/products";
 import Pagination from "@/components/pagination";
@@ -118,12 +118,8 @@ export default {
   name: 'IndexPage',
   layout: 'UserLayout',
   auth: 'guest',
-  async serverPrefetch() {
-    // await Promise.all([
-      await this.fetchProducts(1)
-    // ])
-  },
   async fetch(){
+    await this.fetchProducts(1)
     await this.fetchCategories(1)
   },
   components: {
@@ -135,7 +131,6 @@ export default {
   },
   data(){
     return {
-      categories: [],
       list: [
         { backgroundImage: '/slide-1.jpeg' },
         { backgroundImage: '/slide-2.jpg' },
@@ -148,21 +143,21 @@ export default {
     this.loadingControl()
   },
   computed: {
-    ...mapGetters('guests/categories', ['getCategory']),
-    ...mapGetters('guests/products', [
-      'getProducts',
-      'getLastPage',
-      'getPerPage',
-      'getTotal',
-      'getCurrentPage',
-      'getLinks'
+    ...mapState('guests/categories', ['categories']),
+    ...mapState('guests/products', [
+      'products',
+      'lastPage',
+      'perPage',
+      'total',
+      'currentPage',
+      'links'
     ])
   },
   methods: {
     ...mapActions('guests/products', ['fetchProducts']),
     ...mapActions('guests/categories', ['fetchCategories']),
     loadingControl(){
-      if (this.getProducts){
+      if (this.products){
         this.isLoading = false
       }
     },

@@ -12,7 +12,7 @@
     <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 h-full mx-auto flex flex-wrap mb-4">
       <div
         class="mx-auto my-6 max-w-sm bg-white dark:bg-gray-700"
-        v-for="(product, index) of getProducts"
+        v-for="(product, index) of products"
         :key="index"
       >
         <ProductContent
@@ -28,15 +28,15 @@
     <div class="flex flex-col md:items-end items-center m-8">
       <!-- Help text -->
       <span class="text-sm text-gray-700 dark:text-gray-400">
-              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ getCurrentPage }}</span>
+              Showing<span class="font-semibold text-gray-900 dark:text-white">{{ currentPage }}</span>
               to
-              <span class="font-semibold text-gray-900 dark:text-white">{{ getPerPage }}</span>
+              <span class="font-semibold text-gray-900 dark:text-white">{{ perPage }}</span>
               of
-              <span class="font-semibold text-gray-900 dark:text-white">{{ getTotal }}</span>
+              <span class="font-semibold text-gray-900 dark:text-white">{{ total }}</span>
               Entries
             </span>
       <div class="flex mt-2 xs:mt-0">
-        <div v-for="link of getLinks">
+        <div v-for="link of links">
           <button
             @click="handleLinkClick(link)"
             :class="[link.active ? 'active' : '']"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapState} from "vuex";
 import Products from "~/components/products/index.vue";
 import YourCart from "@/components/your-cart";
 import {initFlowbite} from "flowbite";
@@ -71,14 +71,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('guests/products', [
-      'getProducts',
-      'getProduct',
-      'getLastPage',
-      'getPerPage',
-      'getTotal',
-      'getCurrentPage',
-      'getLinks'
+    ...mapState('guests/products', [
+      'products',
+      'product',
+      'lastPage',
+      'perPage',
+      'total',
+      'currentPage',
+      'links'
     ])
   },
   mounted() {

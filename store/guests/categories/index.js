@@ -1,6 +1,6 @@
 
 export const state = () => ({
-  category: [],
+  categories: [],
   subcategories: [],
   message: '',
   error: [],
@@ -13,43 +13,43 @@ export const state = () => ({
 })
 
 export const getters = {
-  getCategory(state) {
-    return state.category
-  },
-  getSubcategories(state) {
-    return state.subcategories
-  },
-  getMessage(state){
-    return state.message
-  },
-  getErrorMessage(state) {
-    return state.error
-  },
-  getCurrentPage(state){
-    return state.currentPage
-  },
-  getLastPage(state){
-    return state.lastPage
-  },
-  getPerPage(state){
-    return state.perPage
-  },
-  getTotal(state){
-    return state.total
-  },
-  getLinks(state){
-    return state.links
-  },
-  getSubcategoryWithProducts(state) {
-    return state.categoryWithProducts
-  }
+  // getCategory(state) {
+  //   return state.category
+  // },
+  // getSubcategories(state) {
+  //   return state.subcategories
+  // },
+  // getMessage(state){
+  //   return state.message
+  // },
+  // getErrorMessage(state) {
+  //   return state.error
+  // },
+  // getCurrentPage(state){
+  //   return state.currentPage
+  // },
+  // getLastPage(state){
+  //   return state.lastPage
+  // },
+  // getPerPage(state){
+  //   return state.perPage
+  // },
+  // getTotal(state){
+  //   return state.total
+  // },
+  // getLinks(state){
+  //   return state.links
+  // },
+  // getSubcategoryWithProducts(state) {
+  //   return state.categoryWithProducts
+  // }
 }
 
 export const actions = {
   async fetchCategories({ commit }, page ){
     try {
       const { data } = await this.$axios.get(`/api/guests/getCategories?page=${page}`)
-      commit('setCategory', data.category.data);
+      commit('setCategories', data.category.data);
       commit('setCurrentPage', data.category.current_page);
       commit('setLastPage', data.category.last_page);
       commit('setPerPage', data.category.per_page);
@@ -61,9 +61,6 @@ export const actions = {
       return false
     }
   },
-  // async fetchSubCategory({commit}){
-  //   await this.$axios.get(`/api/subcategories`)
-  // },
   async fetchSubCategoryById({commit}, id){
     try {
       const { data } = await this.$axios.get(`/api/guests/findSubcategory/${id}`)
@@ -85,8 +82,8 @@ export const actions = {
 }
 
 export const mutations = {
-  setCategory(state, category){
-    state.category = category
+  setCategories(state, categories){
+    state.categories = categories
   },
   setErrorMessages(state, err){
     state.error = err

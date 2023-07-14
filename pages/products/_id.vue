@@ -10,7 +10,7 @@
       </div>
     </div>
     <editProduct
-      :product_data="getShowedProduct"
+      :product_data="showProduct"
       @addToBag="addToCart"
     />
   </div>
@@ -18,7 +18,7 @@
 
 <script>
 import editProduct from "~/components/products/edit-product";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapState} from "vuex";
 import { Slider, SliderItem } from 'vue-easy-slider'
 export default {
   name: "product-id",
@@ -34,15 +34,15 @@ export default {
       isLoading: true
     }
   },
-  created() {
-    this.id = this.$route.params.id
-  },
+  // created() {
+  //   this.id = this.$route.params.id
+  // },
   async fetch() {
-    await this.fetchShowProduct(this.id)
+    await this.fetchShowProduct(this.$route.params.id)
     this.isLoading = false
   },
   computed: {
-    ...mapGetters('guests/products', ['getShowedProduct'])
+    ...mapState('guests/products', ['showProduct'])
   },
   methods: {
     ...mapActions('guests/products', ['fetchShowProduct', "fetchProduct"]),

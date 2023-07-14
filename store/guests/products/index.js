@@ -3,7 +3,7 @@ export const state = () => ({
   products: [],
   errorMessages: [],
   message: '',
-  cartProduct: [],
+  product: {},
   showProduct: {},
   currentPage: 1,
   lastPage: 1,
@@ -13,36 +13,36 @@ export const state = () => ({
 })
 
 export const getters = {
-  getProducts(state){
-    return state.products
-  },
-  getErrorMessages(state){
-    return state.errorMessages
-  },
-  getMessage(state) {
-    return state.message
-  },
-  getProduct(state) {
-    return state.cartProduct
-  },
-  getShowedProduct(state){
-    return state.showProduct
-  },
-  getCurrentPage(state){
-    return state.currentPage
-  },
-  getLastPage(state){
-    return state.lastPage
-  },
-  getPerPage(state){
-    return state.perPage
-  },
-  getTotal(state){
-    return state.total
-  },
-  getLinks(state){
-    return state.links
-  }
+  // getProducts(state){
+  //   return state.products
+  // },
+  // getErrorMessages(state){
+  //   return state.errorMessages
+  // },
+  // getMessage(state) {
+  //   return state.message
+  // },
+  // getProduct(state) {
+  //   return state.cartProduct
+  // },
+  // getShowedProduct(state){
+  //   return state.showProduct
+  // },
+  // getCurrentPage(state){
+  //   return state.currentPage
+  // },
+  // getLastPage(state){
+  //   return state.lastPage
+  // },
+  // getPerPage(state){
+  //   return state.perPage
+  // },
+  // getTotal(state){
+  //   return state.total
+  // },
+  // getLinks(state){
+  //   return state.links
+  // }
 }
 
 export const actions = {

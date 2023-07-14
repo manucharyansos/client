@@ -18,11 +18,11 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
             </svg>
             <span :class="{ jump: isJump }" class="absolute top-0 right-1.5 text-base">
-              {{ getProduct.length }}
+              {{ product.length }}
             </span>
           </button>
           <div
-            v-if="getProduct"
+            v-if="product"
             id="open-bag"
             class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-full md:w-auto dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
             <button
@@ -37,7 +37,7 @@
               <span class="sr-only">Close menu</span>
             </button>
             <YourCart
-              :products="getProduct"
+              :products="product"
               @deleteClick="deleteProduct"
               @checkout="checkout"
               @plusFromCart="plus"
@@ -110,16 +110,16 @@
                 </li>
               </ul>
             </div>
-            <button data-collapse-toggle="mobile-menu"
-                    type="button"
-                    class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="mobile-menu"
-                    aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-            </button>
           </template>
+          <button data-collapse-toggle="mobile-menu"
+                  type="button"
+                  class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  aria-controls="mobile-menu"
+                  aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+          </button>
 
         </div>
         <div
@@ -152,7 +152,7 @@
 
 <script>
 import { initFlowbite } from 'flowbite'
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import YourCart from "@/components/your-cart";
 export default {
   name: "Index-Header",
@@ -180,7 +180,7 @@ export default {
   },
   computed: {
     ...mapGetters('authCustom', ['getUser']),
-    ...mapGetters('guests/products', ['getProduct'])
+    ...mapState('guests/products', ['product'])
   },
   mounted() {
     initFlowbite()
@@ -189,7 +189,7 @@ export default {
     this.$auth.$storage.setUniversal('color-theme', 'light');
   },
   watch: {
-    getProduct(val){
+    product(val){
       if(val){
         this.isJump = true
       }
@@ -231,8 +231,8 @@ export default {
       this.plusProduct(index)
     },
     basketTotal() {
-      if (this.getProduct && this.getProduct.length > 0) {
-        const res = this.getProduct.reduce((sum, item) => {
+      if (this.product && this.product.length > 0) {
+        const res = this.product.reduce((sum, item) => {
           return sum + item.price * item.quantity;
         }, 0);
         return Math.floor(res);

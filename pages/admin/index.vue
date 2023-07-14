@@ -57,39 +57,57 @@ export default {
   middleware: 'admin',
   data(){
     return {
-      countProduct: null,
-      updatedProduct: null,
-      countCategory: null,
-      updatedCategory: null,
-      countUsers: null,
-      updatedUsers: null,
+      // countProduct: null,
+      // updatedProduct: null,
+      // countCategory: null,
+      // updatedCategory: null,
+      // countUsers: null,
+      // updatedUsers: null,
     }
   },
-  // async fetch(){
-  //   await this.fetchProducts(1)
-  //   await this.users()
-  //   await this.fetchCategories(1)
-  // },
+  fetch(){
+    this.fetchProducts(1)
+    this.users()
+    this.fetchCategories()
+  },
   computed: {
     ...mapGetters('admin/products', ['getProducts']),
     ...mapGetters('admin/categories', ['getCategories']),
-    ...mapGetters('userSettings', ['getUsers'])
+    ...mapGetters('userSettings', ['getUsers']),
+    countProduct() {
+      return this.getProducts.length
+    },
+    updatedProduct(){
+      return this.getProducts.length
+    },
+    countUsers(){
+      return this.getUsers.length
+    },
+    updatedUsers(){
+      return this.getUsers.length
+    },
+    countCategory(){
+      return this.getCategories.length
+    },
+    updatedCategory(){
+      return this.getCategories
+    }
   },
   methods: {
     ...mapActions('admin/products', ['fetchProducts']),
     ...mapActions('admin/categories', ['fetchCategories']),
     ...mapActions('userSettings', ['users'])
   },
-  mounted() {
-    this.fetchProducts(1)
-    this.users()
-    this.fetchCategories(1)
-    this.countProduct = this.getProducts.length
-    this.updatedProduct = this.getProducts.length
-    this.countUsers = this.getUsers.length
-    this.updatedUsers = this.getUsers.length
-    this.countCategory = this.getCategories.length
-    this.updatedCategory = this.getCategories
+  async mounted() {
+    await this.fetchProducts(1)
+    await this.users()
+    await this.fetchCategories()
+    // this.countProduct = this.getProducts.length
+    // this.updatedProduct = this.getProducts.length
+    // this.countUsers = this.getUsers.length
+    // this.updatedUsers = this.getUsers.length
+    // this.countCategory = this.getCategories.length
+    // this.updatedCategory = this.getCategories
   }
 }
 </script>

@@ -30,6 +30,16 @@ export default {
     perPage: { type: Number},
     total: { type: Number},
     links: { type: Array},
+  },
+  mounted() {
+    this.linksTest()
+  },
+  methods: {
+    linksTest(){
+      this.links.map(a  => {
+        console.log(a+1)
+      })
+    }
   }
 }
 </script>
