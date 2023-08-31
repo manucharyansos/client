@@ -51,7 +51,6 @@ export const getters = {
 export const actions = {
   async fetchProducts({ commit }, page ) {
     try {
-      // const { data } = await this.$services.productList(page)
       const { data } = await this.$axios.get(`/api/products?page=${page}`)
       commit('setProducts', data.productData.data);
       commit('setCurrentPage', data.productData.current_page);

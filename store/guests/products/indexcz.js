@@ -15,9 +15,9 @@ export const getters = {
   getProducts(state){
     return state.products
   },
-  getjabcProducts(state){
-    return state.products.filter()
-  },
+  // getProducts(state){
+  //   return state.products.filter()
+  // },
   getErrorMessages(state){
     return state.errorMessages
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Shipping
-      :products="getProduct"
+      :products="product"
       :total="basketTotal()"
     />
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 import Shipping from "@/components/shipping";
-import {mapGetters} from "vuex";
+import {mapGetters, mapState} from "vuex";
 export default {
   name: "index",
   layout: 'UserLayout',
@@ -18,12 +18,12 @@ export default {
     Shipping
   },
   computed: {
-    ...mapGetters('guests/products', ['getProduct'])
+    ...mapState('guests/products', ['product'])
   },
   methods: {
     basketTotal(){
       let res = []
-      for (const item of this.getProduct){
+      for (const item of this.product){
         res.push(item.price * item.quantity)
       }
       res = res.reduce( (sum, el) => {

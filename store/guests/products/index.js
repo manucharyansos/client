@@ -3,7 +3,7 @@ export const state = () => ({
   products: [],
   errorMessages: [],
   message: '',
-  product: {},
+  product: [],
   showProduct: {},
   currentPage: 1,
   lastPage: 1,
@@ -68,7 +68,7 @@ export const actions = {
       commit('setProduct', data)
       return true
     }catch (err){
-      commit('setErrorMessages', err.response.data)
+      commit('setErrorMessages', err.response)
       return false
     }
   },
@@ -109,32 +109,32 @@ export const mutations = {
     this._vm.$set(product, 'quantity', 1)
     this._vm.$set(product, 'count', 1)
     let productExist = false
-    if (state.cartProduct.length){
-      state.cartProduct.map((item) => {
+    if (state.product.length){
+      state.product.map((item) => {
         if (item.id === product.id){
           productExist = true
           item.quantity++
         }
       })
       if (!productExist){
-        state.cartProduct.push(product)
+        state.product.push(product)
         product.quantity = 1
       }
     }else{
-      state.cartProduct.push(product)
+      state.product.push(product)
       product.quantity = 1
     }
   },
   setMinusProduct(state, index){
-    if (state.cartProduct[index].quantity > 1){
-      state.cartProduct[index].quantity--
+    if (state.product[index].quantity > 1){
+      state.product[index].quantity--
     }
   },
   setPlusProduct(state, index){
-    state.cartProduct[index].quantity++
+    state.product[index].quantity++
   },
   deleteProductByIndex(state, index){
-    state.cartProduct.splice(index, 1)
+    state.product.splice(index, 1)
   },
   setShowedProduct(state, product){
     state.showProduct = product

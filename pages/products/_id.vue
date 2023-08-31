@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div v-if="isLoading" class="fixed w-screen h-screen z-50 bg-gray-100 dark:bg-gray-700 opacity-100 flex items-center justify-center">

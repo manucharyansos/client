@@ -184,6 +184,7 @@ export default {
   },
   mounted() {
     initFlowbite()
+    console.log(this.product, 'sdfsdfs')
   },
   created() {
     this.$auth.$storage.setUniversal('color-theme', 'light');

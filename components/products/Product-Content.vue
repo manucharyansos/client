@@ -93,9 +93,9 @@ export default {
       this.selectedRating = rating;
     }
   },
-  mounted() {
-    console.log(typeof (this.average_rating))
-  }
+  // mounted() {
+  //   console.log(typeof (this.average_rating))
+  // }
 }
 </script>
 
